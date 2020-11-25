@@ -89,7 +89,7 @@ function Welcome(props) {
     <Background className="fade-in color-change-2x">
 
     
-      <div className="sidebar" onMouseOver={()=> openSidebar()} onMouseOut={()=> closeSiderBar()}>
+      <div className="sidebar" >
         <Chat roomId={"Act0"} />
       </div>
       <div className="center_map">
