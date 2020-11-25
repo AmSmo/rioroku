@@ -14,7 +14,7 @@ function UserInfo(props){
         let userObj = {
             ticketId: user.ticketId,
             username: username,
-            fullName: (user.name ||user.fullName),
+            fullName: (user.fullName),
             email: user.email
         }
         props.login(userObj)

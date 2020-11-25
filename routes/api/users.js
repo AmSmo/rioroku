@@ -28,10 +28,8 @@ router.post('/register', (req, res) => {
     
     User.findOne({ ticketId: req.body.ticketId })
         .then(user => {
-            
-            if (user) {
-                
-                /* FOR TESTING!!!!! */
+            console.log(user.admin)
+            if (user.admin){
                 
                 const payload = { id: user.id, ticketId: user.ticketId };
                 jwt.sign(payload, keys.secretOrKey, { expiresIn: 9000 }, (err, token) => {
@@ -41,12 +39,9 @@ router.post('/register', (req, res) => {
                         user: user
                     })
                 })
-
-                
-                
-                /* BYPASSING FOR TESTING PURPOSES */
-                // errors.ticketId = 'Ticket has already been used'
-                // return res.status(400).json(errors)
+            }else if (user) {
+                errors.ticketId = 'Ticket has already been used'
+                return res.status(400).json(errors)
             } else {
             sdk.request('/events/130129525915/attendees/')
                 .then(resp => {
@@ -89,25 +84,24 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);
-
+    
     if (!isValid) {
         return res.status(400).json(errors);
     }
-    const { ticketId, username, full_name, email } = req.body
+    const { ticketId, username, fullName, email } = req.body
 
-    User.findOneAndUpdate({ ticketId }, { username, fullName: full_name, email } )
+    User.findOneAndUpdate({ ticketId }, { username, fullName: fullName, email } )
             .then(user=> {
-               
             const payload = { id: user.id, username: user.username };
             jwt.sign(
                 payload,
                 keys.secretOrKey,
                 { expiresIn: 9000 },
                 (err, token) => {
-                    res.json({
+                return res.json({
                         success: true,
                         token: 'Bearer ' + token,
-                        user: {username, full_name}
+                        user: {username, fullName}
                     });
                 });})
         

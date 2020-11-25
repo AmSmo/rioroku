@@ -51,9 +51,9 @@ export const MessageContainer = styled.div`
 `
 export const ChatMessageContainer = styled.div`
     z-index:10;
-    max-height: 350px;
+    max-height: 445px;
     width: 210px;
-    height: 400px;
+    height: 445px;
     background: white;
     overflow-y: scroll;
     word-break: break-word;

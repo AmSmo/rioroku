@@ -35,7 +35,6 @@ function Login(props) {
 
     }
     const signup = ticketId => {
-
         APIUtil.signup(ticketId).then((e) => {
             if (e.data.error) {
                 setErrors({ errors: e.data.error })
@@ -52,7 +51,6 @@ function Login(props) {
     }
 
     const renderErrors = () => {
-        console.log(errors)
         return (
             <>
                 {Object.keys(errors).length !== 0 ?
@@ -119,8 +117,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
+    
     return {
-        login: user => dispatch(login(user))
+        login: user => {
+            return dispatch(login(user))}
     }
 }
 

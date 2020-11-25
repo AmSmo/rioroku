@@ -37,8 +37,11 @@ export const receiveErrors = errors => ({
 
 
 
-export const login = user => dispatch => (
+export const login = user => dispatch => {
+    console.log("disp")
     APIUtil.login(user).then(res => {
+    
+        console.log("RESP", res)
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
         APIUtil.setAuthToken(token);
@@ -46,6 +49,7 @@ export const login = user => dispatch => (
         dispatch(receiveCurrentUser(decoded, user))
     })
         .catch(err => {
+            console.log("err!!")
             dispatch(receiveErrors(err.response.data));
         })
-)
+    }

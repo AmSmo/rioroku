@@ -97,7 +97,7 @@ function Welcome(props) {
   }, []);
 
   return (
-    <Background className="fade-in color-change-2x">
+    <Background>
 
     
       <div className="sidebar" style={sideBar} onMouseOver={() => {
