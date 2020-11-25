@@ -7,7 +7,7 @@ const eventbrite = require("./routes/api/eventbrite");
 const bodyParser = require('body-parser');
 const passport = require('passport')
 const path = require('path');
-const server = require('./server')
+const server = require('./socketServer')
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
