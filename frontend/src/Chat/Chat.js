@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import {useChat} from '../actions/socketFunctions'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {SendMessageButton, MessageLine, ChatMessageContainer} from '../Styles/Styles'
+import {SendMessageButton, MessageLine, ChatMessageContainer, Vertical} from '../Styles/Styles'
 function Chat(props){
     if (!props.loggedIn){
         props.history.push("/")
@@ -51,18 +51,29 @@ function Chat(props){
     // useEffect(()=>{
     //     return setTime(parseInt(stageTime))
     // },[stageTime])
-    return(
-        <div>
-            <ChatMessageContainer>
+
+    const handlePress = (e) =>{
+        if (e.key === "Enter"){
+            handleSendMessage()
+        }
+        
+    }
+    return(<>
+        
+            <Vertical style={{display: !props.hidden ? "none" : "block"}}>CHAT ^</Vertical>
+        <div style={{ display: props.hidden ? "none" : "block", transform: "2s" }}>
+            
+            <ChatMessageContainer >
                 {displayMessages()}
                 <div ref={messagesEndRef} />
             </ChatMessageContainer>
-            
+
             <textarea
                 className="messageInput"
                 value={newMessage}
                 onChange={(e)=> setNewMessage(e.target.value)}
                 placeholder="Your Message..."
+                onKeyPress={(e) => handlePress(e)}
             /><br></br>
             <SendMessageButton onClick={handleSendMessage}>Send Message</SendMessageButton>
 
@@ -74,7 +85,7 @@ function Chat(props){
             :
             null}
         </div>
-        
+        </>
     )   
 
     }

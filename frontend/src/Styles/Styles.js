@@ -20,7 +20,7 @@ border-radius: 10px 10px 0 0;
 text-align: center;
 justify-content: center;
 padding: 10px;
-z-index:10;
+z-index: 5;
 position: static;
 background: whitesmoke;
 
@@ -42,7 +42,7 @@ export const SendMessageButton = styled.button`
 `
 export const MessageContainer = styled.div`
     z-index:10;
-    max-height: 200px;
+    max-height: 350px;
     width: 210px;
     overflow-y: scroll;
     word-break: break-word;
@@ -51,7 +51,7 @@ export const MessageContainer = styled.div`
 `
 export const ChatMessageContainer = styled.div`
     z-index:10;
-    max-height: 200px;
+    max-height: 350px;
     width: 210px;
     height: 400px;
     background: white;
@@ -63,4 +63,13 @@ export const MessageLine = styled.li`
 
     list-style: none;
     text-align: left;
+`
+
+export const Vertical = styled.div`
+    transform: rotate(-90deg);
+    margin-top: 220px;
+    background: none;
+    z-index:0;
+    transition: 2s;
+    display: block;
 `

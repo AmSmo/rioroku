@@ -10,7 +10,10 @@ function Welcome(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
   const [needHelp, setNeedHelp] = useState(false)
-  console.log("welcome", props)
+  const [sideBar, setSideBar] = useState({width: "50px"})
+  const [hidden, setHidden] = useState(true)
+  const [width, setWidth] = useState(window.innerWidth * 0.6)
+  
 
   const changeNeed = () => {
     setNeedHelp(false)
@@ -83,16 +86,31 @@ function Welcome(props) {
       }
     ]
   }
+  useEffect(() => {
+    function handleResize() {
+        setWidth(window.innerWidth * .6)
+        
+      }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  let width = window.innerWidth * 0.6
   return (
     <Background className="fade-in color-change-2x">
 
     
-      <div className="sidebar" >
-        <Chat roomId={"Act0"} />
+      <div className="sidebar" style={sideBar} onMouseOver={() => {
+        setSideBar({ width: "200px", opacity: "1" })
+        setHidden(false)
+        }} 
+        onMouseOut={() =>{ 
+          setSideBar({ width: "50px" })
+          setHidden(true)
+          }}>
+        <Chat roomId={"Act0"} hidden={hidden} />
       </div>
-      <div className="center_map">
+      <CenterMap>
         <ImageMapper
           src={'https://dl.dropboxusercontent.com/s/h5kf351m71ljaf5/act_0_map.png?dl=0'}
           imgWidth={1200}
@@ -101,7 +119,7 @@ function Welcome(props) {
           map={map}
           style={{zIndex: "2", position: "relative"}}
         />
-      </div>
+      </CenterMap>
       <Modal
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
@@ -144,6 +162,7 @@ const BottomRight = styled.div`
     position: fixed;
     right: 10px;
     bottom: 10px;
+    z-index: 4;
 `
 const TopRight = styled.div`
     position: absolute;
@@ -151,4 +170,9 @@ const TopRight = styled.div`
     right: 0px;
     border: 0.4px solid grey;
     background: white;
+`
+
+const CenterMap = styled.div`
+  margin: auto;
+  width: 57vw;
 `
