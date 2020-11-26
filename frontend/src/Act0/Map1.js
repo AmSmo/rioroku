@@ -6,6 +6,7 @@ import { Modal } from 'semantic-ui-react'
 import { HelpButton } from '../Styles/Styles'
 import UserHelp from '../Chat/UserHelp'
 import Chat from '../Chat/Chat'
+import {useInfo} from '../actions/channelInfo'
 
 function Welcome(props) {
   const [open, setOpen] = useState(false)
@@ -44,7 +45,8 @@ function Welcome(props) {
         break;
     }
   }
-
+  
+  
   const map = {
     name: "map1",
     areas: [
@@ -86,6 +88,12 @@ function Welcome(props) {
         fillColor: "none"
       }
     ]
+  }
+
+  const { userList } = useInfo("base", props.username)
+  if (userList.TrackA)
+  if (userList.TrackA.length > 5){
+    map.areas = map.areas.filter(area => area.name !=="1")
   }
   useEffect(() => {
     function handleResize() {

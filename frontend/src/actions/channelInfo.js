@@ -17,7 +17,6 @@ const useInfo = (roomId, username) => {
 
         socketRef.current.on("channelInfo", data=>{
             console.log(Object.values(data).flat() )
-            console.log(data["Act0"].length)
             setUserList(data)
             setUserCount(data)
         })
