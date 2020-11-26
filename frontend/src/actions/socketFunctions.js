@@ -2,21 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; 
-const NEW_HELP_MESSAGE_EVENT = "newHelpMessage"; 
-// const SOCKET_SERVER_URL = "http://localhost:5001";
 const SOCKET_SERVER_URL = `/`;
 
 
-const useChat = (roomId) => {
+
+const useChat = (roomId, username) => {
     const [messages, setMessages] = useState([]); 
     const [stageTime, setStageTime] = useState("0")
     const socketRef = useRef();
     
     useEffect(() => {
-
         socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-            query: { roomId },
+            query: { roomId, username }
         });
+
+        
 
         socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
             
@@ -41,6 +41,8 @@ const useChat = (roomId) => {
             body: messageBody,
             senderId: socketRef.current.id,
         });
+    
+        
     };
 
     const changeStageTime = (time) => {
@@ -49,7 +51,7 @@ const useChat = (roomId) => {
         })
     }
 
- 
+    
 
     return { messages, sendMessage, stageTime, changeStageTime };
 };

@@ -6,6 +6,7 @@ import { Modal } from 'semantic-ui-react'
 import { HelpButton } from '../Styles/Styles'
 import UserHelp from '../Chat/UserHelp'
 import Chat from '../Chat/Chat'
+
 function Welcome(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)

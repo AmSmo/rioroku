@@ -11,11 +11,10 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-    console.log("git", action)
     switch (action.type) {
         
         case RECEIVE_CURRENT_USER:
-            console.log("curr", action)
+            
             return {
                 ...state,
                 isAuthenticated: !!action.payload.currentUser,

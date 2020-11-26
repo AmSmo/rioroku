@@ -7,7 +7,7 @@ import ModalVideo from '../modals/ModalVideo'
 import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
 import ModalLivestream from '../modals/ModalLivestream'
-
+import {useInfo} from '../actions/channelInfo'
 
 
 function TrackA1(props){
@@ -47,7 +47,7 @@ function TrackA1(props){
       break;
     }
   }
-
+  const {list, count} = useInfo("TrackA", props.username)
   const map = {name: "map1",
   areas: [
     {

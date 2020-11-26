@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useChat} from '../actions/socketFunctions'
+import {useInfo} from '../actions/channelInfo'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {SendMessageButton, MessageLine, ChatMessageContainer, Vertical} from '../Styles/Styles'
@@ -9,7 +10,8 @@ function Chat(props){
     }
     
     const {roomId} = props
-    const { messages, sendMessage, stageTime, changeStageTime } = useChat(roomId, props.username)
+    const { messages, sendMessage, stageTime, changeStageTime, userList } = useChat(roomId, props.username)
+    const {list, count } = useInfo(roomId, `${props.username}2`)
     const [newMessage, setNewMessage] = useState("")
     const [time, setTime] = useState(0)
     const [newTime, setNewTime]= useState("")
@@ -58,6 +60,7 @@ function Chat(props){
         }
         
     }
+    
     return(<>
         
             <Vertical style={{display: !props.hidden ? "none" : "block"}}>CHAT ^</Vertical>
@@ -76,7 +79,7 @@ function Chat(props){
                 onKeyPress={(e) => handlePress(e)}
             /><br></br>
             <SendMessageButton onClick={handleSendMessage}>Send Message</SendMessageButton>
-
+            {userList}
             {props.control ? 
             <>
                 <input type="text" value={newTime} onChange={(e)=> setNewTime(e.target.value)} />

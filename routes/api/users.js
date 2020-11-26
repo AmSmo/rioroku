@@ -28,7 +28,7 @@ router.post('/register', (req, res) => {
     
     User.findOne({ ticketId: req.body.ticketId })
         .then(user => {
-            console.log(user.admin)
+            
             if (user.admin){
                 
                 const payload = { id: user.id, ticketId: user.ticketId };
