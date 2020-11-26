@@ -15,7 +15,7 @@ function Welcome(props) {
   const [sideBar, setSideBar] = useState({width: "50px"})
   const [hidden, setHidden] = useState(true)
   const [width, setWidth] = useState(window.innerWidth * 0.6)
-  
+  const [time, setTime] = useState(0)
 
   const changeNeed = () => {
     setNeedHelp(false)
@@ -90,7 +90,11 @@ function Welcome(props) {
     ]
   }
 
-  const { userList } = useInfo("base", props.username)
+  let {userList, userCount} = useInfo("base", props.username)
+  useEffect(()=>{
+    let interval = setInterval(setTime(time => time+1), 1000)
+    return () => clearInterval(interval)
+  },[])
   if (userList.TrackA)
   if (userList.TrackA.length > 5){
     map.areas = map.areas.filter(area => area.name !=="1")

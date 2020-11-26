@@ -12,7 +12,7 @@ const NEW_HELP_MESSAGE_EVENT = "newHelpMessage";
 const library = {}
 io.on("connection", (socket) => {
     const { roomId, username } = socket.handshake.query;
-    console.log("id", roomId)
+    
     socket.join(roomId);
     let channelArray = library[roomId]
     // array.push(username)
