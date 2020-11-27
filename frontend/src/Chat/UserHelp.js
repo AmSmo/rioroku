@@ -19,7 +19,7 @@ function UserHelp(props){
     return(
          myHelp ? 
             <HelpArea>
-                <Chat roomId = {props.username} help />
+                <Chat roomId={props.username} help />
                 <br></br>
                 <button onClick={()=>{
                     setMyHelp(false)

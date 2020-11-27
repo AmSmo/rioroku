@@ -24,6 +24,7 @@ const useChat = (roomId, username) => {
                 ...message,
                 ownedByCurrentUser: message.senderId === socketRef.current.id,
             };
+            console.log(incomingMessage)
             setMessages((messages) => [...messages, incomingMessage]);
         });
 

@@ -1,41 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
 import * as APIUtil from '../util/session_api_util'
 import UserInfo from './UserInfo'
 import { connect } from 'react-redux';
-import { login } from '../actions/session_actions';
+import { login, nextEvent } from '../actions/session_actions';
 import styled from 'styled-components'
-import moment from 'moment'
+import { Dimmer, Loader, Segment } from 'semantic-ui-react'
+import {FlipClock} from './FlipClock'
 
 function Login(props) {
     const [ticketId, setTicketId] = useState("")
     const [errors, setErrors] = useState({})
     const [ticketFound, setTicketFound] = useState(false)
-    const [tempUserInfo, setTempUserInfo] = useState({})
-    const [time, setTime] = useState("")
+    const [tempUserInfo, setTempUserInfo] = useState({})    
+    
     if (props.isAuthenticated === true) {
         props.history.push('/')
     }
     
-    // useEffect(()=>{
-    //     const now = new Date().getTime()
-    //     const countDownDate = new Date()
-    //     countDownDate.setHours(19)
-    //     countDownDate.setMinutes(0)
-    //     countDownDate.setSeconds(0)
-    //     setTime(moment("19:00").countdown().toString())
-    // },[])
+    useEffect(()=>{
+        props.nextEvent()
+    },[])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let ticket = {
-            ticketId: e.target.ticketId.value
-        };
+        let ticket = e.target.ticketId.value
         signup(ticket);
 
     }
     const signup = ticketId => {
-        APIUtil.signup(ticketId).then((e) => {
+        APIUtil.signup({ticketId, eventId: props.eventInfo.id}).then((e) => {
             if (e.data.error) {
                 setErrors({ errors: e.data.error })
 
@@ -70,12 +63,23 @@ function Login(props) {
             </>
         );
     }
+    
 
     return (
         <Background>
             
             <img alt="Rio Records Logo" src='https://images.squarespace-cdn.com/content/v1/5f5babb127bb8735b1ce9ff4/1600834661082-OH0426281Z7QIKY1UR0I/ke17ZwdGBToddI8pDm48kAeNX5A_q12pJ8eKMLVAD7MUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYwL8IeDg6_3B-BRuF4nNrNcQkVuAT7tdErd0wQFEGFSnKbS1XvxpUT8-e_Xpf2ysg0RoPUcD1NnvYm2_Hxgrz_LeDzQPo0UR-MzglQPIBDezw/Rio+Records+2.png' style={{margin: "30px 0", filter: 'invert(.7)', height:"80px" }} />
-            <NextShow>The Next Show Starts In {time}</NextShow>
+            { props.eventInfo ?
+                
+                <FlipClock next={props.eventInfo.date}/>
+                
+            :
+                <Segment style={{height: "170px", margin: "auto", width:"600px"}}>
+                    <Dimmer active>
+                        <Loader indeterminate>Checking Schedule</Loader>
+                    </Dimmer>
+                </Segment>
+}
             {ticketFound ?
             <div style={record}>
             <TicketForm>
@@ -112,7 +116,8 @@ function Login(props) {
 const mapStateToProps = (state) => {
     return {
         signedIn: state.api.isSignedIn,
-        errors: state.errors.session
+        errors: state.errors.session,
+        eventInfo: state.api.eventInfo
     };
 };
 
@@ -120,7 +125,10 @@ const mapDispatchToProps = (dispatch) => {
     
     return {
         login: user => {
-            return dispatch(login(user))}
+            return dispatch(login(user))},
+        nextEvent: ()=> {
+            return dispatch(nextEvent())
+        }
     }
 }
 
@@ -151,11 +159,6 @@ const TicketForm = styled.div`
     box-shadow: 5px 5px 10px black;
 `
 
-const NextShow = styled.div`
-    font-size:32px;
-    color: orange;
-    font-weight: 600;
-`
 
 const record = { 
     background: `url('/assets/Record.png')`,

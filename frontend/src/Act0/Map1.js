@@ -6,13 +6,13 @@ import { Modal } from 'semantic-ui-react'
 import { HelpButton } from '../Styles/Styles'
 import UserHelp from '../Chat/UserHelp'
 import Chat from '../Chat/Chat'
-import {useInfo} from '../actions/channelInfo'
-
+import { useInfo } from '../actions/channelInfo'
+import UserList from '../Chat/UserList'
 function Welcome(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
   const [needHelp, setNeedHelp] = useState(false)
-  const [sideBar, setSideBar] = useState({width: "50px"})
+  const [sideBar, setSideBar] = useState({ width: "50px" })
   const [hidden, setHidden] = useState(true)
   const [width, setWidth] = useState(window.innerWidth * 0.6)
   const [time, setTime] = useState(0)
@@ -37,7 +37,7 @@ function Welcome(props) {
         break;
       case "4":
         props.history.push("/TrackD");
-        break; 
+        break;
       case "5":
         props.history.push("/TrackE");
         break;
@@ -45,8 +45,8 @@ function Welcome(props) {
         break;
     }
   }
-  
-  
+
+
   const map = {
     name: "map1",
     areas: [
@@ -89,38 +89,41 @@ function Welcome(props) {
       }
     ]
   }
-
-  let {userList, userCount} = useInfo("base", props.username)
-  useEffect(()=>{
-    let interval = setInterval(setTime(time => time+1), 1000)
+  let roomId = "Act0"
+  let { userList, userCount } = useInfo(roomId, props.username)
+  useEffect(() => {
+    let interval = setInterval(setTime(time => time + 1), 1000)
     return () => clearInterval(interval)
-  },[])
+  }, [])
   if (userList.TrackA)
-  if (userList.TrackA.length > 5){
-    map.areas = map.areas.filter(area => area.name !=="1")
-  }
+    if (userList.TrackA.length > 5) {
+      map.areas = map.areas.filter(area => area.name !== "1")
+    }
   useEffect(() => {
     function handleResize() {
-        setWidth(window.innerWidth * .6)
-        
-      }
+      setWidth(window.innerWidth * .6)
+
+    }
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
+  console.log("list", userList)
   return (
     <Background>
+      <UserList users={userList[roomId]}/>
 
-    
-      <div className="sidebar" style={sideBar} onMouseOver={() => {
-        setSideBar({ width: "200px", opacity: "1" })
-        setHidden(false)
-        }} 
-        onMouseOut={() =>{ 
+      <div className="sidebar"
+        style={sideBar}
+        onMouseOver={() => {
+          setSideBar({ width: "200px", opacity: "1" })
+          setHidden(false)
+        }}
+        onMouseOut={() => {
           setSideBar({ width: "50px" })
           setHidden(true)
-          }}>
+        }}
+      >
         <Chat roomId={"Act0"} hidden={hidden} />
       </div>
       <CenterMap>
@@ -130,7 +133,7 @@ function Welcome(props) {
           width={width}
           onClick={e => generateModal(e)}
           map={map}
-          style={{zIndex: "2", position: "relative"}}
+          style={{ zIndex: "2", position: "relative" }}
         />
       </CenterMap>
       <Modal
@@ -144,7 +147,7 @@ function Welcome(props) {
       </Modal>
       {needHelp ?
         <BottomRight>
-          <UserHelp changeNeed={changeNeed}/>
+          <UserHelp changeNeed={changeNeed} />
         </BottomRight>
         :
         <HelpButton style={{

@@ -15,10 +15,9 @@ const useInfo = (roomId, username) => {
             query: { roomId, username }
         });
 
-        socketRef.current.on("channelInfo", data=>{
-            console.log(Object.values(data).flat() )
+        socketRef.current.on("channelInfo", data=>{ 
             setUserList(data)
-            setUserCount(data)
+            setUserCount(Object.values(data).flat().length)
         })
 
         return () => {
@@ -27,7 +26,7 @@ const useInfo = (roomId, username) => {
     }, [roomId]);
 
     
-    console.log(userList)
+    
 
     return ({ userList, userCount });
 };

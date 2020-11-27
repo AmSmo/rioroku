@@ -11,7 +11,7 @@ function Chat(props){
     
     const {roomId} = props
     const { messages, sendMessage, stageTime, changeStageTime, userList } = useChat(roomId, props.username)
-    const {list, count } = useInfo(roomId, `${props.username}2`)
+    const {list, count } = useInfo(roomId, `control-${props.username}`)
     const [newMessage, setNewMessage] = useState("")
     const [time, setTime] = useState(0)
     const [newTime, setNewTime]= useState("")
@@ -32,14 +32,10 @@ function Chat(props){
        changeStageTime(parseInt(newTime))
     }
 
-    const myMessage = (message) =>{
-        return message.username === props.username
-    }
-
     const displayMessages = () => {
         return messages.map((message, idx) => {
-            
-        return <MessageLine key={idx} className={ myMessage(message) ? "yours messages message" : "mine messages message"}>{message.body}</MessageLine>
+                    
+        return <p key={idx} className={ message.ownedByCurrentUser ? "from-me" : "from-them"}>{message.body}</p>
 } )   }
     // useEffect(() => {
     //     let timer = setInterval(() => {
@@ -64,9 +60,9 @@ function Chat(props){
     return(<>
         
             <Vertical style={{display: !props.hidden ? "none" : "block"}}>CHAT ^</Vertical>
-        <div style={{ display: props.hidden ? "none" : "block", transform: "2s" }}>
+            <div style={{ display: props.hidden ? "none" : "block", transform: "2s", paddingBottom: "10px", background: "whitesmoke", borderBottomLeftRadius: "15px" }}>
             
-            <ChatMessageContainer >
+            <ChatMessageContainer className="imessage">
                 {displayMessages()}
                 <div ref={messagesEndRef} />
             </ChatMessageContainer>

@@ -12,6 +12,8 @@ export const HelpButton = styled.button`
     color:white;
     font-size: 18px;
     font-weight: 600;
+    box-shadow: 1px 2px grey;
+    cursor: pointer;
 `
 
 export const HelpArea = styled.div`
@@ -26,7 +28,9 @@ background: whitesmoke;
 
 `
 export const SendMessageButton = styled.button`
+    text-align: center;
     background: blue;
+    display:block;
     width: 120px;
     border-radius: 80px;
     border: 0.5px solid whitesmoke;
@@ -36,40 +40,48 @@ export const SendMessageButton = styled.button`
     font-size: 14px;
     font-weight: 500;
     box-shadow: 2px 4px #888888;
+    margin:auto;
+    cursor: pointer;
     &:hover{
         background:red
     }
 `
-export const MessageContainer = styled.div`
+export const HelpMessageContainer = styled.div`
     z-index:10;
-    max-height: 350px;
     width: 210px;
     overflow-y: scroll;
     word-break: break-word;
     background: white;
     border-radius: 5px;
 `
+
 export const ChatMessageContainer = styled.div`
     z-index:10;
-    max-height: 445px;
     width: 210px;
-    height: 445px;
+    min-height: 320px;
+    height:52.5vh;
+    max-height: 530px;
+    
     background: white;
     overflow-y: scroll;
     word-break: break-word;
     background: white;
+    
 `
-export const MessageLine = styled.li`
 
-    list-style: none;
-    text-align: left;
-`
 
 export const Vertical = styled.div`
     transform: rotate(-90deg);
-    margin-top: 220px;
+    font-family: "Montserrat";
+    font-weight: 800;
+    font-size: 25px;
+    position: absolute;
+    right: -18px;
+    top: 50%;
     background: none;
     z-index:0;
     transition: 2s;
     display: block;
+    width: 100px;
+    padding-right: 0;
 `

@@ -16,21 +16,22 @@ router.post('/current', passport.authenticate('jwt', { session: false }), (req, 
     res.json({
         id: req.user.id,
         username: req.user.username,
-        email: req.user.email
+        email: req.user.email,
+        admin: req.user.admin
     });
 })
 router.post('/register', (req, res) => {
 
+    const {ticketId, eventId} = req.body
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
         return res.status(400).json(errors);
     }
     
-    User.findOne({ ticketId: req.body.ticketId })
+    User.findOne({ ticketId })
         .then(user => {
             
-            if (user.admin){
-                
+            if (user && user.admin){
                 const payload = { id: user.id, ticketId: user.ticketId };
                 jwt.sign(payload, keys.secretOrKey, { expiresIn: 9000 }, (err, token) => {
                     res.json({
@@ -40,10 +41,12 @@ router.post('/register', (req, res) => {
                     })
                 })
             }else if (user) {
+                
                 errors.ticketId = 'Ticket has already been used'
                 return res.status(400).json(errors)
             } else {
-            sdk.request('/events/130129525915/attendees/')
+                
+                sdk.request(`/events/${eventId}/attendees/`)
                 .then(resp => {
                     let organizedResponse = apiFunctions.getUsers(resp)
                     if (organizedResponse[req.body.ticketId]) {
@@ -66,7 +69,7 @@ router.post('/register', (req, res) => {
                             .catch(err => res.json({ error: (err) }));
                     }
                     else {
-                        res.json({ error: "No ticket found" })
+                        res.json({ error: "The number you have entered is not valid for this performance, please check that it is entered correctly." })
                     }
                 }
                 )
@@ -101,7 +104,7 @@ router.post('/login', (req, res) => {
                 return res.json({
                         success: true,
                         token: 'Bearer ' + token,
-                        user: {username, fullName}
+                        user: {username, fullName, admin:user.admin}
                     });
                 });})
         

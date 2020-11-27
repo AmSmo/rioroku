@@ -13,6 +13,7 @@ const library = {}
 io.on("connection", (socket) => {
     const { roomId, username } = socket.handshake.query;
     
+    
     socket.join(roomId);
     let channelArray = library[roomId]
     // array.push(username)

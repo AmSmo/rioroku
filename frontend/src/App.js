@@ -1,6 +1,6 @@
 import {Route, Switch} from 'react-router-dom'
-import './App.css';
 import NavBar from './Navbar/Navbar'
+import AudienceNavBar from './Navbar/AudienceNavBar'
 import Start from './Act0/Map1'
 import Rolled from './Rolled/Rolled'
 import Login from './Session/Login'
@@ -12,28 +12,41 @@ import TrackERouter from './TrackE/TrackERouter'
 import {connect} from 'react-redux'
 
 function App(props) {
-  const {isAuthenticated} = props
+  const {isAuthenticated } = props
+  let admin
+  if(props.user){
+    admin = props.user.admin
+  }
   return (
     <div className="App">
-      <NavBar />
-      {isAuthenticated?
-      <Switch>
-          <Route path="/rolled" component={Rolled} />
-          <Route path="/TrackA" component={TrackARouter} />
-          <Route path="/TrackB" component={TrackBRouter} />
-          <Route path="/TrackC" component={TrackCRouter} />
-          <Route path="/TrackD" component={TrackDRouter} />
-          <Route path="/TrackE" component={TrackERouter} />
-
-          <Route path="/" component={Start} />
-
-
-      </Switch>
+      
+        <>
+          {isAuthenticated ?<>
+      {admin ? 
+        <NavBar />
       :
-        <Switch>
-          <Route path="/" component={Login} />
-        </Switch>
-}
+        <AudienceNavBar />
+      }
+          <Switch>
+              <Route path="/rolled" component={Rolled} />
+              <Route path="/TrackA" component={TrackARouter} />
+              <Route path="/TrackB" component={TrackBRouter} />
+              <Route path="/TrackC" component={TrackCRouter} />
+              <Route path="/TrackD" component={TrackDRouter} />
+              <Route path="/TrackE" component={TrackERouter} />
+
+              <Route path="/" component={Start} />
+
+
+          </Switch>
+          </>
+          :
+          <Switch>
+            <Route path="/" component={Login} />
+          </Switch>
+          }
+        </>
+
     </div>
   );
 }

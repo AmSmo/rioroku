@@ -5,13 +5,18 @@ export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const RECEIVE_USER_LOGOUT = "RECEIVE_USER_LOGOUT";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
-
+export const UPDATE_NEXT_EVENT = "UPDATE_NEXT_EVENT";
+export const SET_ADMIN_STATUS = "SET_ADMIN_STATUS"
 export const logoutUser = () => ({
     type: RECEIVE_USER_LOGOUT
 });
 
+export const admin = (admin) => ({
+    type: SET_ADMIN_STATUS,
+    payload: admin   
+})
 export const logout = () => dispatch => {
-    console.log("potato")
+    
     localStorage.removeItem('jwtToken')
     localStorage.removeItem('username')
     APIUtil.setAuthToken(false)
@@ -33,15 +38,24 @@ export const receiveErrors = errors => ({
 });
 
 
+export const setNextEvent = (eventInfo) => ({
+    type: UPDATE_NEXT_EVENT,
+    eventInfo
+})
 
+
+export const nextEvent = () => dispatch => {
+    APIUtil.getEvents().then(res=> {
+        dispatch(setNextEvent(res.data.events[0]))
+    }
+        )
+}
 
 
 
 export const login = user => dispatch => {
-    
     APIUtil.login(user).then(res => {
-    
-        console.log("RESP", res)
+        user.admin = res.data.user.admin
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
         APIUtil.setAuthToken(token);

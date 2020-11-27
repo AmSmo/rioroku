@@ -12,11 +12,14 @@ module.exports = {getUsers : (eventData) =>{
     
     getEventList: (eventsData) =>{
         let {events} = eventsData
-        let dateIdList = {}
+        let dateIdList = []
         for (show of events){
-            // May want to add filter layer in case outside events exist
+            let showInfo = {}
             let date = show["start"]["local"]
-            dateIdList[date] = show["id"]
+            showInfo.date = date
+            showInfo.id = show["id"]
+            // May want to add filter layer in case outside events exist
+            dateIdList.push(showInfo)
         }
         return dateIdList
         // return eventsData /* if we need to sort better, quick change */
