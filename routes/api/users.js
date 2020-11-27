@@ -109,7 +109,6 @@ router.post('/login', (req, res) => {
                 });})
         .catch(err => {
             errors.duplicate = err
-
             return res.status(400).json(errors)
         });
 }
