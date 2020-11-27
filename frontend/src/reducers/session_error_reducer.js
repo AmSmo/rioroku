@@ -10,10 +10,7 @@ const SessionErrorsReducer = (state = _nullErrors, action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_SESSION_ERRORS:
-            if (action.errors.duplicate){
-                return ["Username in use"]
-            }else{
-            return action.errors;}
+            return action.errors
         case RECEIVE_CURRENT_USER:
             return _nullErrors;
         default:
