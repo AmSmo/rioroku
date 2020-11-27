@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState} from "react";
 import socketIOClient from "socket.io-client";
 
+
+
 const SOCKET_SERVER_URL = `/`;
-
-
 
 const useInfo = (roomId, username) => {
     const [userList, setUserList] = useState([])
@@ -17,7 +17,13 @@ const useInfo = (roomId, username) => {
 
         socketRef.current.on("channelInfo", data=>{ 
             setUserList(data)
-            setUserCount(Object.values(data).flat().length)
+            delete data.help
+            delete data.admin
+            let allUsers = Object.values(data).flat().filter(user=>{
+                return !user.startsWith("control") && user !== "undefined"
+            })
+            
+            setUserCount(allUsers.length)
         })
 
         return () => {

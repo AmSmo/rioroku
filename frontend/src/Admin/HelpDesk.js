@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import {ChannelContainer, HelpQueue, InteriorQueue} from '../Styles/Styles'
 import { connect } from 'react-redux'
 import { useHelp } from '../actions/helpFunctions'
+import { useInfo } from '../actions/channelInfo'
+import UserList from '../Chat/UserList'
 import HelpItem from './HelpItem'
 function HelpDesk(props) {
 
 
     const { messages, sendMessage, deleteMessage} = useHelp()
-
+    const { userList, userCount} = useInfo("admin", props.username)
+    useEffect(() =>{
+        renderChannels()
+    }, [userList])
     const displayMessages = () => {
         return messages.map((message, idx) => {
             return (
@@ -15,12 +21,33 @@ function HelpDesk(props) {
             </>)
         })
     }
-
+    const renderChannels = () =>{
+        delete userList.help
+        delete userList.admin
+        return (Object.keys(userList)).map(channel =>{
+            let users = userList[channel]
+            if (users && users.length >0){
+                return <UserList control users={users} roomId={channel} />
+            }
+    })}
     return (
 
             <div>
-                <h2>Help Queue</h2>
-                {displayMessages()}
+                <HelpQueue>
+                    <InteriorQueue>
+                        <h2>Help Queue</h2>
+                        {displayMessages()}
+                    </InteriorQueue>
+                </HelpQueue>
+
+                <ChannelContainer>
+                    <div style={{marginRight: "10px"}}>
+                    <h2>Active Rooms</h2>
+                    <p>Total Users: {userCount}</p>
+                    </div>
+                
+                    {renderChannels()}
+                </ChannelContainer>
             </div>
 
 

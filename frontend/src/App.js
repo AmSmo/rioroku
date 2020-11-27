@@ -4,6 +4,7 @@ import AudienceNavBar from './Navbar/AudienceNavBar'
 import Start from './Act0/Map1'
 import Rolled from './Rolled/Rolled'
 import Login from './Session/Login'
+import HelpDesk from './Admin/HelpDesk'
 import TrackARouter from './TrackA/TrackARouter'
 import TrackBRouter from './TrackB/TrackBRouter'
 import TrackCRouter from './TrackC/TrackCRouter'
@@ -24,10 +25,16 @@ function App(props) {
           {isAuthenticated ?<>
       {admin ? 
         <NavBar />
+
       :
         <AudienceNavBar />
       }
           <Switch>
+            {admin ?
+           <Route path='/HelpDesk' component={HelpDesk} />
+           :
+           null
+          }
               <Route path="/rolled" component={Rolled} />
               <Route path="/TrackA" component={TrackARouter} />
               <Route path="/TrackB" component={TrackBRouter} />

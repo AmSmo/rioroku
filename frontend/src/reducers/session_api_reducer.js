@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
             return {...state, eventInfo: action.eventInfo}
         case SET_ADMIN_STATUS:
             return ({...state,
-            user: {...state.user, admin: action.payload}})
+            user: {...state.user, admin: action.payload.admin, username: action.payload.username}})
         case RECEIVE_CURRENT_USER:
             return {
                 ...state,

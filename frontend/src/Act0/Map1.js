@@ -108,10 +108,9 @@ function Welcome(props) {
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  console.log("list", userList)
   return (
     <Background>
-      <UserList users={userList[roomId]}/>
+      <UserList users={userList[roomId]} roomId={roomId}  />
 
       <div className="sidebar"
         style={sideBar}

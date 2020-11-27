@@ -47,7 +47,7 @@ function TrackA1(props){
       break;
     }
   }
-  const {list, count} = useInfo("TrackA", props.username)
+  const {userList, userCount} = useInfo("TrackA", props.username)
   const map = {name: "map1",
   areas: [
     {
@@ -106,7 +106,6 @@ return(
 
   <Background>
     
-  <h1>{props.time}</h1>
   <div className="center_map">
   <ImageMapper
   src={'https://dl.dropboxusercontent.com/s/au6xan8beolro28/map_A_1.png?dl=0'}
@@ -131,7 +130,12 @@ return(
 }
 
 const mapStateToProps = state => {
-  return state.game
+  if (state.api.user) {
+    return { username: state.api.user.username, loggedIn: state.api.isAuthenticated }
+  }
+  else {
+    return { username: localStorage.getItem("username"), loggedIn: true }
+  }
 }
 
 export default connect(mapStateToProps)(TrackA1)

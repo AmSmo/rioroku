@@ -24,7 +24,7 @@ const useChat = (roomId, username) => {
                 ...message,
                 ownedByCurrentUser: message.senderId === socketRef.current.id,
             };
-            console.log(incomingMessage)
+            
             setMessages((messages) => [...messages, incomingMessage]);
         });
 
@@ -54,7 +54,7 @@ const useChat = (roomId, username) => {
 
     
 
-    return { messages, sendMessage, stageTime, changeStageTime };
+    return { messages, sendMessage, stageTime};
 };
 
 

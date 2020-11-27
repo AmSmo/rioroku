@@ -3,22 +3,24 @@ import {useChat} from '../actions/socketFunctions'
 import {useInfo} from '../actions/channelInfo'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {SendMessageButton, MessageLine, ChatMessageContainer, Vertical} from '../Styles/Styles'
+import {SendMessageButton, ChatMessageContainer, Vertical} from '../Styles/Styles'
 function Chat(props){
     if (!props.loggedIn){
         props.history.push("/")
     }
     
     const {roomId} = props
-    const { messages, sendMessage, stageTime, changeStageTime, userList } = useChat(roomId, props.username)
-    const {list, count } = useInfo(roomId, `control-${props.username}`)
+    const { messages, sendMessage, stageTime } = useChat(roomId, props.username)
     const [newMessage, setNewMessage] = useState("")
     const [time, setTime] = useState(0)
     const [newTime, setNewTime]= useState("")
+    useInfo(roomId, `control-${props.username}`)
+    
     const handleSendMessage = ()=>{
+        if (newMessage.trim() !== ""){
         sendMessage(props.username + ": " + newMessage)
-        setNewMessage("")
-
+    }
+    setNewMessage("")
     }
 
     const messagesEndRef = useRef(null)
@@ -28,9 +30,10 @@ function Chat(props){
     }
 
     useEffect(scrollToBottom, [messages]);
-    const handleTimeChange = () =>{
-       changeStageTime(parseInt(newTime))
-    }
+
+    // const handleTimeChange = () =>{
+    //    changeStageTime(parseInt(newTime))
+    // }
 
     const displayMessages = () => {
         return messages.map((message, idx) => {
@@ -56,33 +59,38 @@ function Chat(props){
         }
         
     }
-    
+    console.log(props)
     return(<>
         
             <Vertical style={{display: !props.hidden ? "none" : "block"}}>CHAT ^</Vertical>
             <div style={{ display: props.hidden ? "none" : "block", transform: "2s", paddingBottom: "10px", background: "whitesmoke", borderBottomLeftRadius: "15px" }}>
             
-            <ChatMessageContainer className="imessage">
+            <ChatMessageContainer style={props.help ? { height: "300px"}: null}className="imessage">
                 {displayMessages()}
                 <div ref={messagesEndRef} />
             </ChatMessageContainer>
-
+            { props.userHelp && messages.length === 0 ?
+                <div> Alison Has been Notified </div>
+                :
+                <>
             <textarea
                 className="messageInput"
                 value={newMessage}
                 onChange={(e)=> setNewMessage(e.target.value)}
                 placeholder="Your Message..."
                 onKeyPress={(e) => handlePress(e)}
-            /><br></br>
+            />
             <SendMessageButton onClick={handleSendMessage}>Send Message</SendMessageButton>
-            {userList}
-            {props.control ? 
+            </>
+}
+            <br></br>
+            {/* {props.control ? 
             <>
                 <input type="text" value={newTime} onChange={(e)=> setNewTime(e.target.value)} />
                 <button onClick={handleTimeChange}>ChangeTime</button>
             </>
             :
-            null}
+            null} */}
         </div>
         </>
     )   

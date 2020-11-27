@@ -1,3 +1,7 @@
+.App{
+  text-align: center;
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat', 'Monospace', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -60,8 +64,8 @@ input {
   }
 
   100% {
-    -webkit-transform: rotate(-360deg);
-    transform: rotate(-360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -72,8 +76,8 @@ input {
   }
 
   100% {
-    -webkit-transform: rotate(-360deg);
-    transform: rotate(-360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 

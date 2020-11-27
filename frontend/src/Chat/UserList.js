@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import Chat from './Chat'
-import styled from 'styled-components'
+import {UserListContainer} from '../Styles/Styles'
 
 function UserList(props) {
-    console.log(props)
-    let filteredUsers = []
+    
+    let filteredUsers
+    if (props.users){
     if (props.control){
         filteredUsers = props.users.filter(user => user.startsWith("control"))
     }else{
-        filteredUsers = props.users.filter(user => !user.startsWith("control"))
-    }
+        filteredUsers = props.users.filter(user => {
+            return !user.startsWith("control") && user !== "undefined" })
+    }}
     const renderUsers = (filteredUsers)=>{
         return filteredUsers.map((user,idx) =>{
-            console.log(user)
-            return <li key={idx}>{user}</li>
+            let color = idx % 2 === 0 ? "lightgrey" : "whitesmoke"
+            return <li style={{textAlign: "left", background: color, width: "100%" }}key={idx}>{user}</li>
         })
     }
     return (
-        <UserListContainer>
+        <UserListContainer style={
+            !props.control?     {position: "fixed",
+            left: "0",
+            top: "28px"}: null}>
+            <h3>{props.roomId}</h3>
             {props.users ?
             renderUsers(filteredUsers)
             :
@@ -29,11 +34,3 @@ function UserList(props) {
 
 export default UserList
 
-const UserListContainer = styled.ul`
-    list-style-type: none;
-    background: whitesmoke;
-    height: 200px;
-    overflow-y: scroll;
-    width: 300px;
-
-`

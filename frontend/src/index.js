@@ -19,8 +19,7 @@ if (localStorage.jwtToken) {
   
   preAuth().then(data =>{ 
     localStorage.setItem("username", data.data.username)
-    
-    store.dispatch(admin(data.data.admin))
+    store.dispatch(admin(data.data.admin, data.data.username))
   })
   .catch(err => console.log(err))
     const preloadedState = { api: { user: {username: localStorage.getItem("username") }, isAuthenticated: true } };

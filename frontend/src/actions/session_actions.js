@@ -11,9 +11,9 @@ export const logoutUser = () => ({
     type: RECEIVE_USER_LOGOUT
 });
 
-export const admin = (admin) => ({
+export const admin = (admin, username) => ({
     type: SET_ADMIN_STATUS,
-    payload: admin   
+    payload: {admin, username}
 })
 export const logout = () => dispatch => {
     
@@ -63,7 +63,6 @@ export const login = user => dispatch => {
         dispatch(receiveCurrentUser(decoded, user))
     })
         .catch(err => {
-    
-            dispatch(receiveErrors(err.response.data));
+            return dispatch(receiveErrors(err.response.data));
         })
     }

@@ -3,10 +3,9 @@ import {connect} from 'react-redux'
 import {useHelp} from'../actions/helpFunctions'
 import {HelpArea, SendMessageButton} from '../Styles/Styles'
 import Chat from './Chat'
+import {Icon} from 'semantic-ui-react'
 
 function UserHelp(props){
-    
-    
     const { messages, sendMessage } = useHelp(props.username)
     const [newMessage, setNewMessage] = useState("")
     const [myHelp, setMyHelp] = useState(false)
@@ -19,17 +18,19 @@ function UserHelp(props){
     return(
          myHelp ? 
             <HelpArea>
-                <Chat roomId={props.username} help />
-                <br></br>
-                <button onClick={()=>{
+                <Icon name="window close" style={{ float: "right" }} onClick={() => {
                     setMyHelp(false)
                     props.changeNeed()
-                    }}>
-                    Solved
-                </button>
+                }} />
+                <Chat roomId={props.username} userHelp />
+                <br></br>
             </HelpArea>
                 :
         <HelpArea>
+                <Icon name="window close" style={{ float: "right" }} onClick={() => {
+                    setMyHelp(false)
+                    props.changeNeed()
+                }}/>
             <p>Please Describe You Problem</p>
             <textarea
                 value={newMessage}
@@ -37,8 +38,6 @@ function UserHelp(props){
                 placeholder="Your Message..."
             /><br></br>
             <SendMessageButton onClick={handleSendMessage}>Send Message</SendMessageButton>
-            
-                
         </HelpArea>
         
         

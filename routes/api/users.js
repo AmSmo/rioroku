@@ -92,7 +92,7 @@ router.post('/login', (req, res) => {
         return res.status(400).json(errors);
     }
     const { ticketId, username, fullName, email } = req.body
-
+    
     User.findOneAndUpdate({ ticketId }, { username, fullName: fullName, email } )
             .then(user=> {
             const payload = { id: user.id, username: user.username };
@@ -107,7 +107,11 @@ router.post('/login', (req, res) => {
                         user: {username, fullName, admin:user.admin}
                     });
                 });})
-        
+        .catch(err => {
+            errors.duplicate = err
+
+            return res.status(400).json(errors)
+        });
 }
 )
 
