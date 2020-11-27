@@ -45,7 +45,8 @@ export const setNextEvent = (eventInfo) => ({
 
 
 export const nextEvent = () => dispatch => {
-    APIUtil.getEvents().then(res=> {
+    APIUtil.getEvents().then(res=> { 
+        console.log(res.data)
         dispatch(setNextEvent(res.data.events[0]))
     }
         )
