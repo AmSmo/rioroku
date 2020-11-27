@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components"
 import './clock.scss'
 import { Dimmer, Loader, Segment, Transition } from 'semantic-ui-react'
+
 const AnimatedCard = ({ animation, digit }) => {
     
     return (
@@ -11,7 +12,6 @@ const AnimatedCard = ({ animation, digit }) => {
     );
 };
 
-// function component
 const StaticCard = ({ position, digit }) => {
     return (
         <div className={position}>
@@ -187,9 +187,9 @@ class FlipClock extends React.Component {
             loaded,
             clock
         } = this.state;
-        setTimeout(() => this.setState({loaded:true}), 100)
         return (
             <>
+            {clock ? null : setTimeout(() => this.setState({loaded:true}), 100)}
                 <Transition visible = { clock } animation = 'scale' duration = { 400} >
             <ClockContainer>
                 { this.state.timeleft > 0 ? 

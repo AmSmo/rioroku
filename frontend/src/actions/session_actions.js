@@ -45,19 +45,20 @@ export const setNextEvent = (eventInfo) => ({
 
 
 export const nextEvent = () => dispatch => {
-    APIUtil.getEvents().then(res=> { 
-        console.log(res.data)
-        dispatch(setNextEvent(res.data.events[0]))
-    }
-        )
+    APIUtil.getEvents().then(resp=> { 
+        console.log(resp.data)
+        dispatch(setNextEvent(resp.data.events[0]))
+    }).catch(err => {
+        return dispatch(receiveErrors(err.response.data));
+    })
 }
 
 
 
 export const login = user => dispatch => {
-    APIUtil.login(user).then(res => {
-        user.admin = res.data.user.admin
-        const { token } = res.data;
+    APIUtil.login(user).then(resp => {
+        user.admin = resp.data.user.admin
+        const { token } = resp.data;
         localStorage.setItem('jwtToken', token);
         APIUtil.setAuthToken(token);
         const decoded = jwt_decode(token);
