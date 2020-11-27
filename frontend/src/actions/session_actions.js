@@ -49,7 +49,8 @@ export const nextEvent = () => dispatch => {
         console.log(resp.data)
         dispatch(setNextEvent(resp.data.events[0]))
     }).catch(err => {
-        return dispatch(receiveErrors(err.response.data));
+        console.log(err)
+        dispatch(receiveErrors(err.response));
     })
 }
 
