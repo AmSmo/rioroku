@@ -26,16 +26,45 @@ export const HelpButton = styled.button`
     box-shadow: 1px 2px grey;
     cursor: pointer;
 `
+export const OpenHelp = styled.button`
+    background: red;
+    width: 60px;
+    border-radius: 80px;
+    border: 0.5px solid whitesmoke;
+    height:28px;
+    font-family: monospace;
+    color:white;
+    font-size: 12px;
+    font-weight: 400;
+    box-shadow: 1px 2px grey;
+    cursor: pointer;
+    margin-right: 10px;
+`
+
+export const UserNeeds = styled.li`
+    list-style:none;
+    text-align: left;
+    word-break: break-word;
+`
+
+
+
+export const BottomRight = styled.div`
+    position: fixed;
+    right: 10px;
+    bottom: 0px;
+    z-index: 4;
+`
 
 export const HelpArea = styled.div`
-border: 1px solid black;
-border-radius: 10px 10px 0 0;
-text-align: center;
-justify-content: center;
-padding: 10px;
-z-index: 5;
-position: static;
-background: whitesmoke;
+    border: 1px solid black;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    z-index: 5;
+    position: static;
+    background: whitesmoke;
 
 `
 export const SendMessageButton = styled.button`
@@ -79,6 +108,16 @@ export const ChatMessageContainer = styled.div`
     background: white;
     
 `
+export const CenterMap = styled.div`
+  margin: auto;
+  width: 50vw;
+`
+
+export const BlueBackground = styled.div`
+  background: #4287f5;
+  top: 16px;
+  height: 94.5vh;
+`
 
 
 export const Vertical = styled.div`
@@ -111,10 +150,12 @@ export const HelpQueue = styled.div`
     position: fixed;
     right: 0;
     width: 240px;
-    border: 1px solid lightgrey;
+    border: 3px solid lightgrey;
     height: 500px;
     overflow-y: scroll;
     z-index:10;
+    box-shadow: 2px 2px 2px grey;
+    border-bottom-left-radius: 15px;
 `
 
 export const InteriorQueue = styled.div`

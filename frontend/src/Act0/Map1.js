@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
@@ -8,6 +7,7 @@ import UserHelp from '../Chat/UserHelp'
 import Chat from '../Chat/Chat'
 import { useInfo } from '../actions/channelInfo'
 import UserList from '../Chat/UserList'
+import { CenterMap, BlueBackground, BottomRight } from '../Styles/Styles'
 function Welcome(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
@@ -108,8 +108,10 @@ function Welcome(props) {
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+
   return (
-    <Background>
+    <BlueBackground>
       <UserList users={userList[roomId]} roomId={roomId}  />
 
       <div className="sidebar"
@@ -157,7 +159,7 @@ function Welcome(props) {
           Help
                         </HelpButton>
       }
-    </Background>
+    </BlueBackground>
   )
 }
 
@@ -167,27 +169,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(Welcome)
 
-const Background = styled.div`
-  background: #4287f5;
-  top: 16px;
-  height: 94.5vh;
-`
 
-const BottomRight = styled.div`
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-    z-index: 4;
-`
-const TopRight = styled.div`
-    position: absolute;
-    top: 50px;
-    right: 0px;
-    border: 0.4px solid grey;
-    background: white;
-`
 
-const CenterMap = styled.div`
-  margin: auto;
-  width: 57vw;
-`

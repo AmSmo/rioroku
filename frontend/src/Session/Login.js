@@ -140,7 +140,6 @@ export default connect(
 
 const Background= styled.div`
     background: url('https://images.squarespace-cdn.com/content/v1/5f5babb127bb8735b1ce9ff4/1600841353451-S1O9EJ52ZOH6OPEI4PUX/ke17ZwdGBToddI8pDm48kCiMFTcZBGji0W88cIICJysUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYwL8IeDg6_3B-BRuF4nNrNcQkVuAT7tdErd0wQFEGFSnBQ3wFkNBVy7lZy9hvHlJuMyXjX7fiW1znkD-CsoKCeUK1nzmHInNPsAcKIA5dmCwA/Orange+Threads.png') black;
-    height: 100vh;
     display: block;
     background-position: center;
     background-repeat: repeat-x;

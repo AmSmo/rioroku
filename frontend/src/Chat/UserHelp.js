@@ -22,7 +22,7 @@ function UserHelp(props){
                     setMyHelp(false)
                     props.changeNeed()
                 }} />
-                <Chat roomId={props.username} userHelp />
+                <Chat roomId={`Help-${props.username}`} userHelp />
                 <br></br>
             </HelpArea>
                 :

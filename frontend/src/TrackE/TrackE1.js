@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
@@ -7,11 +6,12 @@ import ModalVideo from '../modals/ModalVideo'
 import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
 import ModalLivestream from '../modals/ModalLivestream'
+import {BlueBackground, CenterMap} from '../Styles/Styles'
 
 function TrackE1(props){
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
-
+  const [width, setWidth] = useState(window.innerWidth * 0.5)
   const modalClose = () => {
     setOpen(false)
   }
@@ -81,18 +81,28 @@ function TrackE1(props){
     }
   ]
 }
+  useEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth * .5)
+
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
 return(
-  <Background>
-
+  <BlueBackground>
+    <CenterMap>
   <ImageMapper
   src={'https://dl.dropboxusercontent.com/s/3jncw5ztorvep3n/clue%20board.jpg?dl=0'}
   imgWidth={1000}
-  width={1000}
+  width={width}
   onClick={e=> generateModal(e)}
   map={map}
-
   />
+  </CenterMap>
   <Modal
   onClose={() => setOpen(false)}
   onOpen={() => setOpen(true)}
@@ -102,7 +112,7 @@ return(
   >
   {contents}
   </Modal>
-  </Background>
+  </BlueBackground>
 )
 }
 
@@ -111,6 +121,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(TrackE1)
-
-const Background = styled.div`
-background-color: #4287f5`

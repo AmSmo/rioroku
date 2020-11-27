@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
@@ -8,11 +7,12 @@ import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
 import ModalLivestream from '../modals/ModalLivestream'
 import {useInfo} from '../actions/channelInfo'
-
+import {CenterMap, BlueBackground} from '../Styles/Styles'
 
 function TrackA1(props){
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
+  const [width, setWidth] = useState(window.innerWidth * 0.6)
 
   const modalClose = () => {
     setOpen(false)
@@ -102,20 +102,31 @@ function TrackA1(props){
   ]
 }
 
+  useEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth * .6)
+
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
 return(
 
-  <Background>
+  <BlueBackground>
     
-  <div className="center_map">
+  <CenterMap>
   <ImageMapper
   src={'https://dl.dropboxusercontent.com/s/au6xan8beolro28/map_A_1.png?dl=0'}
   imgWidth={1200}
-  width={1200}
+  width={width}
   onClick={e=> generateModal(e)}
   map={map}
 
   />
-  </div>
+  </CenterMap>
   <Modal
   onClose={() => setOpen(false)}
   onOpen={() => setOpen(true)}
@@ -125,7 +136,7 @@ return(
   >
   {contents}
   </Modal>
-  </Background>
+  </BlueBackground>
 )
 }
 
@@ -140,5 +151,3 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(TrackA1)
 
-const Background = styled.div`
-background-color: #4287f5`

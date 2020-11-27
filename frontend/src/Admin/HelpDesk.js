@@ -26,7 +26,7 @@ function HelpDesk(props) {
         delete userList.admin
         return (Object.keys(userList)).map(channel =>{
             let users = userList[channel]
-            if (users && users.length >0){
+            if (users && users.length >0 && !channel.startsWith("Help")){
                 return <UserList control users={users} roomId={channel} />
             }
     })}
