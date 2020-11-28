@@ -6,10 +6,13 @@ function UserList(props) {
     let filteredUsers
     if (props.users){
     if (props.control){
-        filteredUsers = props.users.filter(user => user.startsWith("control"))
+        filteredUsers = props.users.filter(user => {
+            if(user){
+                user.startsWith("control")}})
     }else{
         filteredUsers = props.users.filter(user => {
-            return !user.startsWith("control") && user !== "undefined" })
+            if(user){
+                return !user.startsWith("control") && user !== "undefined"}})
     }}
     const renderUsers = (filteredUsers)=>{
         return filteredUsers.map((user,idx) =>{
