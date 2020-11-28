@@ -10,13 +10,11 @@ const path = require('path');
 const server = require('./socketServer')
 
 if (process.env.NODE_ENV === 'production') {
+    app.use("/api/users", users);
+    app.use("/api/eventbrite", eventbrite);
     app.use(express.static('frontend/build'));
     app.get('*', (req, res) => {
-        if (req.url.startsWith("/api")){
-            app.use("/api/users", users);
-            app.use("/api/eventbrite", eventbrite);
-        }else{
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))};
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
     })
     
 }
