@@ -9,15 +9,7 @@ const passport = require('passport')
 const path = require('path');
 const server = require('./socketServer')
 
-if (process.env.NODE_ENV === 'production') {
-    app.use("/api/users", users);
-    app.use("/api/eventbrite", eventbrite);
-    app.use(express.static('frontend/build'));
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-    })
-    
-}
+
 /* CHAT! */
 
 /* REST OF THE API */
@@ -34,7 +26,14 @@ mongoose
 
 const port = process.env.PORT || 5000;
 
-server(app,port)
-
 app.use("/api/users", users);
 app.use("/api/eventbrite", eventbrite);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('frontend/build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    })
+    
+}
+server(app,port)
