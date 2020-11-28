@@ -82,6 +82,50 @@ input {
 }
 
 
+
+html body ::-webkit-scrollbar {
+  width: 4px;
+  background: rgba(104, 104, 227, 0.2);
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+  
+}
+::-webkit-scrollbar-button:end {
+  height: 30px;
+  width: 30%;
+}
+
+::-webkit-scrollbar-button:start {
+  height: 30px;
+  width: 30%;
+}
+
+html body ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey;
+  border-radius: 8px;
+  padding-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+}
+
+
+html body ::-webkit-scrollbar-thumb:hover {
+  /* background: darkblue; */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+}
+html body ::-webkit-scrollbar-button {
+  /* background: darkblue; */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+  
+}
+
 .fade-in {
   -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
   animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;

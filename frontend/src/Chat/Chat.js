@@ -20,7 +20,7 @@ function Chat(props){
         if (newMessage.trim() !== ""){
         sendMessage(props.username + ": " + newMessage)
     }
-    setNewMessage("")
+        setNewMessage("")
     }
 
     const messagesEndRef = useRef(null)
@@ -31,35 +31,20 @@ function Chat(props){
 
     useEffect(scrollToBottom, [messages]);
 
-    // const handleTimeChange = () =>{
-    //    changeStageTime(parseInt(newTime))
-    // }
 
     const displayMessages = () => {
         return messages.map((message, idx) => {
                     
         return <p key={idx} className={ message.ownedByCurrentUser ? "from-me" : "from-them"}>{message.body}</p>
 } )   }
-    // useEffect(() => {
-    //     let timer = setInterval(() => {
-    //         setTime(time => (time + 1));
-            
-    //     }, 1000);
 
-    // return () => clearInterval(timer);
-    // },[time])
-
-    // useEffect(()=>{
-    //     return setTime(parseInt(stageTime))
-    // },[stageTime])
 
     const handlePress = (e) =>{
         if (e.key === "Enter"){
+            e.preventDefault()
             handleSendMessage()
         }
-        
     }
-    console.log(props)
     return(<>
         
             <Vertical style={{display: !props.hidden ? "none" : "block"}}>CHAT ^</Vertical>

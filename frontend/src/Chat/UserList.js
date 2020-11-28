@@ -6,9 +6,10 @@ function UserList(props) {
     let filteredUsers
     if (props.users){
     if (props.control){
+        
         filteredUsers = props.users.filter(user => {
             if(user){
-                user.startsWith("control")}})
+                return user.startsWith("control")}})
     }else{
         filteredUsers = props.users.filter(user => {
             if(user){

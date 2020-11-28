@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState} from "react";
-import socketIOClient from "socket.io-client";
+import socketIOClient, { io } from "socket.io-client";
 
 
 
@@ -19,23 +19,23 @@ const useInfo = (roomId, username) => {
             setUserList(data)
             delete data.help
             delete data.admin
-            let allUsers = Object.values(data).flat().filter(user=>{
-                if (user){
-                    return !user.startsWith("control") && user !== "undefined"}
-                else{
-                    return false}
+            let userArray = Object.values(data).flat()
+            console.log(userArray)
+            let allUsers = userArray.filter(user=>{
+                if(user){
+                return user !== "undefined" && user.startsWith("control")}
+
             })
+            
             
             setUserCount(allUsers.length)
         })
 
         return () => {
+            
             socketRef.current.disconnect();
         };
     }, [roomId]);
-
-    
-    
 
     return ({ userList, userCount });
 };

@@ -5,11 +5,22 @@ import { useHelp } from '../actions/helpFunctions'
 import { useInfo } from '../actions/channelInfo'
 import UserList from '../Chat/UserList'
 import HelpItem from './HelpItem'
+import {useTimer} from '../actions/timerInfo'
+import { Dropdown } from 'semantic-ui-react';
 function HelpDesk(props) {
 
 
     const { messages, sendMessage, deleteMessage} = useHelp()
     const { userList, userCount} = useInfo("admin", props.username)
+    const {setTimer, startTimer, resetTimer, pauseTimer, browserTimer, getTimer} = useTimer()
+    const [disable, setDisable] = useState(true)
+    const [showMinutes, setShowMinutes] = useState(0)
+    const [showSeconds, setShowSeconds] = useState(0)
+    const [localTime, setLocalTime] = useState(0)
+    
+
+    console.log(browserTimer)
+
     useEffect(() =>{
         renderChannels()
     }, [userList])
@@ -18,7 +29,7 @@ function HelpDesk(props) {
             return (
                 <>
                     <HelpItem message={message} key={idx} deleteMessage={deleteMessage}/>
-            </>)
+                </>)
         })
     }
     const renderChannels = () =>{
@@ -30,9 +41,40 @@ function HelpDesk(props) {
                 return <UserList control users={users} roomId={channel} />
             }
     })}
+
+    const handleChange = (e) =>{
+        switch(e.target.name){
+            case "showMinutes":
+                setShowMinutes(e.target.value)
+                break;
+            case "showSeconds":
+                setShowSeconds(e.target.value)
+                break;
+            default:
+                break;
+        }
+    }
+
+    const setShowTimer = () => {
+        setTimer(showMinutes, showSeconds)
+    }
     return (
 
             <div>
+                <button onClick={()=> setDisable(!disable)}>Toggle Timer Changes</button>
+                <button onClick={()=> {
+                    return startTimer()}} disabled={disable} >Start Timer</button>
+                <button onClick={() => {
+                    console.log(localTime)
+                    pauseTimer()}} disabled={disable}>Pause Timer</button>
+                <button onClick={() => resetTimer()} disabled={disable}>Reset Timer</button>
+                <button onClick={() => getTimer()} >Get Timer</button>
+                
+            <input type="number" min="0" max="200" name="showMinutes" disabled={disable} value={showMinutes} onChange={handleChange} /> 
+                <label for="minutes">Minutes</label>
+                <input type="number" min="0" max="59" name="showSeconds" disabled={disable} value={showSeconds} onChange={handleChange} /> 
+                <label for="minutes">Seconds</label>
+                <button onClick={() => setShowTimer()} disabled={disable}>Set Timer</button>
                 <HelpQueue>
                     <InteriorQueue>
                         <h2>Help Queue</h2>

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
-import { HelpButton } from '../Styles/Styles'
-import UserHelp from '../Chat/UserHelp'
 import Chat from '../Chat/Chat'
 import { useInfo } from '../actions/channelInfo'
 import UserList from '../Chat/UserList'
@@ -11,12 +9,12 @@ import { CenterMap, BlueBackground, BottomRight } from '../Styles/Styles'
 function Welcome(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
-  const [needHelp, setNeedHelp] = useState(false)
   const [sideBar, setSideBar] = useState({ width: "50px" })
   const [hidden, setHidden] = useState(true)
   const [width, setWidth] = useState(window.innerWidth * 0.6)
   const [time, setTime] = useState(0)
-
+  
+  const [needHelp, setNeedHelp] = useState(false)
   const changeNeed = () => {
     setNeedHelp(false)
   }
@@ -146,19 +144,7 @@ function Welcome(props) {
       >
         {contents}
       </Modal>
-      {needHelp ?
-        <BottomRight>
-          <UserHelp changeNeed={changeNeed} />
-        </BottomRight>
-        :
-        <HelpButton style={{
-          right: "10px",
-          bottom: "5px"
-        }}
-          onClick={() => setNeedHelp(true)}>
-          Help
-                        </HelpButton>
-      }
+      
     </BlueBackground>
   )
 }

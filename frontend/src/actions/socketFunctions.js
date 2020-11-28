@@ -8,7 +8,6 @@ const SOCKET_SERVER_URL = `/`;
 
 const useChat = (roomId, username) => {
     const [messages, setMessages] = useState([]); 
-    const [stageTime, setStageTime] = useState("0")
     const socketRef = useRef();
     
     useEffect(() => {
@@ -28,9 +27,6 @@ const useChat = (roomId, username) => {
             setMessages((messages) => [...messages, incomingMessage]);
         });
 
-        socketRef.current.on("changeTime", (time) => {
-            setStageTime(time.body)
-        })
 
         return () => {
             socketRef.current.disconnect();
@@ -46,15 +42,10 @@ const useChat = (roomId, username) => {
         
     };
 
-    const changeStageTime = (time) => {
-        socketRef.current.emit("changeTime",{
-            body: time
-        })
-    }
 
     
 
-    return { messages, sendMessage, stageTime};
+    return { messages, sendMessage};
 };
 
 

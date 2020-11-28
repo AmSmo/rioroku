@@ -47,7 +47,7 @@ function TrackA1(props){
       break;
     }
   }
-  const {userList, userCount} = useInfo("TrackA", props.username)
+  const {userList, userCount} = useInfo("TrackA", `control-${props.username}`)
   const map = {name: "map1",
   areas: [
     {

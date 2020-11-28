@@ -1,4 +1,5 @@
 import {Route, Switch} from 'react-router-dom'
+import {useState} from 'react'
 import NavBar from './Navbar/Navbar'
 import AudienceNavBar from './Navbar/AudienceNavBar'
 import Start from './Act0/Map1'
@@ -11,9 +12,15 @@ import TrackCRouter from './TrackC/TrackCRouter'
 import TrackDRouter from './TrackD/TrackDRouter'
 import TrackERouter from './TrackE/TrackERouter'
 import {connect} from 'react-redux'
-
+import UserHelp from './Chat/UserHelp'
+import { HelpButton , BottomRight } from './Styles/Styles'
 function App(props) {
   const {isAuthenticated } = props
+  const [needHelp, setNeedHelp] = useState(false)
+  const changeNeed = () => {
+    setNeedHelp(false)
+  }
+
   let admin
   if(props.user){
     admin = props.user.admin
@@ -46,6 +53,19 @@ function App(props) {
 
 
           </Switch>
+          {needHelp ?
+            <BottomRight>
+              <UserHelp changeNeed={changeNeed} />
+            </BottomRight>
+            :
+            <HelpButton style={{
+              right: "10px",
+              bottom: "5px"
+            }}
+              onClick={() => setNeedHelp(true)}>
+              Help
+                        </HelpButton>
+          }
           </>
           :
           <Switch>

@@ -1,18 +1,9 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from "styled-components"
 import './clock.scss'
 import { Dimmer, Loader, Segment, Transition } from 'semantic-ui-react'
 
-const AnimatedCard = ({ animation, digit }) => {
-    
-    return (
-        <div className={`flipCard ${animation}`}>
-            <span>{digit}</span>
-        </div>
-    );
-};
-
-const StaticCard = ({ position, digit }) => {
+const Card = ({ position, digit }) => {
     return (
         <div className={position}>
             <span>{digit}</span>
@@ -20,248 +11,174 @@ const StaticCard = ({ position, digit }) => {
     );
 };
 
-// function component
-const FlipUnitContainer = ({ digit, shuffle, unit }) => {
+const FlipUnitContainer = ({ digit, unit }) => {
 
-    // assign digit values
-    let currentDigit = digit;
-    let previousDigit = digit - 1;
-
-    // to prevent a negative value
-    if (unit !== 'hours') {
-        previousDigit = previousDigit === -1
-            ? 59
-            : previousDigit;
-    } else {
-        previousDigit = previousDigit === -1
-            ? 23
-            : previousDigit;
+    if (digit < 10) {
+        digit = `0${digit}`;
     }
-
-    // add zero
-    if (currentDigit < 10) {
-        currentDigit = `0${currentDigit}`;
-    }
-    if (previousDigit < 10) {
-        previousDigit = `0${previousDigit}`;
-    }
-
-    // shuffle digits
-    const digit1 = shuffle
-        ? previousDigit
-        : currentDigit;
-    const digit2 = !shuffle
-        ? previousDigit
-        : currentDigit;
-
-    // shuffle animations
-    const animation1 = shuffle
-        ? 'fold'
-        : 'unfold';
-    const animation2 = !shuffle
-        ? 'fold'
-        : 'unfold';
+   
 
     return (
         <>
         <div className={'flipUnitContainer'}>
-            <StaticCard
+            <Card
                 position={'upperCard'}
-                digit={currentDigit}
+                digit={digit}
             />
-            <StaticCard
+            <Card
                 position={'lowerCard'}
-                digit={previousDigit}
+                digit={digit}
             />
-            <AnimatedCard
-                digit={digit1}
-                animation={animation1}
-            />
-            <AnimatedCard
-                digit={digit2}
-                animation={animation2}
-            />
-            <div>
                 <NextShow style={{fontWeight: '400', fontSize: "22px"}}>{unit}</NextShow>
-            </div>
+            
         </div>
         </>
     );
 };
 
-// class component
-class FlipClock extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            timeleft: 0,
-            hours: 0,
-            hoursShuffle: true,
-            minutes: 0,
-            minutesShuffle: true,
-            days: 0,
-            daysShuffle: true,
-            seconds: 0,
-            secondsShuffle: true,
-            loaded:false,
-            clock:false
-        };
-    }
-
-    componentDidMount() {
-        this.timerID = setInterval(
-            () => this.updateTime(),
-            50
-        );
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    updateTime() {
-        // let countDownDate = new Date(2020, 10, 29, 8, 0, 0)
-        let countDownDate = new Date(this.props.next)
-        let now = new Date().getTime();
-        let timeleft = countDownDate - now;
-        this.setState({timeleft})
-        let days = Math.floor((timeleft % (1000 * 60 * 60 * 24 * 7)   / (1000 * 60 * 60 * 24)));
-        let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60)); 
-        let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-        if (timeleft < 0 ){
-            seconds = Math.abs(seconds) 
-            if(seconds === 60 ){
-                seconds = 0
-            }
-            minutes = Math.abs(minutes) -1
-            if(minutes === 60){
-                minutes = 0
-            }
-            hours = Math.abs(hours) -1
-        }
-        if (days !== this.state.days) {
-            const daysShuffle = !this.state.daysShuffle;
-            this.setState({
-                days,
-                daysShuffle
-            });
-        }
-        if (hours !== this.state.hours) {
-            const hoursShuffle = !this.state.hoursShuffle;
-            this.setState({
-                hours,
-                hoursShuffle
-            });
-        }
-        // on minute chanage, update minutes and shuffle state
-        if (minutes !== this.state.minutes) {
-            const minutesShuffle = !this.state.minutesShuffle;
-            this.setState({
-                minutes,
-                minutesShuffle
-            });
-        }
-        // on second chanage, update seconds and shuffle state
-        if (seconds !== this.state.seconds) {
-            const secondsShuffle = !this.state.secondsShuffle;
-            this.setState({
-                seconds,
-                secondsShuffle
-            });
-        }
-    }
-
-    render() {
-
-        const {
-            days,
-            daysShuffle,
-            hours,
-            minutes,
-            seconds,
-            hoursShuffle,
-            minutesShuffle,
-            secondsShuffle,
-            loaded,
-            clock
-        } = this.state;
-        return (
-            <>
-            {clock ? null : setTimeout(() => this.setState({loaded:true}), 100)}
-                <Transition visible = { clock } animation = 'scale' duration = { 400} >
-            <ClockContainer>
-                { this.state.timeleft > 0 ? 
-                <>
-                <NextShow>
-                            The Next Show Starts In
-                </NextShow>
-                <div className={'flipClock'}>
-                    
-                            <FlipUnitContainer
-                        unit={'days'}
-                        digit={days}
-                        shuffle={daysShuffle}
-                        header={"Days"}
-                    />
-                
-                    <FlipUnitContainer
-                        unit={'hours'}
-                        digit={hours}
-                        shuffle={hoursShuffle}
-                    />
-                <FlipUnitContainer
-                    unit={'minutes'}
-                    digit={minutes}
-                    shuffle={minutesShuffle}
-                />
-                <FlipUnitContainer
-                    unit={'seconds'}
-                    digit={seconds}
-                    shuffle={secondsShuffle}
-                />
-                </div>
-                </>
-                :
-                <>
-                        <NextShow>The Show Started </NextShow>
-                 <div className={'flipClock'}>
-                <FlipUnitContainer
-                    unit={'hours'}
-                    digit={hours}
-                    shuffle={hoursShuffle}
-                />
-                <FlipUnitContainer
-                    unit={'minutes'}
-                    digit={minutes}
-                    shuffle={minutesShuffle}
-                />
-                <FlipUnitContainer
-                    unit={'seconds'}
-                    digit={seconds}
-                    shuffle={secondsShuffle}
-                />
-                </div>
-                <NextShow>ago</NextShow>
-                </>
-            }
-            </ClockContainer>
-            </Transition>
-        
-            
-              <Transition visible={!loaded} animation='scale' duration={400} onHide={()=> this.setState({clock:true})}>
-              <Segment style={{ height: "170px", margin: "auto", width: "600px" }}>
-                  <Dimmer active>
-                      <Loader indeterminate>Checking Schedule</Loader>
-                  </Dimmer>
-              </Segment>
-                </Transition>
-                </>
-            
-    )
+function FlipClock(props){
+    const [timeleft, setTimeleft] = useState(0)
+    const [days, setDays] = useState(0)
+    const [hours, setHours] = useState(0)
+    const [minutes, setMinutes] = useState(0)
+    const [seconds, setSeconds] = useState(0)
+    let [loaded, setLoaded] = useState(false)
+    let [clock, setClock] = useState(false)
+    let [next, setNext] = useState(props.next[0].date)
+    let [current, setCurrent] = useState(0)
     
-}}
+    useEffect(()=>{
+        let timer = setInterval(
+            () => updateTime(),
+            60
+        )
+        return () => { clearInterval(timer)}
+
+    })
+
+    const updateTime = () => {
+
+        let countDownDate = new Date(next)
+        let now = new Date().getTime();
+        let updatedTimeLeft = countDownDate - now;
+        setTimeleft(updatedTimeLeft)
+        let currentDays = Math.floor((timeleft % (1000 * 60 * 60 * 24 * 7) / (1000 * 60 * 60 * 24)));
+        let currentHours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let currentMinutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+        let currentSeconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+        if (timeleft < 0) {
+            currentSeconds = Math.abs(currentSeconds)
+            if (currentSeconds === 60) {
+                currentSeconds = 0
+            }
+            currentMinutes = Math.abs(currentMinutes) - 1
+            if (currentMinutes === 60) {
+                currentMinutes = 0
+            }
+            currentHours = Math.abs(currentHours) - 1
+            if (currentHours > 1) {
+                let idx = current + 1
+                setCurrent(idx)
+                setNext(props.next[idx].date)
+            }
+        }
+    
+        if (days !== currentDays) {
+                setDays(currentDays)
+                
+            
+        }
+        if (hours !== currentHours) {
+            setHours(currentHours)
+            
+        };
+        if (minutes !== currentMinutes) {
+                setMinutes(currentMinutes)
+                
+        };
+       
+        if (seconds !== currentSeconds) {
+            
+                setSeconds(currentSeconds)
+                
+            
+        }
+    }
+    return (
+        <>
+            {clock ? null : setTimeout(() => setLoaded(true),40 )}
+            <Transition visible={clock} animation='scale' duration={100}  >
+                <ClockContainer>
+                    {timeleft > 0 ?
+                        <>
+                            <NextShow>
+                                The Next Show Starts In
+                </NextShow>
+                            <div className={'flipClock'}>
+
+                                <FlipUnitContainer
+                                    unit={'days'}
+                                    digit={days}
+                    
+                                />
+
+                                <FlipUnitContainer
+                                    unit={'hours'}
+                                    digit={hours}
+                                    
+                                />
+                                <FlipUnitContainer
+                                    unit={'minutes'}
+                                    digit={minutes}
+                                    
+                                />
+                                <FlipUnitContainer
+                                    unit={'seconds'}
+                                    digit={seconds}
+                                    
+                                />
+                            </div>
+                        </>
+                        :
+                        <>
+                            <NextShow>The Show Started </NextShow>
+                            <div className={'flipClock'}>
+                                <FlipUnitContainer
+                                    unit={'hours'}
+                                    digit={hours}
+                                    
+                                />
+                                <FlipUnitContainer
+                                    unit={'minutes'}
+                                    digit={minutes}
+                                    
+                                />
+                                <FlipUnitContainer
+                                    unit={'seconds'}
+                                    digit={seconds}
+
+                                />
+                            </div>
+                            <NextShow>ago</NextShow>
+                        </>
+                    }
+                </ClockContainer>
+            </Transition>
+
+
+            <Transition visible={!loaded} animation='scale' duration={400} onHide={() => setClock(true)}>
+                <Segment style={{ height: "170px", margin: "auto", width: "600px" }}>
+                    <Dimmer active>
+                        <Loader indeterminate>Checking Schedule</Loader>
+                    </Dimmer>
+                </Segment>
+            </Transition>
+        </>
+
+    )
+
+}
+
 const NextShow = styled.div`
     font-size:32px;
     color: orange;

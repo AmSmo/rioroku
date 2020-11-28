@@ -3,9 +3,10 @@ import {Menu} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { changeActive, currentClock, resetClock} from '../actions'
 import {logout} from '../actions/session_actions'
-
 import {withRouter} from 'react-router-dom'
+
 function NavBar(props){
+
     const [time, setTime] = useState(0)
     const [isActive, setIsActive] = useState(false);
     
@@ -35,8 +36,9 @@ function NavBar(props){
                     name='start-clock'
                     onClick={() => {
                         setIsActive(true)
+                        props.startTimer()
                         props.changeActive('start-clock')}}
-                    active={props.game.active === 'start-clock'}
+                        active={props.game.active === 'start-clock'}
                 >
                     Start Clock
                 </Menu.Item>

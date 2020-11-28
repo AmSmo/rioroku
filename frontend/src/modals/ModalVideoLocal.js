@@ -10,7 +10,6 @@ function ModalVideoLocal(props) {
     // useEffect(()=>{playVideo()}, [])
   return (
     <center>
-      <h1>LALSDLAFLALASL</h1>
     {/* <div onClick={null} >
 
 

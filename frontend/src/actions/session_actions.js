@@ -46,10 +46,10 @@ export const setNextEvent = (eventInfo) => ({
 
 export const nextEvent = () => dispatch => {
     APIUtil.getEvents().then(resp=> { 
-        console.log("in get", resp)
-        dispatch(setNextEvent(resp.data.events[0]))
+        let comingup = resp.data.events.slice(0,3)
+        
+        dispatch(setNextEvent(resp.data.events))
     }).catch(err => {
-        console.log("err in get", err)
         dispatch(receiveErrors(err.response));
     })
 }
