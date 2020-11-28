@@ -20,7 +20,10 @@ const useInfo = (roomId, username) => {
             delete data.help
             delete data.admin
             let allUsers = Object.values(data).flat().filter(user=>{
-                return !user.startsWith("control") && user !== "undefined"
+                if (user){
+                    return !user.startsWith("control") && user !== "undefined"}
+                else{
+                    return false}
             })
             
             setUserCount(allUsers.length)
