@@ -9,7 +9,8 @@ const GET_TIMER = "getTimer"
 const SOCKET_SERVER_URL = `/`;
 
 const useTimer = () => {
-    let [browserTimer, setBrowserTimer] = useState({timer: 0, rolling:false, accurate: false})
+    let [browserTimer, setBrowserTimer] = useState({})
+    
     const socketRef = useRef();
 
     useEffect(() => {
@@ -18,29 +19,37 @@ const useTimer = () => {
         });
 
         socketRef.current.on("startBrowserTimer", (data) => {
+            data.accurate = true
             setBrowserTimer(data)
         });
         socketRef.current.on("resetBrowserTimer", (data) => {
+            data.accurate = true
             setBrowserTimer(data)
         });
         socketRef.current.on("pauseBrowserTimer", (data) => {
+            console.log(data)
+            data.accurate = true
             setBrowserTimer(data)
         });
         socketRef.current.on("setBrowserTimer", (data) => {
+            data.accurate = true
             setBrowserTimer(data)
         });
         
         socketRef.current.on("getBrowserTimer", (data) => {
+            data.accurate = true
             setBrowserTimer(data)
         });
 
         return () => {
+            setBrowserTimer({ })
             socketRef.current.disconnect();
+            
         };
     }, []);
 
     const startTimer = () => {
-        socketRef.current.emit(START_TIMER, true)
+        socketRef.current.emit(START_TIMER)
     }
 
     const setTimer = (minutes, seconds) => {

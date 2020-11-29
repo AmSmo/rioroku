@@ -36,7 +36,6 @@ function NavBar(props){
                     name='start-clock'
                     onClick={() => {
                         setIsActive(true)
-                        props.startTimer()
                         props.changeActive('start-clock')}}
                         active={props.game.active === 'start-clock'}
                 >

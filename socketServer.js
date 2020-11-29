@@ -40,11 +40,11 @@ module.exports = (function (app, port) {
         });
 
         const startTimer = () => {
-            
+        
             timerInterval = setInterval(() => {
                 timer = timer + 1
             }, 1000)
-            io.sockets.emit("startBrowserTimer", { data: { timer, rolling: true, accurate: true } })
+            io.sockets.emit("startBrowserTimer", { timer, rolling: true, accurate: true })
         }
         const getTimer = () => {
             let rolling
@@ -53,25 +53,25 @@ module.exports = (function (app, port) {
             }else{
                 rolling = true
             }
-            io.sockets.emit("getBrowserTimer", { data: { timer, rolling, accurate: true } })
+            io.sockets.emit("getBrowserTimer", { timer, rolling, accurate: true })
         }
 
         const resetTimer = () => {
             clearInterval(timerInterval)
             delete (timerInterval)
             timer = 0
-            io.sockets.emit("resetBrowserTimer", { data: { timer, rolling: false, accurate: true } })
+            io.sockets.emit("resetBrowserTimer", { timer, rolling: false, accurate: true  })
         }
 
         const pauseTimer = () => {
             clearInterval(timerInterval)
             delete(timerInterval)
-            io.sockets.emit("pauseBrowserTimer", { data: { timer, rolling: false, accurate: true } })
+            io.sockets.emit("pauseBrowserTimer", { timer, rolling: false, accurate: true })
         }
 
         const setTimer = (newTime) => {
             timer = newTime
-            io.sockets.emit("setBrowserTimer", { data: { timer, rolling: false, accurate: true } })
+            io.sockets.emit("setBrowserTimer", { timer, rolling: false, accurate: true })
         }
 
         socket.on("getTimer", (data)=>{

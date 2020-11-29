@@ -29,6 +29,7 @@ const useChat = (roomId, username) => {
 
 
         return () => {
+            
             socketRef.current.disconnect();
         };
     }, [roomId]);
