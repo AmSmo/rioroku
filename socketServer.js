@@ -50,6 +50,8 @@ module.exports = (function (app, port) {
             let rolling
             if (timerInterval && timerInterval._destroyed){
                 rolling = false
+            }else if(!timerInterval){
+                rolling = false
             }else{
                 rolling = true
             }
@@ -71,7 +73,14 @@ module.exports = (function (app, port) {
 
         const setTimer = (newTime) => {
             timer = newTime
-            io.sockets.emit("setBrowserTimer", { timer, rolling: false, accurate: true })
+            if (timerInterval && timerInterval._destroyed) {
+                rolling = false
+            } else if (!timerInterval) {
+                rolling = false
+            } else {
+                rolling = true
+            }
+            io.sockets.emit("setBrowserTimer", { timer, rolling, accurate: true })
         }
 
         socket.on("getTimer", (data)=>{

@@ -19,25 +19,24 @@ const useTimer = () => {
         });
 
         socketRef.current.on("startBrowserTimer", (data) => {
-            data.accurate = true
+            data.accurate = "start"
             setBrowserTimer(data)
         });
         socketRef.current.on("resetBrowserTimer", (data) => {
-            data.accurate = true
+            data.accurate = "reset"
             setBrowserTimer(data)
         });
         socketRef.current.on("pauseBrowserTimer", (data) => {
-            console.log(data)
-            data.accurate = true
+            data.accurate = "pause"
             setBrowserTimer(data)
         });
         socketRef.current.on("setBrowserTimer", (data) => {
-            data.accurate = true
+            data.accurate = "set"
             setBrowserTimer(data)
         });
         
         socketRef.current.on("getBrowserTimer", (data) => {
-            data.accurate = true
+            data.accurate = "get"
             setBrowserTimer(data)
         });
 

@@ -23,6 +23,9 @@ function UserInfo(props){
         
         props.login(userObj)
     }
+    if (props.isAuthenticated === true) {
+        props.history.push('/')
+    }
     
         return (
             <>

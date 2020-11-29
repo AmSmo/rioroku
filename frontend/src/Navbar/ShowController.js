@@ -10,7 +10,6 @@ import { useTimer } from '../actions/timerInfo'
 
 function ShowController(props) {
     const [localTime, setLocalTime] = useState(0)
-    const [isActive, setIsActive] = useState(false);
     const [disable, setDisable] = useState(true)
     const [showMinutes, setShowMinutes] = useState(0)
     const [showSeconds, setShowSeconds] = useState(0)
@@ -18,21 +17,31 @@ function ShowController(props) {
     const { setTimer, startTimer, resetTimer, pauseTimer, browserTimer, getTimer } = useTimer()
     let updatedTime = new Date(localTime * 1000).toISOString().substr(11, 8);
     
-    browserTimer.changed = false
+    
     
     useEffect(() => {
         let interval = null;
+        console.log("used", browserTimer)
+        if (browserTimer.accurate === "set" && browserTimer.rolling){
+            browserTimer.accurate = false
+            return setLocalTime(browserTimer.timer + 1)
+        }
+        if (browserTimer.accurate === "get" && browserTimer.rolling){
+            browserTimer.accurate = false
+            return setLocalTime(browserTimer.timer + 1)
+        }
         if (browserTimer.rolling) {
             interval = setInterval(() => {
                 setLocalTime(localTime => (localTime + 1))
             }, 1000);
-        } else if (!browserTimer.rolling && localTime !== 0) {
-            clearInterval(interval);
+            browserTimer.accurate = false
+        }else{
+            setLocalTime(browserTimer.timer||0)
+            browserTimer.accurate = false
         }
         return () => {
-            console.log("RETURNING")
             clearInterval(interval)};
-    }, [isActive, localTime, browserTimer]);
+    }, [localTime, browserTimer]);
 
     
     
@@ -50,24 +59,6 @@ function ShowController(props) {
     }
     const setShowTimer = () => {
         setTimer(showMinutes, showSeconds)
-    }
-    console.log(localTime)
-    if (browserTimer.accurate){
-        setTruth(true)
-        browserTimer.accurate = false
-        browserTimer.change = true
-     }
-    
-    if (truth){
-        console.log("local", localTime,browserTimer.timer)
-        if (localTime !== browserTimer.timer){
-            console.log("NOT TRUE")
-            setLocalTime(browserTimer.timer)
-        }
-        if (browserTimer.rolling !== isActive) {
-            
-            setIsActive(browserTimer.rolling)
-        }
     }
     
     return (
@@ -103,7 +94,7 @@ function ShowController(props) {
                     Stop Clock
                 </Menu.Item>
 
-                <Menu.Item>{localTime}</Menu.Item>
+                <Menu.Item>{updatedTime || 0}</Menu.Item>
                 <Menu.Item
                     name='reset-clock'
                     onClick={() => {

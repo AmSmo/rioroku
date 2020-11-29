@@ -86,7 +86,7 @@ function Login(props) {
                     <div style={{ padding: "20px 0" }}>
                         What Would You Like To Be Called During This Experience?
                     </div>
-                <UserInfo info={tempUserInfo} login={props.login}/>
+                <UserInfo info={tempUserInfo} login={props.login} isAuthenticated={props.isAuthenticated}/>
             </TicketForm>
                 </div>
                 :
