@@ -14,6 +14,7 @@ import TrackERouter from './TrackE/TrackERouter'
 import {connect} from 'react-redux'
 import UserHelp from './Chat/UserHelp'
 import { HelpButton , BottomRight } from './Styles/Styles'
+import TimerKeeper from './Session/TimeKeeper'
 function App(props) {
   const {isAuthenticated } = props
   const [needHelp, setNeedHelp] = useState(false)
@@ -30,11 +31,15 @@ function App(props) {
       
         <>
           {isAuthenticated ?<>
-      {admin ? 
-        <NavBar />
+      {admin ? <>
+      
 
+        </>
       :
-        <AudienceNavBar />
+      <>
+      <TimerKeeper/>
+      <AudienceNavBar />
+      </>
       }
           <Switch>
             {admin ?
@@ -42,6 +47,7 @@ function App(props) {
            :
            null
           }
+               
               <Route path="/rolled" component={Rolled} />
               <Route path="/TrackA" component={TrackARouter} />
               <Route path="/TrackB" component={TrackBRouter} />

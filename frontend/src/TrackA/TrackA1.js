@@ -8,6 +8,7 @@ import ModalAudio from '../modals/ModalAudio'
 import ModalLivestream from '../modals/ModalLivestream'
 import {useInfo} from '../actions/channelInfo'
 import {CenterMap, BlueBackground} from '../Styles/Styles'
+import TimeKeeper from '../Session/TimeKeeper'
 
 function TrackA1(props){
   const [open, setOpen] = useState(false)
@@ -116,7 +117,7 @@ function TrackA1(props){
 return(
 
   <BlueBackground>
-    
+    <TimeKeeper/>
   <CenterMap>
   <ImageMapper
   src={'https://dl.dropboxusercontent.com/s/au6xan8beolro28/map_A_1.png?dl=0'}

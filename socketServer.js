@@ -2,7 +2,7 @@ const { Console } = require('console');
 
 module.exports = (function (app, port) {
     const server = require('http').createServer(app);
-    let timer = 0
+    let timer = -1
     const options = {
         cors: {
             origin: '*',

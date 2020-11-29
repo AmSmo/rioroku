@@ -27,7 +27,6 @@ if (localStorage.jwtToken) {
     const currentTime = Date.now() / 1000;
   if (decodedUser.exp < currentTime) {
     store.dispatch(logout());
-    window.location.href = '/login';
   }
   
 } else {
@@ -49,7 +48,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

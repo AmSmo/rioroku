@@ -16,7 +16,9 @@ function UserHelp(props){
     }
 
     return(
+       
          myHelp ? 
+            <div className={myHelp ? "slide-in-blurred-bottom" : "flip-out-hor-top"}>
             <HelpArea>
                 <Icon name="window close" style={{ float: "right" }} onClick={() => {
                     setMyHelp(false)
@@ -25,13 +27,15 @@ function UserHelp(props){
                 <Chat roomId={`Help-${props.username}`} userHelp />
                 <br></br>
             </HelpArea>
+            </div>
                 :
-        <HelpArea>
+            <HelpArea className={!myHelp ? "tilt-in-bottom-2" : "flip-out-hor-top"}>
                 <Icon name="window close" style={{ float: "right" }} onClick={() => {
                     setMyHelp(false)
                     props.changeNeed()
+                    
                 }}/>
-            <p>Please Describe You Problem</p>
+            <p>Please Describe Your Problem</p>
             <textarea
                 value={newMessage}
                 onChange={(e)=> setNewMessage(e.target.value)}

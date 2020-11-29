@@ -5,20 +5,15 @@ import { Modal } from 'semantic-ui-react'
 import Chat from '../Chat/Chat'
 import { useInfo } from '../actions/channelInfo'
 import UserList from '../Chat/UserList'
-import { CenterMap, BlueBackground, BottomRight } from '../Styles/Styles'
+import { CenterMap, BlueBackground } from '../Styles/Styles'
+import TimeKeeper from '../Session/TimeKeeper'
 function Welcome(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
   const [sideBar, setSideBar] = useState({ width: "50px" })
   const [hidden, setHidden] = useState(true)
   const [width, setWidth] = useState(window.innerWidth * 0.6)
-  const [time, setTime] = useState(0)
   
-  const [needHelp, setNeedHelp] = useState(false)
-  const changeNeed = () => {
-    setNeedHelp(false)
-  }
-
   const modalClose = () => {
     setOpen(false)
   }
@@ -89,10 +84,7 @@ function Welcome(props) {
   }
   let roomId = "Act0"
   let { userList, userCount } = useInfo(roomId, props.username)
-  useEffect(() => {
-    let interval = setInterval(setTime(time => time + 1), 1000)
-    return () => clearInterval(interval)
-  }, [])
+
   if (userList.TrackA)
     if (userList.TrackA.length > 5) {
       map.areas = map.areas.filter(area => area.name !== "1")
@@ -109,17 +101,19 @@ function Welcome(props) {
 
 
   return (
-    <BlueBackground>
+    <BlueBackground>  
+      <TimeKeeper/>
+      
       <UserList users={userList[roomId]} roomId={roomId}  />
 
       <div className="sidebar"
         style={sideBar}
         onMouseOver={() => {
-          setSideBar({ width: "200px", opacity: "1" })
+          setSideBar({ width: "200px", opacity: "1", marginRight: "25px", boxShadow: "5px 5px black" })
           setHidden(false)
         }}
         onMouseOut={() => {
-          setSideBar({ width: "50px" })
+          setSideBar({ width: "50px", right: "0px" })
           setHidden(true)
         }}
       >
@@ -132,7 +126,7 @@ function Welcome(props) {
           width={width}
           onClick={e => generateModal(e)}
           map={map}
-          style={{ zIndex: "2", position: "relative" }}
+          style={{ zIndex: "2", position: "relative"}}
         />
       </CenterMap>
       <Modal
@@ -144,7 +138,7 @@ function Welcome(props) {
       >
         {contents}
       </Modal>
-      
+      {console.log(props.game)}
     </BlueBackground>
   )
 }

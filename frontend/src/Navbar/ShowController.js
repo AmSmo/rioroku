@@ -108,10 +108,10 @@ function ShowController(props) {
                 >
                     Reset Clock
                 </Menu.Item>
-                <Menu.Item>
-                    <input type="number" min="0" max="200" name="showMinutes" disabled={disable} value={showMinutes} onChange={handleChange} /> 
+                <Menu.Item >
+                <input style={{ width: "50px" }}type="number" min="0" max="200" name="showMinutes" disabled={disable} value={showMinutes} onChange={handleChange} /> 
                     <label for="minutes">Minutes</label>
-                    <input type="number" min="0" max="59" name="showSeconds" disabled={disable} value={showSeconds} onChange={handleChange} /> 
+                <input style={{ width: "50px" }}type="number" min="0" max="59" name="showSeconds" disabled={disable} value={showSeconds} onChange={handleChange} /> 
                     <label for="minutes">Seconds</label>
                     <button onClick={() => setShowTimer()} disabled={disable}>Set Timer</button>
                 </Menu.Item>

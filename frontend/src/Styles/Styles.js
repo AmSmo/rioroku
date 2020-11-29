@@ -10,6 +10,7 @@ export const UserListContainer = styled.ul`
     margin-left: 20px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    box-shadow: 3px 3px 20px black;
 `
 
 export const HelpButton = styled.button`
@@ -23,7 +24,7 @@ export const HelpButton = styled.button`
     color:white;
     font-size: 18px;
     font-weight: 600;
-    box-shadow: 1px 2px grey;
+    box-shadow: 3px 3px 4px black;
     cursor: pointer;
 `
 export const OpenHelp = styled.button`
@@ -58,18 +59,19 @@ export const BottomRight = styled.div`
 
 export const HelpArea = styled.div`
     border: 1px solid black;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
     text-align: center;
     justify-content: center;
     padding: 10px;
     z-index: 5;
     position: static;
     background: whitesmoke;
+    box-shadow: 3px 3px 4px black;
 
 `
 export const SendMessageButton = styled.button`
     text-align: center;
-    background: blue;
+    background: rgb(97, 97, 247);
     display:block;
     width: 120px;
     border-radius: 80px;
@@ -82,8 +84,11 @@ export const SendMessageButton = styled.button`
     box-shadow: 2px 4px #888888;
     margin:auto;
     cursor: pointer;
+
+
+
     &:hover{
-        background:red
+        background:rgb(80, 80, 249);
     }
 `
 export const HelpMessageContainer = styled.div`
@@ -106,11 +111,14 @@ export const ChatMessageContainer = styled.div`
     overflow-y: scroll;
     word-break: break-word;
     background: white;
+    box-shadow: 1px 1px 1px lightslategray;
+    margin: 8px;
     
 `
 export const CenterMap = styled.div`
   margin: auto;
   width: 50vw;
+  box-shadow: 10px 10px 70px black;
 `
 
 export const BlueBackground = styled.div`

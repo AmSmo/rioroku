@@ -37,8 +37,9 @@ function HelpDesk(props) {
     })}
  
     return (
-
-            <div>
+        <>
+            <ShowController/>
+        <div>
               
            
                 <HelpQueue>
@@ -49,7 +50,6 @@ function HelpDesk(props) {
                 </HelpQueue>
 
                 <ChannelContainer>
-                    <ShowController/>
                     <div style={{marginRight: "10px"}}>
                         <h2>Active Rooms</h2>
                         <p>
@@ -61,7 +61,7 @@ function HelpDesk(props) {
                 </ChannelContainer>
             </div>
 
-
+</>
     )
 
 }
