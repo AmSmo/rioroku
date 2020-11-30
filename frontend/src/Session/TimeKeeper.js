@@ -9,7 +9,7 @@ import {withRouter} from 'react-router-dom'
 function TimeKeeper (props){
     const [localTime, setLocalTime] = useState(-1)
     const { browserTimer, getTimer } = useTimer()
-    
+
 
     useEffect(() => {
         let interval = null;
@@ -44,14 +44,16 @@ function TimeKeeper (props){
     }, [])
     let updatedTime = new Date(localTime === -1? 0: localTime * 1000).toISOString().substr(11, 8);
 
-    if(localTime > 20 && localTime < 30 && props.match.path !== "/rolled"){
-        props.history.push("/rolled")
-    }
-    if(localTime === 31 && props.match.path === "/rolled"){
+    if(localTime === 0 && props.match.path != "/"){
         props.history.push("/")
     }
+    if(localTime > 20 && localTime < 30 && props.match.path === "/TrackA"){
+        props.history.push("/TrackA2")
+    }
+
+
     console.log(props)
-    
+
     return (
         <Menu style={{ marginBottom: "0px" }}>
 
@@ -77,7 +79,7 @@ function TimeKeeper (props){
 
 
 
-const mapStateToProps = state => {  
+const mapStateToProps = state => {
     return state
 }
 

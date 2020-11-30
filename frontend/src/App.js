@@ -4,6 +4,7 @@ import NavBar from './Navbar/Navbar'
 import AudienceNavBar from './Navbar/AudienceNavBar'
 import Start from './Act0/Map1'
 import Rolled from './Rolled/Rolled'
+import TrackA2 from './TrackA/TrackA2'
 import Login from './Session/Login'
 import HelpDesk from './Admin/HelpDesk'
 import TrackARouter from './TrackA/TrackARouter'
@@ -28,11 +29,11 @@ function App(props) {
   }
   return (
     <div className="App">
-      
+
         <>
           {isAuthenticated ?<>
       {admin ? <>
-      
+
 
         </>
       :
@@ -47,7 +48,7 @@ function App(props) {
            :
            null
           }
-              
+              <Route path="/TrackA2" component={TrackA2} />
               <Route path="/rolled" component={Rolled} />
               <Route path="/TrackA" component={TrackARouter} />
               <Route path="/TrackB" component={TrackBRouter} />
