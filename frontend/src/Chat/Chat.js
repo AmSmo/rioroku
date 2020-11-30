@@ -1,4 +1,4 @@
-import {updateChatHistory} from '../util/session_api_util'
+import {updateChatHistory, retrieveChatHistory} from '../util/session_api_util'
 import React, {useEffect, useState, useRef} from 'react'
 import {useChat} from '../actions/socketFunctions'
 import {useInfo} from '../actions/channelInfo'
@@ -12,7 +12,8 @@ function Chat(props){
     }
     
     const {roomId} = props
-    const { messages, sendMessage } = useChat(roomId, props.username)
+    let [history, setHistory] = useState([])
+    let { messages, sendMessage } = useChat(roomId, props.username)
     const [newMessage, setNewMessage] = useState("")
 
     useInfo(roomId, `control-${props.username}`)    
@@ -26,8 +27,15 @@ function Chat(props){
     const prevMessages = usePrevious(messages)
     
     useEffect(()=>{
-        return () =>{updateChatHistory({roomId: roomId, messages: prevMessages.current})}
-        // .then(e=>console.log("lala",e))}
+        let local = []
+        retrieveChatHistory({roomId}).then(resp=>{ 
+            local= resp.data
+            setHistory(resp.data)})
+        
+        return () =>{
+            console.log("hist", history)
+            updateChatHistory({roomId: roomId, messages: [...local, ...prevMessages.current]}).then(resp=> console.log(resp.config.data))}
+
     },[])
 
 
@@ -38,7 +46,11 @@ function Chat(props){
     }
 
     useEffect(scrollToBottom, [messages]);
-
+    const displayHistory = () => {
+        return history.map((message, idx)=>{
+            return <p key={idx} className={message.ownedByCurrentUser ? "from-me" : "from-them"}>{message.body}</p>    
+        })
+    }
 
     const displayMessages = () => {
         return messages.map((message, idx) => {
@@ -59,6 +71,7 @@ function Chat(props){
             <div style={{ display: props.hidden ? "none" : "block", transform: "2s", paddingBottom: "10px", background: "whitesmoke", borderBottomLeftRadius: "15px" }}>
             
             <ChatMessageContainer style={props.help ? { height: "300px"}: null}className="imessage">
+                {displayHistory()}
                 {displayMessages()}
                 <div ref={messagesEndRef} />
             </ChatMessageContainer>

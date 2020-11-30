@@ -13,6 +13,10 @@ export const updateChatHistory = (messages) =>{
     return axios.post('/api/chat/update', messages)
 }
 
+export const retrieveChatHistory = (roomId) =>{
+    return axios.post('/api/chat/retrieve', roomId)
+}
+
 export const signup = (userData) => {
 
     return axios.post('/api/users/register', userData);

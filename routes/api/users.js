@@ -57,6 +57,7 @@ router.post('/register', (req, res) => {
                             .then(user => {
                                 let infoBack = organizedResponse[req.body.ticketId]
                                 infoBack.ticketId = req.body.ticketId
+                                infoBack.fullName = infoBack.name
                                 const payload = { id: user.id, ticketId: user.ticketId};
                                 jwt.sign(payload, keys.secretOrKey, { expiresIn: 9000 }, (err, token) => {
                                     res.json({
