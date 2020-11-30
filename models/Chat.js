@@ -13,7 +13,7 @@ const ChatSchema = new Schema({
 }
 )
 ChatSchema.statics.findOneOrCreate = async function findOneOrCreate(condition, doc) {
-    console.log(condition)
+
     const one = await this.findOne(condition);
     return one || this.create(doc);
 };

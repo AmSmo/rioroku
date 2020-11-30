@@ -21,14 +21,11 @@ module.exports = (function (app, port) {
         
         socket.join(roomId);
         let channelArray = library[roomId]
-        // if (roomId.startsWith("HELP-")){
         
-        // if (roomId.startsWith("Help-")){
-            console.log("ALSLAFDA", roomId)
-            if (roomId.startsWith("Help-")){
-            io.in(roomId).emit("connected", `lemmings ${roomId}`)}
-        // }
-        // }
+        if (roomId.startsWith("Help-")){
+            io.in(roomId).emit("connected", `lemmings ${roomId}`)
+        }
+        
         if (channelArray) {
             channelArray.push(username)
             let unique = [...new Set(channelArray)]

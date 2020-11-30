@@ -31,12 +31,11 @@ export default ModalAudio;
 function pauseAudio() {
   var x = document.getElementsByClassName("audio-element")[0];
   x.pause();
-  console.log("pause");
+
 }
 
 function stopAudio(){
   var x = document.getElementsByClassName("audio-element")[0];
   x.pause();
   x.currentTime = 0;
-  console.log("stop");
 }

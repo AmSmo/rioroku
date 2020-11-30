@@ -6,8 +6,7 @@ const Chat = require('../../models/Chat');
 
 
 router.post('/update', (req, res) => {
-        const {roomId,messages} = req.body
-        console.log(Chat)
+    const {roomId,messages} = req.body
     Chat.findOneOrCreate({ roomId }, { roomId, messages }).then(chat => chat.updateOne({ messages }).then(resp => res.json(resp)))
 })
 

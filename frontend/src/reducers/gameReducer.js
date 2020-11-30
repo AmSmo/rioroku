@@ -4,7 +4,7 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-    console.log("HERE")
+    
     switch (action.type){
         case "CHANGE_ACTIVE":
             return ({...state, active: action.payload.active})

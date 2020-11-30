@@ -26,7 +26,8 @@ function Chat(props){
     const prevMessages = usePrevious(messages)
     
     useEffect(()=>{
-        return () =>{updateChatHistory({roomId: roomId, messages: prevMessages.current}).then(e=>console.log("lala",e))}
+        return () =>{updateChatHistory({roomId: roomId, messages: prevMessages.current})}
+        // .then(e=>console.log("lala",e))}
     },[])
 
 

@@ -20,7 +20,6 @@ const useInfo = (roomId, username) => {
             delete data.help
             delete data.admin
             let userArray = Object.values(data).flat()
-            console.log(userArray)
             let allUsers = userArray.filter(user=>{
                 if(user){
                 return user !== "undefined" && user.startsWith("control")}

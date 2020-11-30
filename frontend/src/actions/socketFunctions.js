@@ -26,7 +26,7 @@ const useChat = (roomId, username) => {
         });
 
         socketRef.current.on("connected", (data) => {
-            console.log("HELP!", data)
+            // console.log("HELP!", data)
         })
         
         return () => {

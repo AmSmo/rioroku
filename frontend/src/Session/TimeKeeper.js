@@ -54,7 +54,6 @@ function TimeKeeper (props){
         props.history.push("/TrackA2")
     }
 
-    console.log(props)
 
     return (
         <Menu style={{ marginBottom: "0px" }}>
