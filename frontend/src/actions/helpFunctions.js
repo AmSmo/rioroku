@@ -13,6 +13,8 @@ const useHelp = (username) => {
             query: { roomId: "help" },
         });
 
+      
+
         socketRef.current.on(NEW_HELP_MESSAGE_EVENT, (message) => {
             const incomingMessage = {
                 ...message,

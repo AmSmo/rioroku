@@ -26,6 +26,7 @@ function App(props) {
   if(props.user){
     admin = props.user.admin
   }
+  console.log("AAA")
   return (
     <div className="App">
       
