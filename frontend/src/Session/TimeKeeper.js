@@ -3,6 +3,9 @@ import {connect} from 'react-redux'
 import {useTimer} from '../actions/timerInfo'
 import { currentClock } from '../actions/index'
 import {Menu} from 'semantic-ui-react'
+import { logout } from '../actions/session_actions'
+import {withRouter} from 'react-router-dom'
+
 function TimeKeeper (props){
     const [localTime, setLocalTime] = useState(-1)
     const { browserTimer, getTimer } = useTimer()
@@ -10,41 +13,50 @@ function TimeKeeper (props){
 
     useEffect(() => {
         let interval = null;
-        console.log("used", browserTimer)
         if (browserTimer.accurate === "set" && browserTimer.rolling) {
             browserTimer.accurate = false
+            currentClock(browserTimer.timer + 1)
             return setLocalTime(browserTimer.timer + 1)
         }
         if (browserTimer.accurate === "get" && browserTimer.rolling) {
             browserTimer.accurate = false
             setLocalTime(browserTimer.timer + 1)
+            currentClock(localTime)
         }
         if (browserTimer.rolling) {
             interval = setInterval(() => {
                 setLocalTime(localTime => (localTime + 1))
             }, 1000);
+            currentClock(localTime)
             browserTimer.accurate = false
         } else {
             setLocalTime(browserTimer.timer || -1)
+            currentClock(localTime)
             browserTimer.accurate = false
         }
         return () => {
             clearInterval(interval)
+            currentClock(localTime)
         };
     }, [localTime, browserTimer, props]);
-
     useEffect(()=>{
         getTimer()
     }, [])
     let updatedTime = new Date(localTime === -1? 0: localTime * 1000).toISOString().substr(11, 8);
 
-
-
+    if(localTime > 20 && localTime < 30 && props.match.path !== "/rolled"){
+        props.history.push("/rolled")
+    }
+    if(localTime === 31 && props.match.path === "/rolled"){
+        props.history.push("/")
+    }
+    console.log(props)
+    
     return (
         <Menu style={{ marginBottom: "0px" }}>
 
 
-            <Menu.Item>{updatedTime}</Menu.Item>
+            <Menu.Item className="fade-in" >{updatedTime}</Menu.Item>
 
             {props.api.isAuthenticated ?
                 <Menu.Item
@@ -65,9 +77,9 @@ function TimeKeeper (props){
 
 
 
-const mapStateToProps = state => {
+const mapStateToProps = state => {  
     return state
 }
 
 
-export default connect(mapStateToProps, {currentClock})(TimeKeeper)
+export default withRouter(connect(mapStateToProps, {currentClock, logout})(TimeKeeper))

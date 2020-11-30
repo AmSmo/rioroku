@@ -138,7 +138,7 @@ function Welcome(props) {
       >
         {contents}
       </Modal>
-      {console.log(props.game)}
+      {"STUFF",   console.log(props.game)}
     </BlueBackground>
   )
 }

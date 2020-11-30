@@ -21,7 +21,6 @@ function ShowController(props) {
     
     useEffect(() => {
         let interval = null;
-        console.log("used", browserTimer)
         if (browserTimer.accurate === "set" && browserTimer.rolling){
             browserTimer.accurate = false
             return setLocalTime(browserTimer.timer + 1)

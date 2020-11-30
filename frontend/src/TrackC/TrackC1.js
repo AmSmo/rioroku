@@ -7,6 +7,7 @@ import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
 import ModalLivestream from '../modals/ModalLivestream'
 import {CenterMap, BlueBackground} from '../Styles/Styles'
+import TimeKeeper from '../Session/TimeKeeper'
 function Track_C_1(props){
     const [open, setOpen] = useState(false)
     const [contents, setContents] = useState(null)
@@ -69,6 +70,7 @@ areas: [
 
     return(
         <BlueBackground>
+            <TimeKeeper />
             <CenterMap>
             <ImageMapper
                 src={'https://dl.dropboxusercontent.com/s/3jncw5ztorvep3n/clue%20board.jpg?dl=0'}

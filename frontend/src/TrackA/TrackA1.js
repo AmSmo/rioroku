@@ -116,7 +116,7 @@ function TrackA1(props){
 
 return(
 
-  <BlueBackground>
+  <BlueBackground className="fade-in">
     <TimeKeeper/>
   <CenterMap>
   <ImageMapper

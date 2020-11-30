@@ -6,13 +6,11 @@ export const changeActive = active => {
     }
 }
 
-
-
 export const currentClock = time => {
-    return{
+    return({
         type: "CURRENT_CLOCK",
         payload: {time}
-    }
+    })
 }
 
 export const resetClock = time => {
