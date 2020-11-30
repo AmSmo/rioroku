@@ -1,7 +1,6 @@
 import {Route, Switch} from 'react-router-dom'
 import {useState} from 'react'
-import NavBar from './Navbar/Navbar'
-import AudienceNavBar from './Navbar/AudienceNavBar'
+
 import Start from './Act0/Map1'
 import Rolled from './Rolled/Rolled'
 import TrackA2 from './TrackA/TrackA2'
@@ -15,7 +14,7 @@ import TrackERouter from './TrackE/TrackERouter'
 import {connect} from 'react-redux'
 import UserHelp from './Chat/UserHelp'
 import { HelpButton , BottomRight } from './Styles/Styles'
-import TimerKeeper from './Session/TimeKeeper'
+
 function App(props) {
   const {isAuthenticated } = props
   const [needHelp, setNeedHelp] = useState(false)
