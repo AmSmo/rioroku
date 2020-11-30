@@ -22,15 +22,15 @@ function TrackA1(props){
     switch (e.name){
       case "1":
         setOpen(true)
-        setContents(<ModalVideo basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose}/>)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/7EpSBDPlZn4'} setOpen={modalClose}/>)
       break;
       case "2":
         setOpen(true)
-        setContents(<ModalVideo basic size="small" videoId={'gPsxT8ODAU0'} setOpen={modalClose}/>)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://vimeo.com/115189988'} setOpen={modalClose}/>)
       break;
       case "3":
         setOpen(true)
-        setContents(<ModalVideo basic size="small" videoId={'jkV8SeNW_Nc'} setOpen={modalClose}/>)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/jkV8SeNW_Nc'} setOpen={modalClose}/>)
       break;
       case "4":
         setOpen(true)
@@ -42,11 +42,11 @@ function TrackA1(props){
       break;
       case "6":
         setOpen(true)
-        setContents(<ModalVideo basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose}/>)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/7EpSBDPlZn4'} setOpen={modalClose}/>)
       break;
       case "7":
         setOpen(true)
-        setContents(<ModalVideo basic size="small" videoId={'qMxWAPvYrj4'} setOpen={modalClose}/>)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/qMxWAPvYrj4'} setOpen={modalClose}/>)
       break;
 
       default:
