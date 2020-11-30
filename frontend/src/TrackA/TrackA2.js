@@ -6,6 +6,7 @@ import ModalVideo from '../modals/ModalVideo'
 import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
 import ModalLivestream from '../modals/ModalLivestream'
+import ModalImage from '../modals/ModalImage'
 import {useInfo} from '../actions/channelInfo'
 import {CenterMap, BlueBackground} from '../Styles/Styles'
 import TimeKeeper from '../Session/TimeKeeper'
@@ -22,7 +23,7 @@ function TrackA2(props){
     switch (e.name){
       case "1":
         setOpen(true)
-        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/7EpSBDPlZn4'} setOpen={modalClose}/>)
+        setContents(<ModalImage basic size="small" imageId={'https://losangeles.cbslocal.com/wp-content/uploads/sites/14984641/2016/07/shutterstock_234541271.jpg?w=1000&h=576&crop=1'} setOpen={modalClose}/>)
       break;
       case "2":
         setOpen(true)
@@ -50,11 +51,11 @@ function TrackA2(props){
       break;
       case "8":
         setOpen(true)
-        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/7EpSBDPlZn4'} setOpen={modalClose}/>)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://soundcloud.com/will-pickens/sets/experiment-audio-plays-cyoa'} setOpen={modalClose}/>)
       break;
       case "9":
         setOpen(true)
-        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/7EpSBDPlZn4'} setOpen={modalClose}/>)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/z2eYchNQ-64'} setOpen={modalClose}/>)
       break;
       case "10":
         setOpen(true)
@@ -146,9 +147,9 @@ function TrackA2(props){
 
 return(
 
-  <BlueBackground>
+  <BlueBackground className="fade-in">
     <TimeKeeper/>
-  <CenterMap className="fade-in">
+  <CenterMap>
   <ImageMapper
   src={'https://dl.dropboxusercontent.com/s/pk2wv82qhw2zlu7/map_A_2.png?dl=0'}
   imgWidth={1200}

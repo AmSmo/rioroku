@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
+import ModalImage from '../modals/ModalImage'
 import ModalVideo from '../modals/ModalVideo'
 import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
@@ -22,7 +23,7 @@ function TrackA1(props){
     switch (e.name){
       case "1":
         setOpen(true)
-        setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/7EpSBDPlZn4'} setOpen={modalClose}/>)
+        setContents(<ModalImage basic size="small" imageId={'https://losangeles.cbslocal.com/wp-content/uploads/sites/14984641/2016/07/shutterstock_234541271.jpg?w=1000&h=576&crop=1'} setOpen={modalClose}/>)
       break;
       case "2":
         setOpen(true)

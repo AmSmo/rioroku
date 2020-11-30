@@ -13,7 +13,7 @@ function Welcome(props) {
   const [sideBar, setSideBar] = useState({ width: "50px" })
   const [hidden, setHidden] = useState(true)
   const [width, setWidth] = useState(window.innerWidth * 0.6)
-  
+
   const modalClose = () => {
     setOpen(false)
   }
@@ -101,9 +101,9 @@ function Welcome(props) {
 
 
   return (
-    <BlueBackground>  
+    <BlueBackground>
       <TimeKeeper/>
-      
+
       <UserList users={userList[roomId]} roomId={roomId}  />
 
       <div className="sidebar"
@@ -140,6 +140,7 @@ function Welcome(props) {
       </Modal>
       {"STUFF",   console.log(props.game)}
     </BlueBackground>
+    
   )
 }
 
@@ -148,6 +149,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(Welcome)
-
-
-

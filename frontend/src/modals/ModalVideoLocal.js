@@ -9,8 +9,11 @@ function ModalVideoLocal(props) {
 
     // useEffect(()=>{playVideo()}, [])
   return (
+
     <center>
-    {/* <div onClick={null} >
+    {
+    
+      /* <div onClick={null} >
 
 
     <video className="video-element">
@@ -18,6 +21,7 @@ function ModalVideoLocal(props) {
     </video>
 
     </div> */}
+
     <ReactPlayer url={props.videoId} className="video-element" playing={true} playbackRate={1} muted={false} onEnded={props.setOpen}/>
     </center>
   )
