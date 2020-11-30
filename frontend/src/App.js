@@ -32,16 +32,6 @@ function App(props) {
 
         <>
           {isAuthenticated ?<>
-      {admin ? <>
-
-
-        </>
-      :
-      <>
-      <TimerKeeper/>
-      <AudienceNavBar />
-      </>
-      }
           <Switch>
             {admin ?
            <Route path='/HelpDesk' component={HelpDesk} />
