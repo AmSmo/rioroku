@@ -15,7 +15,7 @@ module.exports = {getUsers : (eventData) =>{
         let dateIdList = []
         for (show of events){
             let showInfo = {}
-            let date = show["start"]["local"]
+            let date = show["start"]["utc"]
             showInfo.date = date
             showInfo.id = show["id"]
             // May want to add filter layer in case outside events exist

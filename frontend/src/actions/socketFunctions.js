@@ -15,8 +15,6 @@ const useChat = (roomId, username) => {
             query: { roomId, username }
         });
 
-        
-
         socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
             
             const incomingMessage = {
@@ -27,25 +25,25 @@ const useChat = (roomId, username) => {
             setMessages((messages) => [...messages, incomingMessage]);
         });
 
-
+        socketRef.current.on("connected", (data) => {
+            console.log("HELP!", data)
+        })
+        
         return () => {
             
             socketRef.current.disconnect();
         };
     }, [roomId]);
-
+    
     const sendMessage = (messageBody) => {
         socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
             body: messageBody,
             senderId: socketRef.current.id,
         });
-    
+        
         
     };
-
-
-    
-
+   
     return { messages, sendMessage};
 };
 

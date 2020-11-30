@@ -5,8 +5,9 @@ import TrackA2 from './TrackA2'
 
 
 function TrackARouter() {
+  
   return (
-
+      
       <Switch>
           <Route path="/TrackA" component={TrackA1} />
           <Route path="/TrackA2" component={TrackA2} />

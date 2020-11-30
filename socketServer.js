@@ -18,9 +18,17 @@ module.exports = (function (app, port) {
     io.on("connection", (socket) => {
 
         const { roomId, username } = socket.handshake.query;
+        
         socket.join(roomId);
         let channelArray = library[roomId]
+        // if (roomId.startsWith("HELP-")){
         
+        // if (roomId.startsWith("Help-")){
+            console.log("ALSLAFDA", roomId)
+            if (roomId.startsWith("Help-")){
+            io.in(roomId).emit("connected", `lemmings ${roomId}`)}
+        // }
+        // }
         if (channelArray) {
             channelArray.push(username)
             let unique = [...new Set(channelArray)]
@@ -30,6 +38,9 @@ module.exports = (function (app, port) {
         }
         io.sockets.emit("channelInfo", library)
         // Listen for new messages
+
+        
+
         socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
 
             io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);

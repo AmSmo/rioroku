@@ -1,27 +1,34 @@
+import {updateChatHistory} from '../util/session_api_util'
 import React, {useEffect, useState, useRef} from 'react'
 import {useChat} from '../actions/socketFunctions'
 import {useInfo} from '../actions/channelInfo'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {SendMessageButton, ChatMessageContainer, Vertical} from '../Styles/Styles'
+import {usePrevious} from '../Session/MessageHistory'
 function Chat(props){
     if (!props.loggedIn){
         props.history.push("/")
     }
     
     const {roomId} = props
-    const { messages, sendMessage, stageTime } = useChat(roomId, props.username)
+    const { messages, sendMessage } = useChat(roomId, props.username)
     const [newMessage, setNewMessage] = useState("")
-    const [time, setTime] = useState(0)
-    const [newTime, setNewTime]= useState("")
-    useInfo(roomId, `control-${props.username}`)
-    
+
+    useInfo(roomId, `control-${props.username}`)    
     const handleSendMessage = ()=>{
         if (newMessage.trim() !== ""){
-        sendMessage(props.username + ": " + newMessage)
-    }
+            sendMessage(props.username + ": " + newMessage)
+        }
         setNewMessage("")
     }
+    
+    const prevMessages = usePrevious(messages)
+    
+    useEffect(()=>{
+        return () =>{updateChatHistory({roomId: roomId, messages: prevMessages.current}).then(e=>console.log("lala",e))}
+    },[])
+
 
     const messagesEndRef = useRef(null)
 
