@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const UserListContainer = styled.ul`
     list-style-type: none;
-    padding-left: 0px; 
+    padding-left: 0px;
     background: rgba(235, 230, 230, 0.9);
     height: 200px;
     overflow-y: scroll;
@@ -106,17 +106,19 @@ export const ChatMessageContainer = styled.div`
     min-height: 320px;
     height:52.5vh;
     max-height: 530px;
-    
+
     background: white;
     overflow-y: scroll;
     word-break: break-word;
     background: white;
     box-shadow: 1px 1px 1px lightslategray;
     margin: 8px;
-    
+
 `
 export const CenterMap = styled.div`
   margin: auto;
+  margin-top: 10vw;
+
   width: 50vw;
   box-shadow: 10px 10px 70px black;
 `

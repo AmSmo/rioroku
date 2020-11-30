@@ -5,10 +5,13 @@ import { currentClock } from '../actions/index'
 import {Menu} from 'semantic-ui-react'
 import { logout } from '../actions/session_actions'
 import {withRouter} from 'react-router-dom'
+import { Modal } from 'semantic-ui-react'
+
 
 function TimeKeeper (props){
     const [localTime, setLocalTime] = useState(-1)
     const { browserTimer, getTimer } = useTimer()
+
 
 
     useEffect(() => {
@@ -47,10 +50,9 @@ function TimeKeeper (props){
     if(localTime === 0 && props.match.path != "/"){
         props.history.push("/")
     }
-    if(localTime > 20 && localTime < 30 && props.match.path === "/TrackA"){
+    if(localTime > 40 && localTime < 50 && props.match.path === "/TrackA"){
         props.history.push("/TrackA2")
     }
-
 
     console.log(props)
 
@@ -73,7 +75,8 @@ function TimeKeeper (props){
                 </Menu.Item>
                 :
                 null}
-        </Menu>
+
+          </Menu>
     )
 }
 

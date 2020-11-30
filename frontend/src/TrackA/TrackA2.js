@@ -147,10 +147,11 @@ function TrackA2(props){
 
 return(
 
-  <BlueBackground className="fade-in">
-    <TimeKeeper/>
-  <CenterMap>
+  <BlueBackground>
+  <TimeKeeper/>
+  <CenterMap className="fade-in">
   <ImageMapper
+
   src={'https://dl.dropboxusercontent.com/s/pk2wv82qhw2zlu7/map_A_2.png?dl=0'}
   imgWidth={1200}
   width={width}
