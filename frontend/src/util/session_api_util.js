@@ -9,6 +9,10 @@ export const setAuthToken = token => {
     }
 };
 
+export const updateChatHistory = (messages) =>{
+    return axios.post('/api/chat/update', messages)
+}
+
 export const signup = (userData) => {
 
     return axios.post('/api/users/register', userData);

@@ -1,3 +1,4 @@
+import {updateChatHistory} from '../util/session_api_util'
 import React, {useEffect, useState, useRef} from 'react'
 import {useChat} from '../actions/socketFunctions'
 import {useInfo} from '../actions/channelInfo'
@@ -25,7 +26,7 @@ function Chat(props){
     const prevMessages = usePrevious(messages)
     
     useEffect(()=>{
-        return () =>{console.log("exit", prevMessages.current)}
+        return () =>{updateChatHistory({roomId: roomId, messages: prevMessages.current}).then(e=>console.log("lala",e))}
     },[])
 
 
