@@ -14,6 +14,8 @@ function UserHelp(props){
         setNewMessage("")
         setMyHelp(true)
     }
+
+
     useEffect(()=>{
         console.log(newMessage)
         handleSendMessage()
