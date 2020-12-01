@@ -393,8 +393,8 @@ p[class^="from-"].emoji::before {
 
 
 .slide-in-blurred-bottom {
-  -webkit-animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
-  animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+  -webkit-animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.430, 1.000, 0.420, 1.000) both;
+  animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.430, 1.000, 0.420, 1.000) both;
 }
 
 /* ----------------------------------------------
