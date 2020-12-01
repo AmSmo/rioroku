@@ -44,7 +44,7 @@ function Welcome(props) {
       {
         name: "1",
         shape: "poly",
-        coords: [260, 175, 498, 206, 470, 442, 347, 424, 250, 391, 249, 289],
+        coords: [295,301,289,224,301,87,542,114,514,355,385,337,336,322],
         preFillColor: "none",
         fillColor: "none",
 
@@ -52,7 +52,7 @@ function Welcome(props) {
       {
         name: "2",
         shape: "poly",
-        coords: [536, 214, 765, 128, 848, 357, 733, 398, 675, 406, 627, 408],
+        coords: [584,125,808,44,893,268,795,302,726,320,670,320,605,187],
         preFillColor: "none",
         fillColor: "none",
 
@@ -60,21 +60,21 @@ function Welcome(props) {
       {
         name: "3",
         shape: "poly",
-        coords: [129, 550, 357, 472, 438, 698, 278, 745, 214, 746],
+        coords: [172,463,403,384,481,610,359,650,292,658,258,660,212,560],
         preFillColor: "none",
         fillColor: "none"
       },
       {
         name: "4",
         shape: "poly",
-        coords: [469, 505, 708, 518, 695, 759, 584, 752, 505, 733, 471, 718],
+        coords: [512,415,752,431,740,676,605,661,528,638,516,628,510,524,510,466],
         preFillColor: "none",
         fillColor: "none"
       },
       {
         name: "5",
         shape: "poly",
-        coords: [723, 473, 948, 386, 1031, 615, 930, 650, 864, 667, 811, 666, 763, 576],
+        coords: [990,302,1075,525,968,566,902,578,856,578,803,475,763,382],
         preFillColor: "none",
         fillColor: "none"
       }
@@ -101,12 +101,12 @@ function Welcome(props) {
 
   return (
     <BlueBackground>
-      <TimeKeeper/>      
+      <TimeKeeper/>
       <CenterMap>
         <ImageMapper
-          src={'https://dl.dropboxusercontent.com/s/h5kf351m71ljaf5/act_0_map.png?dl=0'}
-          imgWidth={1200}
-          
+          src={'https://dl.dropboxusercontent.com/s/pi9lngemsh75qqc/act_0_map_16x9.png?dl=0'}
+          imgWidth={1280}
+
           width={width}
           onClick={e => generateModal(e)}
           map={map}
@@ -122,9 +122,9 @@ function Welcome(props) {
       >
         {contents}
       </Modal>
-      
+
     </BlueBackground>
-    
+
   )
 }
 
