@@ -60,49 +60,49 @@ function TrackA1(props){
     {
       name: "1",
       shape: "circle",
-      coords:[193,187,49],
+      coords:[193,141,52],
       preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "2",
       shape: "circle",
-      coords:[414,323,49],
+      coords:[420,281,51],
       preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "3",
       shape: "circle",
-      coords:[879,251,52],
+      coords:[875,205,51],
       preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "4",
       shape: "circle",
-      coords:[152,490,51],
+      coords:[149,448,53],
       preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "5",
       shape: "circle",
-      coords:[711,388,49],
+      coords:[712,341,51],
       preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "6",
       shape: "circle",
-      coords:[381,663,47],
+      coords:[380,617,51],
       preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "7",
       shape: "circle",
-      coords:[1039,442,49],
+      coords:[1039,397,54],
       preFillColor: "none",
       fillColor: "none"
     }
@@ -127,9 +127,9 @@ return(
     <TimeKeeper/>
   {/* <CenterMap> */}
   <ImageMapper
-  src={'https://dl.dropboxusercontent.com/s/au6xan8beolro28/map_A_1.png?dl=0'}
+  src={'https://dl.dropboxusercontent.com/s/qfkllxfra8lpwoa/map_A_1_16x9.png?dl=0'}
   //src={'https://dl.dropboxusercontent.com/s/pk2wv82qhw2zlu7/map_A_2.png?dl=0'}
-  imgWidth={1200}
+  imgWidth={1280}
   width={width}
   onClick={e=> generateModal(e)}
   map={map}

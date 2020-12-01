@@ -14,7 +14,8 @@ import TimeKeeper from '../Session/TimeKeeper'
 function TrackA2(props){
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
-  const [width, setWidth] = useState(window.innerWidth * 0.6)
+  const [width, setWidth] = useState(window.innerWidth)
+  const [height, setHeight] = useState(window.innerHeight)
 
   const modalClose = () => {
     setOpen(false)
@@ -71,100 +72,108 @@ function TrackA2(props){
     {
       name: "1",
       shape: "circle",
-      coords:[193,187,49],
+      coords:[193,141,52],
+      preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "2",
       shape: "circle",
-      coords:[414,323,49],
+      coords:[420,281,51],
+      preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "3",
       shape: "circle",
-      coords:[879,251,52],
+      coords:[875,205,51],
+      preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "4",
       shape: "circle",
-      coords:[152,490,51],
+      coords:[149,448,53],
+      preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "5",
       shape: "circle",
-      coords:[711,388,49],
+      coords:[712,341,51],
+      preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "6",
       shape: "circle",
-      coords:[381,663,47],
+      coords:[380,617,51],
+      preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "7",
       shape: "circle",
-      coords:[1039,442,49],
+      coords:[1039,397,54],
+      preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "8",
       shape: "circle",
-      coords:[833,646,48],
+      coords:[833,600,52],
       preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "9",
       shape: "circle",
-      coords:[189,736,48],
+      coords:[170,619,53],
       preFillColor: "none",
       fillColor: "none"
     },
     {
       name: "10",
       shape: "circle",
-      coords:[1064,746,50],
+      coords:[1134,145,53],
       preFillColor: "none",
       fillColor: "none"
     }
   ]
 }
 
-  useEffect(() => {
-    function handleResize() {
-      setWidth(window.innerWidth * .6)
+useEffect(() => {
+  function handleResize() {
+    setWidth(window.innerWidth)
+    setHeight(window.innerHeight)
 
-    }
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }
+  window.addEventListener("resize", handleResize);
+  handleResize();
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
 
 
 return(
 
-  <BlueBackground>
-  <TimeKeeper/>
-  <CenterMap className="fade-in">
+  <BlueBackground className="fade-in">
+    <TimeKeeper/>
+  {/* <CenterMap> */}
   <ImageMapper
-
-  src={'https://dl.dropboxusercontent.com/s/pk2wv82qhw2zlu7/map_A_2.png?dl=0'}
-  imgWidth={1200}
+  src={'https://dl.dropboxusercontent.com/s/p7a55clmn6cqw7r/map_A_2_16x9.png?dl=0'}
+  //src={'https://dl.dropboxusercontent.com/s/pk2wv82qhw2zlu7/map_A_2.png?dl=0'}
+  imgWidth={1280}
   width={width}
   onClick={e=> generateModal(e)}
   map={map}
 
   />
-  </CenterMap>
+  {/* </CenterMap> */}
   <Modal
   onClose={() => setOpen(false)}
   onOpen={() => setOpen(true)}
   open={open}
-
+  dimmer='blurring'
   basic
   >
   {contents}
