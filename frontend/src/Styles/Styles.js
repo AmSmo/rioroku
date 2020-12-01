@@ -156,7 +156,7 @@ export const ChannelContainer = styled.div`
 
 export const HelpQueue = styled.div`
     position: fixed;
-    right: 0;
+    left: 10px;
     width: 240px;
     border: 3px solid lightgrey;
     height: 500px;

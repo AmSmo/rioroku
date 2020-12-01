@@ -1,79 +1,65 @@
-import {Route, Switch} from 'react-router-dom'
-import {useState} from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { useState } from 'react'
+import AdminRoutes from './Routes/AdminRoutes'
+import AudienceTestRoutes from './Routes/AudienceTestRoutes'
 
-import Start from './Act0/Map1'
-import Rolled from './Rolled/Rolled'
-import TrackA2 from './TrackA/TrackA2'
 import Login from './Session/Login'
-import HelpDesk from './Admin/HelpDesk'
-import TrackARouter from './TrackA/TrackARouter'
-import TrackBRouter from './TrackB/TrackBRouter'
-import TrackCRouter from './TrackC/TrackCRouter'
-import TrackDRouter from './TrackD/TrackDRouter'
-import TrackERouter from './TrackE/TrackERouter'
-import {connect} from 'react-redux'
+
+import { connect } from 'react-redux'
 import UserHelp from './Chat/UserHelp'
-import { HelpButton , BottomRight } from './Styles/Styles'
+import { HelpButton, BottomRight } from './Styles/Styles'
+
+
 
 function App(props) {
-  const {isAuthenticated } = props
+  const { isAuthenticated } = props
   const [needHelp, setNeedHelp] = useState(false)
   const changeNeed = () => {
     setNeedHelp(false)
   }
 
   let admin
-  if(props.user){
+  if (props.user) {
     admin = props.user.admin
   }
   return (
 
-        <>
-          {isAuthenticated ?<>
-          <Switch>
-            {admin ?
-           <Route path='/HelpDesk' component={HelpDesk} />
-           :
-           null
-          }
-              <Route path="/TrackA2" component={TrackA2} />
-              <Route path="/rolled" component={Rolled} />
-              <Route path="/TrackA" component={TrackARouter} />
-              <Route path="/TrackB" component={TrackBRouter} />
-              <Route path="/TrackC" component={TrackCRouter} />
-              <Route path="/TrackD" component={TrackDRouter} />
-              <Route path="/TrackE" component={TrackERouter} />
 
-              <Route path="/" component={Start} />
-
-
-          </Switch>
-          
-          {needHelp ?
-            <BottomRight>
-              <UserHelp changeNeed={changeNeed} time={new Date()}/>
-            </BottomRight>
-            :
-            <HelpButton style={{
-              right: "10px",
-              bottom: "5px"
-            }}
-              onClick={() => setNeedHelp(true)}>
+    isAuthenticated ?
+      <>
+        {admin ?
+          <AdminRoutes />
+          :
+          <>
+            <AudienceTestRoutes />
+            {needHelp ?
+              <BottomRight>
+                <UserHelp changeNeed={changeNeed} time={new Date()} />
+              </BottomRight>
+              :
+              <HelpButton style={{
+                right: "10px",
+                bottom: "5px"
+              }}
+                onClick={() => setNeedHelp(true)}>
                 Help
                         </HelpButton>
-          }
+            }
           </>
-          :
-          <Switch>
-            <Route path="/" component={Login} />
-          </Switch>
-          }
-        </>
+        }
 
 
-  );
+      </>
+      :
+      <Switch>
+        <Route path="/" component={Login} />
+      </Switch>
+
+
+
+  )
 }
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   return state.api
 }
 export default connect(mapStateToProps)(App);

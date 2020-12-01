@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Chat from './Chat'
 import UserHelp from './UserHelp';
-import HelpDesk from './HelpDesk'
+import SMDesk from './SMDesk'
 import styled from 'styled-components'
 import {HelpButton} from '../styles/styles'
 function MainPage(props){
@@ -9,7 +9,7 @@ function MainPage(props){
         const [needHelp, setNeedHelp] = useState(false)
         return (
             <div>
-                <HelpDesk />
+                <SMDesk />
                 <Chat roomId={"123"}/>
                 <Chat roomId={"456"} control/>
                     {needHelp ?

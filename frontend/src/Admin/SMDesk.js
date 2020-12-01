@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import {ChannelContainer, HelpQueue, InteriorQueue} from '../Styles/Styles'
+import React, { useEffect} from 'react';
+import {ChannelContainer} from '../Styles/Styles'
 import { connect } from 'react-redux'
 import { useHelp } from '../actions/helpFunctions'
 import { useInfo } from '../actions/channelInfo'
 import UserList from '../Chat/UserList'
-import HelpItem from './HelpItem'
 import ShowController from '../Navbar/ShowController'
-function HelpDesk(props) {
+function SMDesk(props) {
 
-
-    const { messages, sendMessage, deleteMessage} = useHelp()
     const { userList, userCount} = useInfo("admin", props.username)
     
 
     useEffect(() =>{
         renderChannels()
     }, [userList])
-
-    const displayMessages = () => {
-        return messages.map((message, idx) => {
-            return (
-                <>
-                    <HelpItem message={message} key={idx} deleteMessage={deleteMessage}/>
-                </>)
-        })
-    }
 
     const renderChannels = () =>{
         delete userList.help
@@ -42,12 +30,7 @@ function HelpDesk(props) {
         <div>
               
            
-                <HelpQueue>
-                    <InteriorQueue>
-                        <h2>Help Queue</h2>
-                        {displayMessages()}
-                    </InteriorQueue>
-                </HelpQueue>
+                
 
                 <ChannelContainer>
                     <div style={{marginRight: "10px"}}>
@@ -75,4 +58,4 @@ const mapStatetoProps = state => {
 }
 
 
-export default connect(mapStatetoProps)(HelpDesk);
+export default connect(mapStatetoProps)(SMDesk);
