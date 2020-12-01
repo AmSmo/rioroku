@@ -1,13 +1,15 @@
 //not working yet
 
 import React from 'react'
-import { Modal } from 'semantic-ui-react'
+import { Modal, Icon } from 'semantic-ui-react'
 import ReactLivestream from 'react-livestream'
 
 function ModalLivestream(props) {
 
   return (
-      <Modal.Content onClick={()=> props.setOpen(false) }>
+    <>
+    <Icon name="window close" style={{ float: "right" }} onClick={() => props.setOpen()} />
+    <Modal.Content onClick={()=> props.setOpen(false) }>
           <center>
           <ReactLivestream
             platform="youtube"
@@ -16,6 +18,7 @@ function ModalLivestream(props) {
           />
           </center>
     </Modal.Content>
+    </>
   )
 }
 

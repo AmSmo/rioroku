@@ -14,8 +14,8 @@ import TimeKeeper from '../Session/TimeKeeper'
 function TrackA1(props){
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
-  const [width, setWidth] = useState(window.innerWidth * 0.6)
-
+  const [width, setWidth] = useState(window.innerWidth)
+  const [height, setHeight] = useState(window.innerHeight)
   const modalClose = () => {
     setOpen(false)
   }
@@ -111,7 +111,8 @@ function TrackA1(props){
 
   useEffect(() => {
     function handleResize() {
-      setWidth(window.innerWidth * .6)
+      setWidth(window.innerWidth)
+      setHeight(window.innerHeight)
 
     }
     window.addEventListener("resize", handleResize);
@@ -124,7 +125,7 @@ return(
 
   <BlueBackground className="fade-in">
     <TimeKeeper/>
-  <CenterMap>
+  {/* <CenterMap> */}
   <ImageMapper
   src={'https://dl.dropboxusercontent.com/s/au6xan8beolro28/map_A_1.png?dl=0'}
   //src={'https://dl.dropboxusercontent.com/s/pk2wv82qhw2zlu7/map_A_2.png?dl=0'}
@@ -134,7 +135,7 @@ return(
   map={map}
 
   />
-  </CenterMap>
+  {/* </CenterMap> */}
   <Modal
   onClose={() => setOpen(false)}
   onOpen={() => setOpen(true)}

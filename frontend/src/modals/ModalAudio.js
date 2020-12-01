@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 
 function ModalAudio(props) {
   const playAudio = () => {
@@ -8,8 +8,9 @@ function ModalAudio(props) {
   }
 
   useEffect(()=>{playAudio()}, [])
-  return (
+  return (<>
     <center>
+      <Icon name="window close" style={{ marginLeft: "160px" }} onClick={() => props.setOpen()} />
     <div onClick={null} >
 
     <Button.Group vertical labeled icon>
@@ -24,6 +25,7 @@ function ModalAudio(props) {
 
     </div>
     </center>
+    </>
   )
 }
 export default ModalAudio;

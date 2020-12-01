@@ -27,7 +27,6 @@ function App(props) {
     admin = props.user.admin
   }
   return (
-    <div className="App">
 
         <>
           {isAuthenticated ?<>
@@ -71,7 +70,7 @@ function App(props) {
           }
         </>
 
-    </div>
+
   );
 }
 const mapStateToProps = state =>{

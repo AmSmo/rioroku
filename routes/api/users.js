@@ -31,7 +31,7 @@ router.post('/register', (req, res) => {
     User.findOne({ ticketId })
         .then(user => {
             
-            if (user && user.admin){
+            if (user && user.admin || user && user.audience){
                 const payload = { id: user.id, ticketId: user.ticketId };
                 jwt.sign(payload, keys.secretOrKey, { expiresIn: 9000 }, (err, token) => {
                     res.json({

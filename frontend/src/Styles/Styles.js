@@ -25,6 +25,7 @@ export const HelpButton = styled.button`
     font-size: 18px;
     font-weight: 600;
     box-shadow: 3px 3px 4px black;
+    z-index: 6;
     cursor: pointer;
 `
 export const OpenHelp = styled.button`
@@ -116,17 +117,14 @@ export const ChatMessageContainer = styled.div`
 
 `
 export const CenterMap = styled.div`
-  margin: auto;
-  margin-top: 10vw;
 
-  width: 50vw;
-  box-shadow: 10px 10px 70px black;
+
+  
 `
 
 export const BlueBackground = styled.div`
   background: #4287f5;
-  top: 16px;
-  height: 94.5vh;
+  height: 100vh;
 `
 
 
@@ -166,6 +164,7 @@ export const HelpQueue = styled.div`
     z-index:10;
     box-shadow: 2px 2px 2px grey;
     border-bottom-left-radius: 15px;
+    
 `
 
 export const InteriorQueue = styled.div`

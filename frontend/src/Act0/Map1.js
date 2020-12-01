@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
-import Chat from '../Chat/Chat'
 import { useInfo } from '../actions/channelInfo'
 import UserList from '../Chat/UserList'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
@@ -10,9 +9,8 @@ import TimeKeeper from '../Session/TimeKeeper'
 function Welcome(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
-  const [sideBar, setSideBar] = useState({ width: "50px" })
-  const [hidden, setHidden] = useState(true)
-  const [width, setWidth] = useState(window.innerWidth * 0.6)
+  const [width, setWidth] = useState(window.innerWidth)
+  const [height, setHeight] = useState(window.innerHeight)
 
   const modalClose = () => {
     setOpen(false)
@@ -83,7 +81,8 @@ function Welcome(props) {
     ]
   }
   let roomId = "Act0"
-  let { userList, userCount } = useInfo(roomId, props.username)
+  console.log(props)
+  let { userList, userCount } = useInfo(roomId, `control-${props.username}`)
 
   if (userList.TrackA)
     if (userList.TrackA.length > 5) {
@@ -91,8 +90,8 @@ function Welcome(props) {
     }
   useEffect(() => {
     function handleResize() {
-      setWidth(window.innerWidth * 0.6 )
-
+      setWidth(window.innerWidth )
+      setHeight(window.innerHeight)
     }
     window.addEventListener("resize", handleResize);
     handleResize();
@@ -102,27 +101,12 @@ function Welcome(props) {
 
   return (
     <BlueBackground>
-      <TimeKeeper/>
-
-      <UserList users={userList[roomId]} roomId={roomId}  />
-
-      <div className="sidebar"
-        style={sideBar}
-        onMouseOver={() => {
-          setSideBar({ width: "200px", opacity: "1", marginRight: "25px", boxShadow: "5px 5px black" })
-          setHidden(false)
-        }}
-        onMouseOut={() => {
-          setSideBar({ width: "50px", right: "0px" })
-          setHidden(true)
-        }}
-      >
-        <Chat roomId={"Act0"} hidden={hidden} />
-      </div>
+      <TimeKeeper/>      
       <CenterMap>
         <ImageMapper
           src={'https://dl.dropboxusercontent.com/s/h5kf351m71ljaf5/act_0_map.png?dl=0'}
           imgWidth={1200}
+          
           width={width}
           onClick={e => generateModal(e)}
           map={map}
@@ -145,6 +129,11 @@ function Welcome(props) {
 }
 
 const mapStateToProps = state => {
+  if (state.api.user) {
+    state.username = state.api.user.username
+  }else {
+    state.username = localStorage.getItem("username")
+  }
   return state
 }
 

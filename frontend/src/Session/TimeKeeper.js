@@ -56,26 +56,27 @@ function TimeKeeper (props){
 
 
     return (
-        <Menu style={{ marginBottom: "0px" }}>
+        <></>
+        // <Menu style={{ marginBottom: "0px" }}>
 
 
-            <Menu.Item className="fade-in" >{updatedTime}</Menu.Item>
+        //     <Menu.Item className="fade-in" >{updatedTime}</Menu.Item>
 
-            {props.api.isAuthenticated ?
-                <Menu.Item
-                    side="right"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        props.logout()
-                    }}
+        //     {props.api.isAuthenticated ?
+        //         <Menu.Item
+        //             side="right"
+        //             onClick={(e) => {
+        //                 e.preventDefault()
+        //                 props.logout()
+        //             }}
 
-                >
-                    Log Out
-                </Menu.Item>
-                :
-                null}
+        //         >
+        //             Log Out
+        //         </Menu.Item>
+        //         :
+        //         null}
 
-          </Menu>
+        //   </Menu>
     )
 }
 

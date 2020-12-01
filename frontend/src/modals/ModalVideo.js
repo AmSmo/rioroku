@@ -1,11 +1,12 @@
 import React from 'react'
-import { Modal } from 'semantic-ui-react'
+import { Modal,Icon } from 'semantic-ui-react'
 import YouTube from 'react-youtube'
 
 function ModalVideo(props) {
 
   return (
       <Modal.Content onClick={()=> props.setOpen(false) }>
+        <Icon name="window close" style={{ float: "right" }} onClick={() => props.setOpen()} />
           <center>
       <YouTube
               videoId={props.videoId}
