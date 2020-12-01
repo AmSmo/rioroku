@@ -12,7 +12,7 @@ function HelpItem(props){
             }
             }/>
             <br></br>
-        <Chat help roomId={`Help-${props.message.username}`}/>
+                <Chat help roomId={`Help-${props.message.username}-${new Date().getDate()}`}/>
         
         </>
         :

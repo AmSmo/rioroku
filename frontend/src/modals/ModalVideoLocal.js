@@ -11,18 +11,9 @@ function ModalVideoLocal(props) {
   return (
 
     <center>
-    {
-    
-      /* <div onClick={null} >
 
 
-    <video className="video-element">
-    <source src={props.videoId}></source>
-    </video>
-
-    </div> */}
-
-    <ReactPlayer url={props.videoId} className="video-element" playing={true} playbackRate={1} muted={false} onEnded={props.setOpen}/>
+    <ReactPlayer url={props.videoId} className="video-element" playing={true} width="100%" playbackRate={1} muted={false} onEnded={props.setOpen}/>
     </center>
   )
 }

@@ -91,7 +91,7 @@ function Welcome(props) {
     }
   useEffect(() => {
     function handleResize() {
-      setWidth(window.innerWidth * .6)
+      setWidth(window.innerWidth * 0.6 )
 
     }
     window.addEventListener("resize", handleResize);

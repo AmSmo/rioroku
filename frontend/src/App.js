@@ -49,9 +49,10 @@ function App(props) {
 
 
           </Switch>
+          
           {needHelp ?
             <BottomRight>
-              <UserHelp changeNeed={changeNeed} />
+              <UserHelp changeNeed={changeNeed} time={new Date()}/>
             </BottomRight>
             :
             <HelpButton style={{
@@ -59,7 +60,7 @@ function App(props) {
               bottom: "5px"
             }}
               onClick={() => setNeedHelp(true)}>
-              Help
+                Help
                         </HelpButton>
           }
           </>

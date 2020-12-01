@@ -3,7 +3,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import {useChat} from '../actions/socketFunctions'
 import {useInfo} from '../actions/channelInfo'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import {SendMessageButton, ChatMessageContainer, Vertical} from '../Styles/Styles'
 import {usePrevious} from '../Session/MessageHistory'
 function Chat(props){
@@ -27,17 +27,17 @@ function Chat(props){
     const prevMessages = usePrevious(messages)
     
     useEffect(()=>{
+        if (roomId.startsWith("Help-")){
         let local = []
         retrieveChatHistory({roomId}).then(resp=>{ 
             local= resp.data
             setHistory(resp.data)})
         
         return () =>{
-            console.log("hist", history)
-            updateChatHistory({roomId: roomId, messages: [...local, ...prevMessages.current]}).then(resp=> console.log(resp.config.data))}
+            
+            updateChatHistory({roomId: roomId, messages: [...local, ...prevMessages.current]}).then(resp=> console.log(resp.config.data))}}
 
     },[])
-
 
     const messagesEndRef = useRef(null)
 
@@ -52,11 +52,26 @@ function Chat(props){
         })
     }
 
+    function urlify(text) {
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        if(RegExp(urlRegex).test(text)){
+
+            text.replace(urlRegex, function (url) {
+
+                let split = text.split(url)
+                console.log(url)
+                text= <p>{split[0]} <a style={{color: "orange"}} href={url} target="_blank"> {url}</a> {split[1]}</p>
+            })
+        }
+            return text
+            
+    }
     const displayMessages = () => {
         return messages.map((message, idx) => {
-                    
-        return <p key={idx} className={ message.ownedByCurrentUser ? "from-me" : "from-them"}>{message.body}</p>
+
+        return <p key={idx} className={ message.ownedByCurrentUser ? "from-me" : "from-them"}>{urlify(message.body)}</p>
 } )   }
+
 
 
     const handlePress = (e) =>{
@@ -75,9 +90,9 @@ function Chat(props){
                 {displayMessages()}
                 <div ref={messagesEndRef} />
             </ChatMessageContainer>
-            { props.userHelp && messages.length === 0 ?
+            {/* { props.userHelp && messages.length === 0 ?
                 <div> Alison Has been Notified </div>
-                :
+                : */}
                 <>
             <textarea
                 className="messageInput"
@@ -88,15 +103,7 @@ function Chat(props){
             />
             <SendMessageButton onClick={handleSendMessage}>Send Message</SendMessageButton>
             </>
-}
-            <br></br>
-            {/* {props.control ? 
-            <>
-                <input type="text" value={newTime} onChange={(e)=> setNewTime(e.target.value)} />
-                <button onClick={handleTimeChange}>ChangeTime</button>
-            </>
-            :
-            null} */}
+{/* } */}
         </div>
         </>
     )   

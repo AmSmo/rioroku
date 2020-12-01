@@ -7,42 +7,45 @@ import {Icon} from 'semantic-ui-react'
 
 function UserHelp(props){
     const { messages, sendMessage } = useHelp(props.username)
-    const [newMessage, setNewMessage] = useState("")
+    const [newMessage, setNewMessage] = useState(props.time.toLocaleTimeString())
     const [myHelp, setMyHelp] = useState(false)
     const handleSendMessage = ()=>{
         sendMessage(props.username + ": " + newMessage)
         setNewMessage("")
         setMyHelp(true)
     }
-
+    useEffect(()=>{
+        console.log(newMessage)
+        handleSendMessage()
+    },[])
     return(
        
-         myHelp ? 
+        //  myHelp ? 
             <div className={myHelp ? "slide-in-blurred-bottom" : "flip-out-hor-top"}>
             <HelpArea>
                 <Icon name="window close" style={{ float: "right" }} onClick={() => {
                     setMyHelp(false)
                     props.changeNeed()
                 }} />
-                <Chat roomId={`Help-${props.username}`} userHelp />
+                <Chat roomId={`Help-${props.username}-${new Date().getDate()}`} userHelp />
                 <br></br>
             </HelpArea>
             </div>
-                :
-            <HelpArea className={!myHelp ? "tilt-in-bottom-2" : "flip-out-hor-top"}>
-                <Icon name="window close" style={{ float: "right" }} onClick={() => {
-                    setMyHelp(false)
-                    props.changeNeed()
+        //         :
+        //     <HelpArea className={!myHelp ? "tilt-in-bottom-2" : "flip-out-hor-top"}>
+        //         <Icon name="window close" style={{ float: "right" }} onClick={() => {
+        //             setMyHelp(false)
+        //             props.changeNeed()
                     
-                }}/>
-            <p>Please Describe Your Problem</p>
-            <textarea
-                value={newMessage}
-                onChange={(e)=> setNewMessage(e.target.value)}
-                placeholder="Your Message..."
-            /><br></br>
-            <SendMessageButton onClick={handleSendMessage}>Send Message</SendMessageButton>
-        </HelpArea>
+        //         }}/>
+        //     <p>Please Describe Your Problem</p>
+        //     <textarea
+        //         value={newMessage}
+        //         onChange={(e)=> setNewMessage(e.target.value)}
+        //         placeholder="Your Message..."
+        //     /><br></br>
+        //     <SendMessageButton onClick={handleSendMessage}>Send Message</SendMessageButton>
+        // </HelpArea>
         
         
     )   

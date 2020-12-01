@@ -62,11 +62,14 @@ function FlipClock(props){
         let now = new Date().getTime();
         let updatedTimeLeft = countDownDate - now;
         setTimeleft(updatedTimeLeft)
-        let currentDays = Math.floor((timeleft % (1000 * 60 * 60 * 24 * 7) / (1000 * 60 * 60 * 24)));
-        let currentHours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let currentMinutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-        let currentSeconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-        if (timeleft < 0) {
+        let currentDays = Math.floor((updatedTimeLeft % (1000 * 60 * 60 * 24 * 7) / (1000 * 60 * 60 * 24)));
+        let currentHours = Math.floor((updatedTimeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let currentMinutes = Math.floor((updatedTimeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        let currentSeconds = Math.floor((updatedTimeLeft % (1000 * 60)) / 1000);
+        if (currentDays === 0 && currentHours === 0 && currentMinutes < 15){
+            props.showing(true)
+        }
+        if (updatedTimeLeft < 0) {
             currentSeconds = Math.abs(currentSeconds)
             if (currentSeconds === 60) {
                 currentSeconds = 0
@@ -76,17 +79,18 @@ function FlipClock(props){
                 currentMinutes = 0
             }
             currentHours = Math.abs(currentHours) - 1
-            if (currentHours > 1) {
+            if (currentHours >= 1) {
+                console.log("curr",current ,props.next)
                 let idx = current + 1
                 setCurrent(idx)
-                setNext(props.next[idx].date)
+                return setNext(props.next[idx].date)
+            }else{
+                props.showing(true)
             }
         }
     
         if (days !== currentDays) {
-                setDays(currentDays)
-                
-            
+                setDays(currentDays)  
         }
         if (hours !== currentHours) {
             setHours(currentHours)
@@ -103,6 +107,7 @@ function FlipClock(props){
                 
             
         }
+        
     }
     return (
         <>
