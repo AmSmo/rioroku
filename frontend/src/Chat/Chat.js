@@ -19,11 +19,14 @@ function Chat(props){
     useInfo(roomId, `control-${props.username}`)    
     const handleSendMessage = ()=>{
         if (newMessage.trim() !== ""){
-            sendMessage(props.username + ": " + newMessage)
+            let fullMessage = props.username + ": " + newMessage
+            let latest = sendMessage(fullMessage)
+            if (roomId.startsWith("Help-")) {
+                updateChatHistory({ roomId: roomId, messages: [...history, latest, ...prevMessages.current] })
         }
         setNewMessage("")
     }
-    
+}
     const prevMessages = usePrevious(messages)
     
     useEffect(()=>{
@@ -34,10 +37,9 @@ function Chat(props){
             setHistory(resp.data)})
         
         return () =>{
-            
-            updateChatHistory({roomId: roomId, messages: [...local, ...prevMessages.current]}).then(resp=> console.log(resp.config.data))}}
+            updateChatHistory({roomId: roomId, messages: [...local, ...prevMessages.current]})
 
-    },[])
+    }}},[])
 
     const messagesEndRef = useRef(null)
 

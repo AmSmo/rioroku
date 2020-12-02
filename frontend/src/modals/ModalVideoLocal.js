@@ -10,10 +10,17 @@ function ModalVideoLocal(props) {
     // useEffect(()=>{playVideo()}, [])
   return (
 <>
-      <Icon name="window close" style={{ float: "right" }} onClick={() => props.setOpen()}/>
+      <Icon name="window close" style={{ float: "right", margin: "-40px" }} onClick={() => props.setOpen()}/>
     <center>
 
-    <ReactPlayer url={props.videoId} className="video-element" playing={true} width="100%" playbackRate={1} muted={false} onEnded={props.setOpen}/>
+    <ReactPlayer url={props.videoId} 
+      className="video-element" 
+        playing={true} width="100%" 
+        playbackRate={1} muted={false} 
+        onEnded={props.setOpen}
+        controls={false}
+        style={{ pointerEvents: 'none' }}
+        />
     </center>
     </>
   )

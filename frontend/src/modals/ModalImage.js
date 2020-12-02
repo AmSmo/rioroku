@@ -1,11 +1,12 @@
 import React, { useEffect} from 'react'
-import { Button } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 
 function ModalImage(props) {
 
 
   return (
     <center>
+      <Icon name="window close" style={{ float: "right" }} onClick={() => props.setOpen()} />
     <div onClick={null} >
 
 

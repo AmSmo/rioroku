@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom'
-
+import React, {useState} from 'react'
 import Allison from '../Admin/Allison'
 import Start from '../Act0/Map1'
 
@@ -12,11 +12,21 @@ import TrackCRouter from '../TrackC/TrackCRouter'
 import TrackDRouter from '../TrackD/TrackDRouter'
 import TrackERouter from '../TrackE/TrackERouter'
 import { connect } from 'react-redux'
-
+import UserHelp from '../Chat/UserHelp'
+import { HelpButton, BottomRight } from '../Styles/Styles'
 
 
 function AudienceTestRoutes(props) {
+    const [needHelp, setNeedHelp] = useState(false)
+    const changeNeed = () => {
+        setNeedHelp(!needHelp)
+    }
+
+
+
+
     return (
+        <>
         <Switch>
 
             <Route path='/SMDesk' component={SMDesk} />
@@ -29,6 +39,21 @@ function AudienceTestRoutes(props) {
             <Route path="/TrackE" component={TrackERouter} />
             <Route path="/" component={Start} />
         </Switch>
+        {
+        needHelp ?
+                    <BottomRight>
+                        <UserHelp changeNeed={changeNeed} time={new Date()} />
+                    </BottomRight>
+            :
+            <HelpButton style={{
+                right: "10px",
+                bottom: "5px"
+            }}
+                onClick={() => setNeedHelp(true)}>
+                Help
+                        </HelpButton>
+    }   
+    </>
         )
 
 }

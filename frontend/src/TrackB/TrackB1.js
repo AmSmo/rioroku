@@ -8,7 +8,7 @@ import ModalAudio from '../modals/ModalAudio'
 import ModalLivestream from '../modals/ModalLivestream'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
 import TimeKeeper from '../Session/TimeKeeper'
-
+import { useInfo } from '../actions/channelInfo'
 function TrackB1(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
@@ -46,7 +46,7 @@ function TrackB1(props) {
         break;
     }
   }
-
+  const { userList, userCount } = useInfo("TrackB", `control-${props.username}`)
   const map = {
     name: "map1",
     areas: [
@@ -115,7 +115,12 @@ function TrackB1(props) {
 }
 
 const mapStateToProps = state => {
-  return state.game
+    if (state.api.user) {
+      state.username = state.api.user.username
+    }else {
+      state.username = localStorage.getItem("username")
+    }
+  return state
 }
 
 export default connect(mapStateToProps)(TrackB1)

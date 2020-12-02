@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import Chat from '../Chat/Chat'
-import { OpenHelp, UserNeeds } from '../Styles/Styles'
+import { InteriorQueue, OpenHelp, UserNeeds } from '../Styles/Styles'
 import { Icon } from 'semantic-ui-react'
 function HelpItem(props) {
-    let [beingHelped, setBeingHelped] = useState(false)
+    
     return (
-        beingHelped ?
-            <>Chat with {props.message.username}<Icon name="window close" style={{ float: "right" }} onClick={() => {
-                props.deleteMessage(props.message)
-                setBeingHelped(false)
+            <div style={{width:"220px", margin: "40px"}}>
+                Chat with {props.message.username}<Icon name="window close" style={{ float: "right" }} onClick={() => {
+                return props.completedHelp(props.message)
             }
             } />
                 <br></br>
+                <div style={{width: "230px"}}>
                 <Chat help roomId={`Help-${props.message.username}-${new Date().getDate()}`} />
-
-            </>
-            :
-            <UserNeeds>
-                <OpenHelp onClick={() => setBeingHelped(true)}>Help</OpenHelp>
-                {props.message.body}
-            </UserNeeds>
+                </div>
+            </div>
     )
 }
 

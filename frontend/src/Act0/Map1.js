@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
 import { useInfo } from '../actions/channelInfo'
-import UserList from '../Chat/UserList'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
 import TimeKeeper from '../Session/TimeKeeper'
 function Welcome(props) {
@@ -81,13 +80,29 @@ function Welcome(props) {
     ]
   }
   let roomId = "Act0"
-  console.log(props)
+  
   let { userList, userCount } = useInfo(roomId, `control-${props.username}`)
 
-  if (userList.TrackA)
-    if (userList.TrackA.length > 5) {
+  let maxWithSlop = (Math.ceil(userCount/5)+ 1 )
+  if (userList.TrackA && userList.TrackA.length >= maxWithSlop){
+    console.log("HERE")
       map.areas = map.areas.filter(area => area.name !== "1")
     }
+  if (userList.TrackB && userList.TrackB.length >= maxWithSlop) {
+      map.areas = map.areas.filter(area => area.name !== "2")
+    }
+  if (userList.TrackC && userList.TrackC.length >= maxWithSlop){
+      map.areas = map.areas.filter(area => area.name !== "3")
+    }
+
+    if ( userList.TrackD && userList.TrackD.length >= maxWithSlop) {
+      map.areas = map.areas.filter(area => area.name !== "5")
+    }
+  if (userList.trackE  && userList.TrackE.length >= maxWithSlop) {
+      map.areas = map.areas.filter(area => area.name !== "6")
+    }
+
+
   useEffect(() => {
     function handleResize() {
       setWidth(window.innerWidth )

@@ -1,14 +1,13 @@
 import React, { useEffect} from 'react';
 import {ChannelContainer} from '../Styles/Styles'
 import { connect } from 'react-redux'
-import { useHelp } from '../actions/helpFunctions'
 import { useInfo } from '../actions/channelInfo'
 import UserList from '../Chat/UserList'
 import ShowController from '../Navbar/ShowController'
+import AdminLiveStream from './AdminLiveStream';
 function SMDesk(props) {
 
     const { userList, userCount} = useInfo("admin", props.username)
-    
 
     useEffect(() =>{
         renderChannels()
@@ -27,6 +26,9 @@ function SMDesk(props) {
     return (
         <>
             <ShowController/>
+            <div style={{width: "300px", height:"200px"}}>
+            <AdminLiveStream videoId="" />
+            </div>
         <div>
               
            

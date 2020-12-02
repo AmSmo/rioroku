@@ -40,7 +40,10 @@ const useChat = (roomId, username) => {
             body: messageBody,
             senderId: socketRef.current.id,
         });
-        
+        return {
+            body: messageBody,
+            senderId: socketRef.current.id,
+        }
         
     };
    

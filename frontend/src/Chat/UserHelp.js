@@ -17,14 +17,10 @@ function UserHelp(props){
 
 
     useEffect(()=>{
-        console.log(newMessage)
         handleSendMessage()
-    },[])
+    },[props.time])
     return(
-       
-        //  myHelp ? 
-            <div className={myHelp ? "slide-in-blurred-bottom" : "flip-out-hor-top"}>
-            <HelpArea>
+        <HelpArea className={myHelp ? "slide-in-blurred-bottom" : null} style={{ display: myHelp ?  "block" : "none"}}>
                 <Icon name="window close" style={{ float: "right" }} onClick={() => {
                     setMyHelp(false)
                     props.changeNeed()
@@ -32,24 +28,6 @@ function UserHelp(props){
                 <Chat roomId={`Help-${props.username}-${new Date().getDate()}`} userHelp />
                 <br></br>
             </HelpArea>
-            </div>
-        //         :
-        //     <HelpArea className={!myHelp ? "tilt-in-bottom-2" : "flip-out-hor-top"}>
-        //         <Icon name="window close" style={{ float: "right" }} onClick={() => {
-        //             setMyHelp(false)
-        //             props.changeNeed()
-                    
-        //         }}/>
-        //     <p>Please Describe Your Problem</p>
-        //     <textarea
-        //         value={newMessage}
-        //         onChange={(e)=> setNewMessage(e.target.value)}
-        //         placeholder="Your Message..."
-        //     /><br></br>
-        //     <SendMessageButton onClick={handleSendMessage}>Send Message</SendMessageButton>
-        // </HelpArea>
-        
-        
     )   
 
     }
