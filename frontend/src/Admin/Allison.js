@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ChannelContainer, UserNeeds, OpenHelp, InteriorQueue } from '../Styles/Styles'
+import { UserNeeds, OpenHelp, InteriorQueue, BlueBackground } from '../Styles/Styles'
 import { connect } from 'react-redux'
 import { useHelp } from '../actions/helpFunctions'
 import { useInfo } from '../actions/channelInfo'
@@ -69,32 +69,37 @@ function Allison(props) {
     }
 
     return (
-        <>
+        <BlueBackground>
+        <div className="grid-container">
+        <div className="item1">
             <AllisonNavBar />
-            <div style={{display:"flexbox", flexWrap: "wrap", height: "100%"}}>
+        </div>
+            <div className="item2">
                 
-                <InteriorQueue style={{ width: "200px", height: "100vh", display:"inline-flex", position: "fixed", borderRight: "1px solid black"}}>
+                
                         <h2 style={{width: "100%", textAlign: "center", borderBottom: "0.5px solid grey"}}>Help Queue</h2>
                             {displayMessages()}
-                        </InteriorQueue>
-                    <div style={{display: "flexbox", justifyContent:"flex-end", position: "relative", maxWidth: "800px",flexWrap: "wrap-reverse", float:"right", height:"70%", overflowY:"scroll"}}>
+                
+                    </div>
+                    <div className="item3">
                         {openChat()}
                     </div>
-            </div>
+                <div className="item4">
                 
-                <ChannelContainer>
-                    <div style={{ marginRight: "10px" }}>
+                    <div>
                         <h2>Active Rooms</h2>
                         <p>
                             Total Users: {userCount}
                         </p>
                     </div>
-
                     {renderChannels()}
-                </ChannelContainer>
-            
+                    
 
-        </>
+                
+            </div>
+
+        </div>
+        </BlueBackground>
     )
 
 }

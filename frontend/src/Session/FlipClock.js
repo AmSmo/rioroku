@@ -185,6 +185,8 @@ function FlipClock(props){
 }
 
 const NextShow = styled.div`
+    margin:auto;
+    text-align:center;
     font-size:32px;
     color: orange;
     font-weight: 600;

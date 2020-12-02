@@ -22,10 +22,7 @@ function UserList(props) {
         })
     }
     return (
-        <UserListContainer style={
-            !props.control?     {position: "fixed",
-            left: "0",
-            top: "28px"}: null}>
+        <UserListContainer >
             <h3>{props.roomId}</h3>
             {props.users ?
             renderUsers(filteredUsers)

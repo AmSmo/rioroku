@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal } from 'semantic-ui-react'
+import { Modal, Icon } from 'semantic-ui-react'
 import YouTube from 'react-youtube'
 
 function ModalVideo(props) {

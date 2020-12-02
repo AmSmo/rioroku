@@ -4,12 +4,12 @@ export const UserListContainer = styled.ul`
     list-style-type: none;
     padding-left: 0px;
     background: rgba(235, 230, 230, 0.9);
-    height: 200px;
+    max-height: 170px;
+    min-height: 100px;
     overflow-y: scroll;
-    width: 200px;
+    width: 170px;
     margin-left: 20px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-radius: 15px;
     box-shadow: 3px 3px 20px black;
 `
 
@@ -117,14 +117,15 @@ export const ChatMessageContainer = styled.div`
 
 `
 export const CenterMap = styled.div`
-
-
+    width:100vw;
+    text-align: center;
   
 `
 
 export const BlueBackground = styled.div`
   background: #4287f5;
   height: 100vh;
+  width:100vw;
 `
 
 

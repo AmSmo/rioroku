@@ -3,6 +3,7 @@ import * as APIUtil from '../util/session_api_util'
 import UserInfo from './UserInfo'
 import { connect } from 'react-redux';
 import { login, nextEvent } from '../actions/session_actions';
+import {CenterMap} from '../Styles/Styles'
 import styled from 'styled-components'
 import { Dimmer, Loader, Segment } from 'semantic-ui-react'
 import {FlipClock} from './FlipClock'
@@ -69,8 +70,9 @@ function Login(props) {
 
     return (
         <Background>
-            
+            <CenterMap>
             <img alt="Rio Records Logo" src='https://images.squarespace-cdn.com/content/v1/5f5babb127bb8735b1ce9ff4/1600834661082-OH0426281Z7QIKY1UR0I/ke17ZwdGBToddI8pDm48kAeNX5A_q12pJ8eKMLVAD7MUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYwL8IeDg6_3B-BRuF4nNrNcQkVuAT7tdErd0wQFEGFSnKbS1XvxpUT8-e_Xpf2ysg0RoPUcD1NnvYm2_Hxgrz_LeDzQPo0UR-MzglQPIBDezw/Rio+Records+2.png' style={{margin: "30px 0", filter: 'invert(.7)', height:"80px" }} />
+            </CenterMap>
             { props.eventInfo ?
                 
                 <FlipClock next={props.eventInfo} showing={showing}/>
