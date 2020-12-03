@@ -3,7 +3,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import {useChat} from '../actions/socketFunctions'
 import {useInfo} from '../actions/channelInfo'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {SendMessageButton, ChatMessageContainer, Vertical} from '../Styles/Styles'
 import {usePrevious} from '../Session/MessageHistory'
 function Chat(props){

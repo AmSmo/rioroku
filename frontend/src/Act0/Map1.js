@@ -7,13 +7,8 @@ import { CenterMap, BlueBackground } from '../Styles/Styles'
 import TimeKeeper from '../Session/TimeKeeper'
 function Welcome(props) {
   const [open, setOpen] = useState(false)
-  const [contents, setContents] = useState(null)
   const [width, setWidth] = useState(window.innerWidth)
-  const [height, setHeight] = useState(window.innerHeight)
 
-  const modalClose = () => {
-    setOpen(false)
-  }
   const generateModal = (e) => {
     switch (e.name) {
       case "1":
@@ -106,7 +101,7 @@ function Welcome(props) {
   useEffect(() => {
     function handleResize() {
       setWidth(window.innerWidth )
-      setHeight(window.innerHeight)
+
     }
     window.addEventListener("resize", handleResize);
     handleResize();
@@ -135,7 +130,6 @@ function Welcome(props) {
 
         basic
       >
-        {contents}
       </Modal>
 
     </BlueBackground>

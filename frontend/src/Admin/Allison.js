@@ -9,9 +9,8 @@ import AllisonNavBar from '../Navbar/AllisonNavBar'
 function Allison(props) {
     let [helping, setHelping] = useState([])
 
-    const { messages, sendMessage, deleteMessage } = useHelp()
+    const { messages, deleteMessage } = useHelp()
     const { userList, userCount } = useInfo("admin", "Allison")
-    let [toBeHelped, setToBeHelped] = useState([])
 
     useEffect(() => {
         renderChannels()
@@ -34,7 +33,7 @@ function Allison(props) {
             if (channel.startsWith("Help-") && userList[channel].length <= 2) {
                 
             waiting.push(...userList[channel].filter(user=> {
-                return (!user.startsWith("control-") )}))
+                    return (!user.startsWith("control-") )}))
             
         } })
         let bob = []

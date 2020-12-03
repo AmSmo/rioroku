@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {useTimer} from '../actions/timerInfo'
 import { currentClock } from '../actions/index'
-import {Menu} from 'semantic-ui-react'
+
 import { logout } from '../actions/session_actions'
 import {withRouter} from 'react-router-dom'
-import { Modal } from 'semantic-ui-react'
+
 
 
 function TimeKeeper (props){
@@ -45,9 +45,9 @@ function TimeKeeper (props){
     useEffect(()=>{
         getTimer()
     }, [])
-    let updatedTime = new Date(localTime === -1? 0: localTime * 1000).toISOString().substr(11, 8);
 
-    if(localTime === 0 && props.match.path != "/"){
+
+    if(localTime === 0 && props.match.path !== "/"){
         props.history.push("/")
     }
     if(localTime > 40 && localTime < 50 && props.match.path === "/TrackA"){
@@ -57,26 +57,6 @@ function TimeKeeper (props){
 
     return (
         <></>
-        // <Menu style={{ marginBottom: "0px" }}>
-
-
-        //     <Menu.Item className="fade-in" >{updatedTime}</Menu.Item>
-
-        //     {props.api.isAuthenticated ?
-        //         <Menu.Item
-        //             side="right"
-        //             onClick={(e) => {
-        //                 e.preventDefault()
-        //                 props.logout()
-        //             }}
-
-        //         >
-        //             Log Out
-        //         </Menu.Item>
-        //         :
-        //         null}
-
-        //   </Menu>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux'
 import {useHelp} from'../actions/helpFunctions'
-import {HelpArea, SendMessageButton} from '../Styles/Styles'
+import {HelpArea} from '../Styles/Styles'
 import Chat from './Chat'
 import {Icon} from 'semantic-ui-react'
 

@@ -9,14 +9,19 @@ import ModalLivestream from '../modals/ModalLivestream'
 import { BlueBackground, CenterMap } from '../Styles/Styles'
 import TimeKeeper from '../Session/TimeKeeper'
 import { useInfo } from '../actions/channelInfo'
+
 function TrackE1(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
   const [width, setWidth] = useState(window.innerWidth * 0.5)
   const modalClose = () => {
     setOpen(false)
+    unmuteAudio()
   }
+
+ 
   const generateModal = (e) => {
+    muteAudio()
     switch (e.name) {
       case "1":
         setOpen(true)
@@ -83,19 +88,68 @@ function TrackE1(props) {
       }
     ]
   }
+
+  let audioEl = document.getElementsByClassName("audio-element")[0]
+
+  
+  const delay = 75
+  const muteAudio = () =>{
+    let volume = audioEl.volume
+    let turn = setInterval(function() {
+      if (volume > 0.01) {
+        volume -= 0.05;
+        audioEl.volume = volume;
+      }else {
+        clearInterval(turn);
+      }}, delay)
+  }
+  const fadeUp = () => {
+    let volume = 0.15
+    let turn = setInterval(
+    function() {
+      if (volume < 0.9) {
+        volume += 0.05;
+        
+        audioEl.volume = volume;
+      }
+      else {
+        clearInterval(turn);
+      }
+    }, delay);
+}
+
+  
+
+  
+  
+  const unmuteAudio = () =>{
+    fadeUp()
+  }
+
+  const playAudio = () => {
+    let audioEl = document.getElementsByClassName("audio-element")[0]
+    setTimeout(()=>{
+      audioEl.play()
+      audioEl.muted=false},100)
+  }
+  
   useEffect(() => {
+    
     function handleResize() {
       setWidth(window.innerWidth * .5)
 
     }
+    
     window.addEventListener("resize", handleResize);
     handleResize();
+    playAudio()
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
 
   return (
     <BlueBackground>
+      
       <TimeKeeper />
       <CenterMap>
         <ImageMapper
@@ -107,14 +161,24 @@ function TrackE1(props) {
         />
       </CenterMap>
       <Modal
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
+        onClose={() => {
+          unmuteAudio()
+          setOpen(false)}}
+        onOpen={() => {
+          muteAudio()
+          setOpen(true)}}
         open={open}
 
         basic
       >
+        
+  
         {contents}
       </Modal>
+      <audio muted="muted" className="audio-element">
+        <source src="https://dl.dropboxusercontent.com/s/anm4e1835utfocg/Personal_Jesus.mp3?dl=0"></source>
+        
+      </audio>
     </BlueBackground>
   )
 }

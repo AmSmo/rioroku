@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Chat from '../Chat/Chat'
-import { InteriorQueue, OpenHelp, UserNeeds } from '../Styles/Styles'
+
 import { Icon } from 'semantic-ui-react'
 function HelpItem(props) {
     

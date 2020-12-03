@@ -13,7 +13,6 @@ function ShowController(props) {
     const [disable, setDisable] = useState(true)
     const [showMinutes, setShowMinutes] = useState(0)
     const [showSeconds, setShowSeconds] = useState(0)
-    let [truth, setTruth] = useState(false)
     const { setTimer, startTimer, resetTimer, pauseTimer, browserTimer, getTimer } = useTimer()
     let updatedTime = new Date(localTime * 1000).toISOString().substr(11, 8);
     
