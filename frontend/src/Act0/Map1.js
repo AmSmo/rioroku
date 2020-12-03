@@ -5,26 +5,32 @@ import { Modal } from 'semantic-ui-react'
 import { useInfo } from '../actions/channelInfo'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
 import TimeKeeper from '../Session/TimeKeeper'
+import {chooseTrack } from '../actions/session_actions'
 function Welcome(props) {
   const [open, setOpen] = useState(false)
   const [width, setWidth] = useState(window.innerWidth)
-
+  const {username} = props.api.user
   const generateModal = (e) => {
     switch (e.name) {
       case "1":
-        props.history.push("/TrackA");
+        props.chooseTrack("A")
+        props.history.push("/");
         break;
       case "2":
-        props.history.push("/TrackB");
+        props.chooseTrack("B")
+        props.history.push("/");
         break;
       case "3":
-        props.history.push("/TrackC");
+        props.chooseTrack("C")
+        props.history.push("/");
         break;
       case "4":
-        props.history.push("/TrackD");
+        props.chooseTrack("D")
+        props.history.push("/");
         break;
       case "5":
-        props.history.push("/TrackE");
+        props.chooseTrack("E")
+        props.history.push("/");
         break;
       default:
         break;
@@ -76,7 +82,7 @@ function Welcome(props) {
   }
   let roomId = "Act0"
   
-  let { userList, userCount } = useInfo(roomId, `control-${props.username}`)
+  let { userList, userCount } = useInfo(roomId, `control-${username}`)
 
   let maxWithSlop = (Math.ceil(userCount/5)+ 1 )
   if (userList.TrackA && userList.TrackA.length >= maxWithSlop){
@@ -138,12 +144,12 @@ function Welcome(props) {
 }
 
 const mapStateToProps = state => {
-  if (state.api.user) {
-    state.username = state.api.user.username
-  }else {
-    state.username = localStorage.getItem("username")
-  }
   return state
 }
+const mapDispatchToProps = dispatch =>{
+  return {
+    chooseTrack: track => dispatch(chooseTrack(track))
+  }
+}
 
-export default connect(mapStateToProps)(Welcome)
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome)

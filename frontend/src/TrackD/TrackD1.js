@@ -11,7 +11,7 @@ function TrackD1(props) {
     const [open, setOpen] = useState(false)
     const [contents, setContents] = useState(null)
     const [width, setWidth] = useState(window.innerWidth * 0.5)
-
+    const { username } = props.api.user
     const modalClose = () => {
         setOpen(false)
     }
@@ -71,7 +71,7 @@ function TrackD1(props) {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const { userList, userCount } = useInfo("TrackD", `control-${props.username}`)
+    const { userList, userCount } = useInfo("TrackD", `control-${username}`)
     return (
         <BlueBackground>
             <TimeKeeper />
@@ -100,11 +100,6 @@ function TrackD1(props) {
 
 
 const mapStateToProps = state => {
-    if (state.api.user) {
-        state.username = state.api.user.username
-    } else {
-        state.username = localStorage.getItem("username")
-    }
     return state
 }
 

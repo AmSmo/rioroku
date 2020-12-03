@@ -7,6 +7,8 @@ export const RECEIVE_USER_LOGOUT = "RECEIVE_USER_LOGOUT";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
 export const UPDATE_NEXT_EVENT = "UPDATE_NEXT_EVENT";
 export const SET_ADMIN_STATUS = "SET_ADMIN_STATUS"
+export const CHOOSE_TRACK = "CHOOSE_TRACK"
+
 export const logoutUser = () => ({
     type: RECEIVE_USER_LOGOUT
 });
@@ -15,10 +17,24 @@ export const admin = (admin, username) => ({
     type: SET_ADMIN_STATUS,
     payload: {admin, username}
 })
+
+export const chosenTrack = (track) => (
+    {
+        type: CHOOSE_TRACK,
+            payload: track
+    }
+)
+
+export const chooseTrack = (track )=> dispatch => {
+    localStorage.setItem("track", track)
+    dispatch(chosenTrack(track))
+}
+
 export const logout = () => dispatch => {
     
     localStorage.removeItem('jwtToken')
-    localStorage.removeItem('username')
+    localStorage.removeItem('jwtToken')
+    localStorage.removeItem('track')
     APIUtil.setAuthToken(false)
     dispatch(logoutUser())
 };

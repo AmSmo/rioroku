@@ -12,19 +12,23 @@ function App(props) {
   if (props.user) {
     admin = props.user.admin
   }
-
+  
   return (
 
 
     isAuthenticated ?
       <>
         {admin ?
-          <AdminRoutes />
-          :
-          <>
+        <>
+        
+        <AdminRoutes />
+        </>
+        :
+        <>
+        
+          
             <AudienceTestRoutes />
-            
-          </>
+        </>
         }
 
 

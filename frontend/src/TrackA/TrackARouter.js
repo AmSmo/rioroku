@@ -9,7 +9,7 @@ function TrackARouter() {
   return (
       
       <Switch>
-          <Route path="/TrackA" component={TrackA1} />
+          <Route path="/" component={TrackA1} />
           <Route path="/TrackA2" component={TrackA2} />
       </Switch>
 

@@ -15,6 +15,7 @@ function TrackA1(props) {
   const [contents, setContents] = useState(null)
   const [width, setWidth] = useState(window.innerWidth)
   const [height, setHeight] = useState(window.innerHeight)
+  const { username } = props.api.user
   const modalClose = () => {
     setOpen(false)
   }
@@ -53,7 +54,7 @@ function TrackA1(props) {
         break;
     }
   }
-  const { userList, userCount } = useInfo("TrackA", `control-${props.username}`)
+  const { userList, userCount } = useInfo("TrackA", `control-${username}`)
   const map = {
     name: "map1",
     areas: [
@@ -150,12 +151,7 @@ function TrackA1(props) {
 }
 
 const mapStateToProps = state => {
-  if (state.api.user) {
-    return { username: state.api.user.username, loggedIn: state.api.isAuthenticated }
-  }
-  else {
-    return { username: localStorage.getItem("username"), loggedIn: true }
-  }
+  return state
 }
 
 export default connect(mapStateToProps)(TrackA1)

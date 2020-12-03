@@ -8,10 +8,11 @@ import {
 
 const initialState = {
     isAuthenticated: false,
-    user: {}
+    user: {},
+    
 };
 
-export default function (state = initialState, action) {
+export default function session(state = initialState, action) {
     switch (action.type) {
         case UPDATE_NEXT_EVENT:
             return {...state, eventInfo: action.eventInfo}

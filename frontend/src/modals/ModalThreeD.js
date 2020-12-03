@@ -6,7 +6,7 @@ function ModalThreeD(props) {
             <PannellumVideo
                 width="100%"
                 height="500px"
-                video={"./assets/3dtest.mp4"}
+                video={props.video}
                 pitch={10}
                 yaw={180}
                 hfov={110}
@@ -14,13 +14,6 @@ function ModalThreeD(props) {
                 showZoomCtrl={false}
              >  
 
-                <Pannellum.Hotspot
-                    // type="custom"
-                    // pitch={31}
-                    // yaw={150}
-                    // handleClick={(evt, name) => this.hanldeClick(name)}
-                    // name="hs1"
-                />
             </PannellumVideo>
       </>
         )

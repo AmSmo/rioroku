@@ -21,24 +21,35 @@ function AudienceTestRoutes(props) {
     const changeNeed = () => {
         setNeedHelp(!needHelp)
     }
+    const {track} = props.game.info
 
+    const where = () => {
+    switch (track){
+        case "A":
+            return TrackARouter
+        case "B":
+            return TrackBRouter
+        case "C":
+            return TrackCRouter
+        case "D":
+            return TrackDRouter
+        case "E":
+            return TrackERouter
+        case "":
+            return Start
+        default:
+            return Start
+    }}
 
-
-
+    console.log("logged", props)
     return (
         <>
-        <Switch>
-
+        
+              
             <Route path='/SMDesk' component={SMDesk} />
             <Route path='/Allison' component={Allison} />
-            <Route path="/TrackA2" component={TrackA2} />
-            <Route path="/TrackA" component={TrackARouter} />
-            <Route path="/TrackB" component={TrackBRouter} />
-            <Route path="/TrackC" component={TrackCRouter} />
-            <Route path="/TrackD" component={TrackDRouter} />
-            <Route path="/TrackE" component={TrackERouter} />
-            <Route path="/" component={Start} />
-        </Switch>
+            <Route path="/" component={where()} />
+        
         {
         needHelp ?
                     <BottomRight>
@@ -58,6 +69,6 @@ function AudienceTestRoutes(props) {
 
 }
 const mapStateToProps = state => {
-    return state.api
+    return state
 }
 export default connect(mapStateToProps)(AudienceTestRoutes);

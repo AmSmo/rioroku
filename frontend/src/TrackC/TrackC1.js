@@ -13,6 +13,7 @@ function Track_C_1(props) {
     const [open, setOpen] = useState(false)
     const [contents, setContents] = useState(null)
     const [width, setWidth] = useState(window.innerWidth * 0.5)
+    const { username } = props.api.user
     const modalClose = () => {
         setOpen(false)
     }
@@ -72,7 +73,7 @@ function Track_C_1(props) {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const { userList, userCount } = useInfo("TrackC", `control-${props.username}`)
+    const { userList, userCount } = useInfo("TrackC", `control-${username}`)
 
     return (
         <BlueBackground>
@@ -101,11 +102,6 @@ function Track_C_1(props) {
 }
 
 const mapStateToProps = state => {
-    if (state.api.user) {
-        state.username = state.api.user.username
-    } else {
-        state.username = localStorage.getItem("username")
-    }
     return state
 }
 

@@ -14,6 +14,7 @@ function TrackE1(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
   const [width, setWidth] = useState(window.innerWidth * 0.5)
+  const { username } = props.api.user
   const modalClose = () => {
     setOpen(false)
     unmuteAudio()
@@ -51,7 +52,7 @@ function TrackE1(props) {
         break;
     }
   }
-  const { userList, userCount } = useInfo("TrackE", `control-${props.username}`)
+  const { userList, userCount } = useInfo("TrackE", `control-${username}`)
   const map = {
     name: "map1",
     areas: [
@@ -92,7 +93,7 @@ function TrackE1(props) {
   let audioEl = document.getElementsByClassName("audio-element")[0]
 
   
-  const delay = 190
+  const delay = 170
   const muteAudio = () =>{
     let volume = 0.70
     let turn = setInterval(function() {
@@ -108,12 +109,12 @@ function TrackE1(props) {
     let volume = 0.20
     let turn = setInterval(
     function() {
-      if (volume < .95) {
+      if (volume < .80) {
         volume += 0.05;
-        
         audioEl.volume = volume;
       }
       else {
+        audioEl.volume = .85
         clearInterval(turn);
       }
     }, delay);
@@ -185,11 +186,6 @@ function TrackE1(props) {
 }
 
 const mapStateToProps = state => {
-  if (state.api.user) {
-    state.username = state.api.user.username
-  } else {
-    state.username = localStorage.getItem("username")
-  }
   return state
 }
 

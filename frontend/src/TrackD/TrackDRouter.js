@@ -7,7 +7,7 @@ function TrackDRouter() {
   return (
 
       <Switch>
-          <Route path="/TrackD" component={TrackD1} />
+          <Route path="/" component={TrackD1} />
       </Switch>
 
   );

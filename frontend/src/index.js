@@ -22,7 +22,7 @@ if (localStorage.jwtToken) {
     store.dispatch(admin(data.data.admin, data.data.username))
   })
   .catch(err => console.log(err))
-    const preloadedState = { api: { user: {username: localStorage.getItem("username") }, isAuthenticated: true } };
+    const preloadedState = { api: { user: {username: localStorage.getItem("username") }, isAuthenticated: true }, game: {info: {track: localStorage.getItem("track")}} };
     store = configureStore(preloadedState);
     const currentTime = Date.now() / 1000;
   if (decodedUser.exp < currentTime) {

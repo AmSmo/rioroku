@@ -7,7 +7,7 @@ function TrackCRouter() {
   return (
 
       <Switch>
-          <Route path="/TrackC" component={TrackC1} />
+          <Route path="/" component={TrackC1} />
       </Switch>
 
   );
