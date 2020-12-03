@@ -30,13 +30,12 @@ function App(props) {
 
       </>
       :
-      <>
+      
       <Switch>
         <Route path="/" component={Login} />
       </Switch>
 
-      <ModalThreeD/>
-        </>
+        
   )
 }
 const mapStateToProps = state => {

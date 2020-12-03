@@ -92,22 +92,23 @@ function TrackE1(props) {
   let audioEl = document.getElementsByClassName("audio-element")[0]
 
   
-  const delay = 75
+  const delay = 190
   const muteAudio = () =>{
-    let volume = audioEl.volume
+    let volume = 0.70
     let turn = setInterval(function() {
-      if (volume > 0.01) {
+      if (volume >= 0.05) {
         volume -= 0.05;
         audioEl.volume = volume;
       }else {
+        audioEl.volume = 0
         clearInterval(turn);
       }}, delay)
   }
   const fadeUp = () => {
-    let volume = 0.15
+    let volume = 0.20
     let turn = setInterval(
     function() {
-      if (volume < 0.9) {
+      if (volume < .95) {
         volume += 0.05;
         
         audioEl.volume = volume;
