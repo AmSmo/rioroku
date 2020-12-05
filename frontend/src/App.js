@@ -2,8 +2,8 @@ import { Route, Switch } from 'react-router-dom'
 import AdminRoutes from './Routes/AdminRoutes'
 import AudienceTestRoutes from './Routes/AudienceTestRoutes'
 import Login from './Session/Login'
+
 import { connect } from 'react-redux'
-import ModalThreeD from './modals/ModalThreeD'
 function App(props) {
   const { isAuthenticated } = props
   
@@ -37,6 +37,7 @@ function App(props) {
       
       <Switch>
         <Route path="/" component={Login} />
+        
       </Switch>
 
         

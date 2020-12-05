@@ -2,9 +2,6 @@ import { Route, Switch } from 'react-router-dom'
 import React, {useState} from 'react'
 import Allison from '../Admin/Allison'
 import Start from '../Act0/Map1'
-
-import TrackA2 from '../TrackA/TrackA2'
-
 import SMDesk from '../Admin/SMDesk'
 import TrackARouter from '../TrackA/TrackARouter'
 import TrackBRouter from '../TrackB/TrackBRouter'
@@ -15,14 +12,13 @@ import { connect } from 'react-redux'
 import UserHelp from '../Chat/UserHelp'
 import { HelpButton, BottomRight } from '../Styles/Styles'
 
-
 function AudienceTestRoutes(props) {
+    
     const [needHelp, setNeedHelp] = useState(false)
     const changeNeed = () => {
         setNeedHelp(!needHelp)
     }
     const {track} = props.game.info
-
     const where = () => {
     switch (track){
         case "A":
@@ -40,11 +36,9 @@ function AudienceTestRoutes(props) {
         default:
             return Start
     }}
-
-    console.log("logged", props)
+    
     return (
         <>
-        
               
             <Route path='/SMDesk' component={SMDesk} />
             <Route path='/Allison' component={Allison} />

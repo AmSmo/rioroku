@@ -46,15 +46,108 @@ function TimeKeeper (props){
         getTimer()
     }, [])
 
-
-    if(localTime === 0 && props.match.path !== "/"){
-        props.history.push("/")
+    if(props.track==="A"){
+        switch (true){
+            case localTime < 20:
+                props.changeAct(1);
+                break;
+            case localTime < 40:
+                props.changeAct(2)
+                break;
+            case localTime < 60:
+                props.changeAct(3)
+                break;
+            case localTime < 80:
+                props.changeAct(4)
+                break;
+            case localTime < 100:
+                props.changeAct(5)
+                break;
+            default:
+                break;
+        }
+            
+    } else if (props.track === "B") {
+        switch (true) {
+            case localTime < 20:
+                props.changeAct(1);
+                break;
+            case localTime < 40:
+                props.changeAct(2)
+                break;
+            case localTime < 60:
+                props.changeAct(3)
+                break;
+            case localTime < 80:
+                props.changeAct(4)
+                break;
+            case localTime < 100:
+                props.changeAct(5)
+                break;
+            default:
+                break;
+        } 
+    }else if (props.track === "C") {
+            switch (true) {
+                case localTime < 20:
+                    props.changeAct(1);
+                    break;
+                case localTime < 40:
+                    props.changeAct(2)
+                    break;
+                case localTime < 60:
+                    props.changeAct(3)
+                    break;
+                case localTime < 80:
+                    props.changeAct(4)
+                    break;
+                case localTime < 100:
+                    props.changeAct(5)
+                    break;
+                default:
+                    break;
+            }
+    } else if (props.track === "D") {
+        switch (true) {
+            case localTime < 20:
+                props.changeAct(1);
+                break;
+            case localTime < 40:
+                props.changeAct(2)
+                break;
+            case localTime < 60:
+                props.changeAct(3)
+                break;
+            case localTime < 80:
+                props.changeAct(4)
+                break;
+            case localTime < 100:
+                props.changeAct(5)
+                break;
+            default:
+                break;
+        }
+    } else if (props.track === "E") {
+        switch (true) {
+            case localTime < 20:
+                props.changeAct(1);
+                break;
+            case localTime < 40:
+                props.changeAct(2)
+                break;
+            case localTime < 60:
+                props.changeAct(3)
+                break;
+            case localTime < 80:
+                props.changeAct(4)
+                break;
+            case localTime < 100:
+                props.changeAct(5)
+                break;
+            default:
+                break;
+        }
     }
-    if(localTime > 40 && localTime < 50 && props.match.path === "/TrackA"){
-        props.history.push("/TrackA2")
-    }
-
-
     return (
         <></>
     )

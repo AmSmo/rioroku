@@ -2,12 +2,6 @@ import React, { useEffect} from 'react'
 import { Icon } from 'semantic-ui-react'
 import ReactPlayer from 'react-player'
 function ModalVideoLocal(props) {
-    // const playVideo = () => {
-    //   const videoEl = document.getElementsByClassName("video-element")[0]
-    //   videoEl.play()
-    // }
-
-    // useEffect(()=>{playVideo()}, [])
   return (
 <>
       <Icon name="window close" style={{ float: "right", margin: "-40px" }} onClick={() => props.setOpen()}/>
