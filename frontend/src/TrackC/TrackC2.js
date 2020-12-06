@@ -5,9 +5,8 @@ import { Modal } from 'semantic-ui-react'
 import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
-import TimeKeeper from '../Session/TimeKeeper'
 import { useInfo } from '../actions/channelInfo'
-function Track_C_1(props) {
+function TrackC2(props) {
     const [open, setOpen] = useState(false)
     const [contents, setContents] = useState(null)
     const [width, setWidth] = useState(window.innerWidth * 0.5)
@@ -18,14 +17,37 @@ function Track_C_1(props) {
     const generateModal = (e) => {
         switch (e.name) {
             case "1":
+                // RECORDED VIDEO
                 setOpen(true)
                 setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
                 break;
             case "2":
+                // RECORDED VIDEO
                 setOpen(true)
-                setContents(<ModalAudio basic size="small" setOpen={modalClose} />)
+                setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
                 break;
             case "3":
+                // RECORDED VIDEO
+                setOpen(true)
+                setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
+                break;
+            case "4":
+                // RECORDED VIDEO
+                setOpen(true)
+                setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+                break;
+            case "5":
+                // RECORDED VIDEO
+                setOpen(true)
+                setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+                break;
+            case "6":
+                // RECORDED VIDEO
+                setOpen(true)
+                setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
+                break;
+            case "7":
+                // RECORDED VIDEO
                 setOpen(true)
                 setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
                 break;
@@ -58,6 +80,38 @@ function Track_C_1(props) {
                 preFillColor: "none",
                 fillColor: "red"
 
+            },
+            {
+                name: "4",
+                shape: "rect",
+                coords: [648, 531, 526, 406],
+                preFillColor: "none",
+                fillColor: "blue"
+            },
+
+            {
+                name: "5",
+                shape: "rect",
+                coords: [77, 265, 260, 439],
+                preFillColor: "none",
+                fillColor: "red"
+
+            },
+            {
+                name: "6",
+                shape: "rect",
+                coords: [648, 531, 526, 406],
+                preFillColor: "none",
+                fillColor: "blue"
+            },
+
+            {
+                name: "7",
+                shape: "rect",
+                coords: [77, 265, 260, 439],
+                preFillColor: "none",
+                fillColor: "red"
+
             }
         ]
     }
@@ -71,11 +125,10 @@ function Track_C_1(props) {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const { userList, userCount } = useInfo("TrackC", `control-${username}`)
+    const { userList, userCount } = useInfo("C-Act2", `control-${username}`)
 
     return (
         <BlueBackground>
-            <TimeKeeper />
             <CenterMap>
                 <ImageMapper
                     src={'https://dl.dropboxusercontent.com/s/3jncw5ztorvep3n/clue%20board.jpg?dl=0'}
@@ -103,4 +156,4 @@ const mapStateToProps = state => {
     return state
 }
 
-export default connect(mapStateToProps)(Track_C_1)
+export default connect(mapStateToProps)(TrackC2)

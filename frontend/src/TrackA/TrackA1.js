@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
-import ModalImage from '../modals/ModalImage'
-
 import ModalVideoLocal from '../modals/ModalVideoLocal'
-import ModalAudio from '../modals/ModalAudio'
 import { useInfo } from '../actions/channelInfo'
 import { BlueBackground } from '../Styles/Styles'
-import TimeKeeper from '../Session/TimeKeeper'
+
 
 function TrackA1(props) {
   const [open, setOpen] = useState(false)
@@ -22,34 +19,40 @@ function TrackA1(props) {
   const generateModal = (e) => {
     switch (e.name) {
       case "1":
+        // RECORDED VIDEO
         setOpen(true)
-        setContents(<ModalImage basic size="small" imageId={'https://losangeles.cbslocal.com/wp-content/uploads/sites/14984641/2016/07/shutterstock_234541271.jpg?w=1000&h=576&crop=1'} setOpen={modalClose} />)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://vimeo.com/115189988'} setOpen={modalClose} />)
         break;
       case "2":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" videoId={'https://vimeo.com/115189988'} setOpen={modalClose} />)
         break;
       case "3":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/jkV8SeNW_Nc'} setOpen={modalClose} />)
         break;
       case "4":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" videoId={'https://storage.googleapis.com/rio_reveal/LAyeas.mov'} setOpen={modalClose} />)
         break;
       case "5":
+        // RECORDED VIDEO
         setOpen(true)
-        setContents(<ModalAudio basic size="small" audioId={'https://dl.dropboxusercontent.com/s/anm4e1835utfocg/Personal_Jesus.mp3?dl=0'} setOpen={modalClose} />)
+        setContents(<ModalVideoLocal basic size="small" videoId={'https://vimeo.com/115189988'} setOpen={modalClose} />)
         break;
       case "6":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/7EpSBDPlZn4'} setOpen={modalClose} />)
         break;
       case "7":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" videoId={'https://youtu.be/qMxWAPvYrj4'} setOpen={modalClose} />)
         break;
-
       default:
         break;
     }
@@ -125,18 +128,18 @@ function TrackA1(props) {
   return (
 
     <BlueBackground className="fade-in">
-      <TimeKeeper />
-      {/* <CenterMap> */}
+      
+      
       <ImageMapper
         src={'https://dl.dropboxusercontent.com/s/qfkllxfra8lpwoa/map_A_1_16x9.png?dl=0'}
-        //src={'https://dl.dropboxusercontent.com/s/pk2wv82qhw2zlu7/map_A_2.png?dl=0'}
+        
         imgWidth={1280}
         width={width}
         onClick={e => generateModal(e)}
         map={map}
 
       />
-      {/* </CenterMap> */}
+      
       <Modal
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}

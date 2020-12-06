@@ -5,39 +5,29 @@ import { Modal } from 'semantic-ui-react'
 import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
-import TimeKeeper from '../Session/TimeKeeper'
-import { useInfo } from '../actions/channelInfo'
-function TrackB1(props) {
+import Chat from '../Chat/Chat.js'
+
+function TrackB4(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
   const [width, setWidth] = useState(window.innerWidth * 0.5)
-  const { username } = props.api.user
   const modalClose = () => {
     setOpen(false)
   }
   const generateModal = (e) => {
     switch (e.name) {
       case "1":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
         break;
       case "2":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
         break;
       case "3":
-        setOpen(true)
-        setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
-        break;
-      case "4":
-        setOpen(true)
-        setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
-        break;
-      case "5":
-        setOpen(true)
-        setContents(<ModalAudio basic size="small" setOpen={modalClose} />)
-        break;
-      case "6":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
         break;
@@ -45,7 +35,6 @@ function TrackB1(props) {
         break;
     }
   }
-  const { userList, userCount } = useInfo("TrackB", `control-${username}`)
   const map = {
     name: "map1",
     areas: [
@@ -89,7 +78,6 @@ function TrackB1(props) {
   return (
 
     <BlueBackground>
-      <TimeKeeper />
       <CenterMap>
         <ImageMapper
           src={'https://dl.dropboxusercontent.com/s/3jncw5ztorvep3n/clue%20board.jpg?dl=0'}
@@ -109,6 +97,7 @@ function TrackB1(props) {
       >
         {contents}
       </Modal>
+      <Chat roomId={"B-Act4"} />
     </BlueBackground>
   )
 }
@@ -118,4 +107,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps)(TrackB1)
+export default connect(mapStateToProps)(TrackB4)

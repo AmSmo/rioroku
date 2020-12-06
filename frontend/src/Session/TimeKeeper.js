@@ -60,9 +60,6 @@ function TimeKeeper (props){
             case localTime < 80:
                 props.changeAct(4)
                 break;
-            case localTime < 100:
-                props.changeAct(5)
-                break;
             default:
                 break;
         }
@@ -80,9 +77,6 @@ function TimeKeeper (props){
                 break;
             case localTime < 80:
                 props.changeAct(4)
-                break;
-            case localTime < 100:
-                props.changeAct(5)
                 break;
             default:
                 break;
@@ -121,9 +115,6 @@ function TimeKeeper (props){
             case localTime < 80:
                 props.changeAct(4)
                 break;
-            case localTime < 100:
-                props.changeAct(5)
-                break;
             default:
                 break;
         }
@@ -140,9 +131,6 @@ function TimeKeeper (props){
                 break;
             case localTime < 80:
                 props.changeAct(4)
-                break;
-            case localTime < 100:
-                props.changeAct(5)
                 break;
             default:
                 break;

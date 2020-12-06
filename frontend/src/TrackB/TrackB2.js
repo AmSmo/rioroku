@@ -5,9 +5,9 @@ import { Modal } from 'semantic-ui-react'
 import ModalVideoLocal from '../modals/ModalVideoLocal'
 import ModalAudio from '../modals/ModalAudio'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
-import TimeKeeper from '../Session/TimeKeeper'
 import { useInfo } from '../actions/channelInfo'
-function TrackB1(props) {
+
+function TrackB2(props) {
   const [open, setOpen] = useState(false)
   const [contents, setContents] = useState(null)
   const [width, setWidth] = useState(window.innerWidth * 0.5)
@@ -18,26 +18,82 @@ function TrackB1(props) {
   const generateModal = (e) => {
     switch (e.name) {
       case "1":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
         break;
       case "2":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
         break;
       case "3":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
         break;
       case "4":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
         break;
       case "5":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalAudio basic size="small" setOpen={modalClose} />)
         break;
       case "6":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
+        break;
+      case "7":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+        break;
+      case "8":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+        break;
+      case "9":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+        break;
+      case "10":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+        break;
+      case "11":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+        break;
+      case "12":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
+        break;
+      case "13":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+        break;
+      case "14":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" setOpen={modalClose} />)
+        break;
+      case "15":
+        // RECORDED VIDEO
+        setOpen(true)
+        setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
+        break;
+      case "16":
+        // RECORDED VIDEO
         setOpen(true)
         setContents(<ModalVideoLocal basic size="small" videoId={'7EpSBDPlZn4'} setOpen={modalClose} />)
         break;
@@ -45,7 +101,7 @@ function TrackB1(props) {
         break;
     }
   }
-  const { userList, userCount } = useInfo("TrackB", `control-${username}`)
+  const { userList, userCount } = useInfo("B-Act2", `control-${username}`)
   const map = {
     name: "map1",
     areas: [
@@ -63,9 +119,105 @@ function TrackB1(props) {
         preFillColor: "none",
         fillColor: "none"
       },
-
       {
         name: "3",
+        shape: "rect",
+        coords: [77, 265, 260, 439],
+        preFillColor: "none",
+        fillColor: "red"
+
+      },
+      {
+        name: "4",
+        shape: "rect",
+        coords: [398, 54, 602, 285],
+        preFillColor: "none",
+        fillColor: "none"
+      },
+      {
+        name: "5",
+        shape: "rect",
+        coords: [77, 265, 260, 439],
+        preFillColor: "none",
+        fillColor: "red"
+
+      },
+      {
+        name: "6",
+        shape: "rect",
+        coords: [398, 54, 602, 285],
+        preFillColor: "none",
+        fillColor: "none"
+      },
+      {
+        name: "7",
+        shape: "rect",
+        coords: [77, 265, 260, 439],
+        preFillColor: "none",
+        fillColor: "red"
+
+      },
+      {
+        name: "8",
+        shape: "rect",
+        coords: [398, 54, 602, 285],
+        preFillColor: "none",
+        fillColor: "none"
+      },
+      {
+        name: "9",
+        shape: "rect",
+        coords: [77, 265, 260, 439],
+        preFillColor: "none",
+        fillColor: "red"
+
+      },
+      {
+        name: "10",
+        shape: "rect",
+        coords: [398, 54, 602, 285],
+        preFillColor: "none",
+        fillColor: "none"
+      },
+      {
+        name: "11",
+        shape: "rect",
+        coords: [77, 265, 260, 439],
+        preFillColor: "none",
+        fillColor: "red"
+
+      },
+      {
+        name: "12",
+        shape: "rect",
+        coords: [398, 54, 602, 285],
+        preFillColor: "none",
+        fillColor: "none"
+      },
+      {
+        name: "13",
+        shape: "rect",
+        coords: [77, 265, 260, 439],
+        preFillColor: "none",
+        fillColor: "red"
+
+      },
+      {
+        name: "14",
+        shape: "rect",
+        coords: [398, 54, 602, 285],
+        preFillColor: "none",
+        fillColor: "none"
+      },
+      {
+        name: "15",
+        shape: "rect",
+        coords: [77, 265, 260, 439],
+        preFillColor: "none",
+        fillColor: "red"
+      },
+      {
+        name: "16",
         shape: "rect",
         coords: [77, 265, 260, 439],
         preFillColor: "none",
@@ -89,7 +241,7 @@ function TrackB1(props) {
   return (
 
     <BlueBackground>
-      <TimeKeeper />
+      
       <CenterMap>
         <ImageMapper
           src={'https://dl.dropboxusercontent.com/s/3jncw5ztorvep3n/clue%20board.jpg?dl=0'}
@@ -118,4 +270,4 @@ const mapStateToProps = state => {
   return state
 }
 
-export default connect(mapStateToProps)(TrackB1)
+export default connect(mapStateToProps)(TrackB2)
