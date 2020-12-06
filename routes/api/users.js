@@ -20,9 +20,17 @@ router.post('/current', passport.authenticate('jwt', { session: false }), (req, 
         admin: req.user.admin
     });
 })
+
+router.post('/updateUserTrack', passport.authenticate('jwt', { session: false }), (req, res) => {
+    let user = req.user
+    let { track } = req.body
+    user.updateOne({ track })
+        .then(resp => console.log(resp))
+})
+
 router.post('/register', (req, res) => {
 
-    const {ticketId, eventId} = req.body
+    const { ticketId, eventId, doorsOpen } = req.body
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
         return res.status(400).json(errors);
@@ -49,7 +57,7 @@ router.post('/register', (req, res) => {
                 sdk.request(`/events/${eventId}/attendees/`)
                 .then(resp => {
                     let organizedResponse = apiFunctions.getUsers(resp)
-                    if (organizedResponse[req.body.ticketId]) {
+                    if (organizedResponse[req.body.ticketId] && doorsOpen) {
                         const newUser = new User({
                             ticketId: req.body.ticketId,
                         })
@@ -68,8 +76,9 @@ router.post('/register', (req, res) => {
                                 })
                             })
                             .catch(err => res.json({ error: (err) }));
-                    }
-                    else {
+                    } else if (organizedResponse[req.body.ticketId]) {
+                        res.json({ error: `Welcome! The “doors” open at 15 minutes prior to the show. We’ll see you back then...` })
+                    } else {
                         res.json({ error: "The number you have entered is not valid for this performance, please check that it is entered correctly." })
                     }
                 }

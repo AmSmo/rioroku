@@ -29,7 +29,7 @@ function Login(props) {
 
     }
     const signup = ticketId => {
-        APIUtil.signup({ticketId, eventId: props.eventInfo[0].id}).then((e) => {
+        APIUtil.signup({ ticketId, eventId: props.eventInfo[0].id, doorsOpen}).then((e) => {
             if (e.data.error) {
                 setErrors({ errors: e.data.error })
 
@@ -85,7 +85,7 @@ function Login(props) {
                 </Segment>
 }           
 
-            {doorsOpen ?
+            
             <>
             {ticketFound ?
             <div style={record}>
@@ -117,9 +117,6 @@ function Login(props) {
                 </form>
             }
             </>
-            :
-            null
-            }
         </Background>
     );
 }

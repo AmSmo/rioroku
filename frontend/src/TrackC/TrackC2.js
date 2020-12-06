@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import ImageMapper from 'react-image-mapper'
 import { Modal } from 'semantic-ui-react'
 import ModalVideoLocal from '../modals/ModalVideoLocal'
-import ModalAudio from '../modals/ModalAudio'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
 import { useInfo } from '../actions/channelInfo'
 function TrackC2(props) {
