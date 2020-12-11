@@ -5,6 +5,7 @@ import { Modal } from 'semantic-ui-react'
 import { useInfo } from '../actions/channelInfo'
 import { CenterMap, BlueBackground } from '../Styles/Styles'
 import TimeKeeper from '../Session/TimeKeeper'
+import ThreeDTest from '../ThreeDTest'
 import {chooseTrack } from '../actions/session_actions'
 function Welcome(props) {
   const [open, setOpen] = useState(false)
@@ -137,7 +138,7 @@ function Welcome(props) {
         basic
       >
       </Modal>
-
+      <ThreeDTest />
     </BlueBackground>
 
   )
