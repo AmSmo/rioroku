@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FilePond, File } from 'react-filepond';
+import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import axios from 'axios'
 function Upload(props){
