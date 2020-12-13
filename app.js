@@ -3,21 +3,23 @@ const mongoose = require('mongoose');
 const app = express();
 const db = require('./config/keys').mongoURI
 const users = require("./routes/api/users");
+const upload = require("./routes/api/upload");
 const eventbrite = require("./routes/api/eventbrite");
 const chat = require("./routes/api/chat");
 const bodyParser = require('body-parser');
 const passport = require('passport')
 const path = require('path');
 const server = require('./socketServer')
-
+// const formidableMiddleware = require('express-formidable')
 
 /* CHAT! */
 
 /* REST OF THE API */
-
+app.use("/api/upload", upload);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+
 require('./config/passport')(passport);
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true  })
@@ -30,6 +32,7 @@ const port = process.env.PORT || 5000;
 app.use("/api/users", users);
 app.use("/api/eventbrite", eventbrite);
 app.use("/api/chat", chat);
+// app.use(formidableMiddleware())
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
