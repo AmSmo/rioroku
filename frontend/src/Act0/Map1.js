@@ -138,7 +138,7 @@ function Welcome(props) {
         basic
       >
       </Modal>
-      <ThreeDTest />
+      {/* <ThreeDTest /> */}
     </BlueBackground>
 
   )
