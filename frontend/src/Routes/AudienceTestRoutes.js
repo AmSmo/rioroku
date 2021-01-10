@@ -12,6 +12,8 @@ import { connect } from 'react-redux'
 import UserHelp from '../Chat/UserHelp'
 import { HelpButton, BottomRight } from '../Styles/Styles'
 
+import BoxOffice from '../Admin/BoxOffice'
+
 function AudienceTestRoutes(props) {
     
     const [needHelp, setNeedHelp] = useState(false)
@@ -39,7 +41,7 @@ function AudienceTestRoutes(props) {
     
     return (
         <>
-              
+            <Route path='BoxOffice' component={BoxOffice} />
             <Route path='/SMDesk' component={SMDesk} />
             <Route path='/Allison' component={Allison} />
             <Route path="/" component={where()} />

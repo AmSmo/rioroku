@@ -20,6 +20,17 @@ router.get("/events", (req, res) => {
     .catch(e=>res.json(e))
 });
 
+router.get("/allevents", (req, res) => {
+    sdk.request('/organizations/216034158017/events/?page_size=1000')
+    .then(resp => {
+        let rio = apiFunctions.getEventList(resp).filter(date=> {
+            console.log(new Date(date.date) > new Date("1-1-2021"))
+            console.log(new Date(date.date))
+            return new Date(date.date) > new Date("1-1-2021")})
+    res.json({ events : rio })})
+    .catch(e=>res.json(e))
+});
+
 
 
 module.exports = router;

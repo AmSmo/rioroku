@@ -4,6 +4,7 @@ import AudienceTestRoutes from './Routes/AudienceTestRoutes'
 import Login from './Session/Login'
 
 import { connect } from 'react-redux'
+import Test from './Test'
 function App(props) {
   const { isAuthenticated } = props
   
@@ -36,6 +37,8 @@ function App(props) {
       :
       
       <Switch>
+        
+        <Route path="/test" component={Test}/>
         <Route path="/" component={Login} />
         
       </Switch>

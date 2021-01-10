@@ -9,12 +9,13 @@ import TrackBRouter from '../TrackB/TrackBRouter'
 import TrackCRouter from '../TrackC/TrackCRouter'
 import TrackDRouter from '../TrackD/TrackDRouter'
 import TrackERouter from '../TrackE/TrackERouter'
+import BoxOffice from '../Admin/BoxOffice'
 import { connect } from 'react-redux'
 
 function AdminRoutes(props){
     return(
     <Switch>
-    
+                <Route path='/BoxOffice' component={BoxOffice} />
                 <Route path='/SMDesk' component={SMDesk} />
                 <Route path='/Allison' component={Allison} />
                 <Route path="/TrackA2" component={TrackA2} />

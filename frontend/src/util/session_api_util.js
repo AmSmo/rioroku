@@ -33,3 +33,7 @@ export const preAuth = () =>{
 export const getEvents = () => {
     return axios.get('/api/eventbrite/events')
 }
+
+export const getAllEvents = () =>{
+    return axios.get('/api/eventbrite/allevents')
+}
