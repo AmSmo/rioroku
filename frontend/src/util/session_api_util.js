@@ -37,3 +37,8 @@ export const getEvents = () => {
 export const getAllEvents = () =>{
     return axios.get('/api/eventbrite/allevents')
 }
+
+export const getAttendees = (eventId) =>{  
+    
+    return axios.post('/api/eventbrite/attendees', {eventId: eventId})
+}

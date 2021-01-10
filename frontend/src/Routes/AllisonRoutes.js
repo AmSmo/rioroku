@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 function AllisonRoutes(props) {
     return (
         <Switch>
+            
             <Route path='/SMDesk' component={SMDesk} />
             <Route path='/' component={Allison} />
         </Switch>)
