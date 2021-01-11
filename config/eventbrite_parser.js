@@ -1,5 +1,5 @@
-module.exports = {getUsers : (eventData) =>{
-    let attendees = eventData.attendees
+module.exports = {getUsers : (attendees) =>{
+    
     let desiredInfo = {}
     for (attendee of attendees){      
         

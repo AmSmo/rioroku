@@ -5,11 +5,34 @@ const keys = require('../../config/keys');
 const apiFunctions = require("../../config/eventbrite_parser")
 const sdk = eventbrite({token: keys.eventbriteAuth});
 
-router.post("/attendees", (req, res) => {
-    sdk.request(`/events/${req.body.eventId}/attendees/`)
+const getUsers = async (eventId, page)=>{
+    let attendees = []
+    let pageCount = 1
+    let answer = await sdk.request(`/events/${eventId}/attendees/?page=${page}`)
     .then(resp => {
-    res.json({ tickets: apiFunctions.getUsers(resp) })})
-    .catch(e=>res.json(e))
+        pageCount = resp["pagination"]["page_count"]
+        attendees.push(...resp.attendees)
+        
+    }).then(resp => {
+        
+        if (page < pageCount){
+           page +=1    
+           return getUsers(eventId, page).then(resp => attendees.push(...resp))
+           
+        }
+    }).then(resp=> {
+        return attendees})
+    .catch(e=> res.json(e))
+    return answer
+    }
+
+
+router.post("/attendees", (req, res) => {
+    getUsers(req.body.eventId, 1).then(resp => {
+        
+        res.json({tickets: apiFunctions.getUsers(resp)})}).catch(e=> console.log(e))
+    
+    
 });
 // organization id: 216034158017
 

@@ -4,8 +4,11 @@ function BoxOffice(props){
     let [events,setEvents] = useState([])
     let [eventId, setEventId]= useState(0)
     let [attendees, setAttendees] = useState([])
+    let [allUsers, setAllUsers] = useState([])
+    let [disabledDB, setDisabledDb] = useState(true)
     useEffect(()=>{
         APIUtil.getAllEvents().then(resp => setEvents(resp.data.events))
+        APIUtil.getAllUsers().then(resp => setAllUsers(resp.data.users.map(user=> user.ticketId)))
     },[])
 
     const submitHandler =(e)=>{
@@ -21,17 +24,18 @@ function BoxOffice(props){
     const renderOptions = () =>{
             return events.map((event, idx) =>{
             return (
-                <option key={idx} value={event.id}>{event.date}</option>
+                <option key={idx} value={event.id}>{new Date(event.date).toLocaleString(undefined, { month: 'long', day: 'numeric', hour: 'numeric', timeZone: 'America/Los_Angeles' })}</option>
             )}
             )}
-
+    const addToDb = (user)=>{
+        APIUtil.lateSeat(user).then(resp=>console.log(resp))
+    }
     const renderAttendees =() =>{
         if (attendees.length > 0){
-            
             return attendees.map((attendee, idx)=>{
-                console.log("LLSAD",attendee)
+                let checkedIn = allUsers.includes(attendee.ticketId)
                 return (
-                    <tr key={idx}>
+                    <tr key={idx} style={{color: checkedIn ? "green" : "red"}}>
                         <td>
                             {attendee.first_name}
                        </td>
@@ -43,6 +47,9 @@ function BoxOffice(props){
                        </td>
                         <td>
                             {attendee.ticketId}
+                       </td>
+                       <td>
+                           {checkedIn ? null : <button disabled={disabledDB} onClick={() => addToDb(attendee)}>Add To Database</button>}
                        </td>
                     </tr>)
             })
@@ -60,6 +67,7 @@ function BoxOffice(props){
                 </select>
                 <input type="submit" />
             </form>
+            <button onClick={()=> setDisabledDb(!disabledDB)}>Toggle Add to Db</button>
             <table>
                     <thead>
                         <tr>
@@ -67,6 +75,7 @@ function BoxOffice(props){
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Ticket ID</th>
+                        <th>Late Seat?</th>
                     </tr>
                     </thead>
                 <tbody>

@@ -11,6 +11,23 @@ const eventbrite = require("eventbrite").default
 const apiFunctions = require("../../config/eventbrite_parser")
 const sdk = eventbrite({ token: keys.eventbriteAuth });
 
+router.get('/getAllUsers', passport.authenticate('jwt', {session: false}), (req, res) =>{
+    User.find({admin: false, audience: false, alison: false}).then(data=>{
+        res.json({users: data})
+    }
+    )
+})
+
+router.post('/lateSeat', passport.authenticate('jwt', {session: false}), (req, res) =>{
+    let ID = function () {
+        return Math.random().toString().substr(2, 5);
+    };
+    let {attendee} = req.body
+    let fullName = attendee.name
+    let username = fullName + " "+ ID()
+    const userObj = {fulllName: attendee.name, email: attendee.email, username, ticketId: attendee.ticketId }
+    console.log(userObj)
+})
 
 router.post('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({

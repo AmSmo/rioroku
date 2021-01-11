@@ -39,6 +39,12 @@ export const getAllEvents = () =>{
 }
 
 export const getAttendees = (eventId) =>{  
-    
     return axios.post('/api/eventbrite/attendees', {eventId: eventId})
+}
+export const lateSeat=(user)=>{
+    return axios.post('/api/users/lateSeat', {attendee: user})
+}
+
+export const getAllUsers = () =>{
+    return axios.get('/api/users/getAllUsers')
 }
