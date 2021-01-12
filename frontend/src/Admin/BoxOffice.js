@@ -74,6 +74,7 @@ function BoxOffice(props) {
             downloadLink.download = filename;
 
             downloadLink.click();
+            
         }
     }
 
