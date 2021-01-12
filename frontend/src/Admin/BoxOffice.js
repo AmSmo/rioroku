@@ -6,9 +6,20 @@ function BoxOffice(props) {
     let [attendees, setAttendees] = useState([])
     let [allUsers, setAllUsers] = useState([])
     let [disabledDB, setDisabledDb] = useState(true)
+    let [userLib, setUserLib] = useState({})
+
+    const usersIntoHash = (users) => {
+        let userHash = {}
+        users.map(user => {
+            userHash[user.ticketId] = {username: user.username, track: user.track}
+        })
+        setUserLib(userHash)
+    }
     useEffect(() => {
         APIUtil.getAllEvents().then(resp => setEvents(resp.data.events))
-        APIUtil.getAllUsers().then(resp => setAllUsers(resp.data.users.map(user => user.ticketId)))
+        APIUtil.getAllUsers().then(resp => {
+            usersIntoHash(resp.data.users)
+            })
     }, [])
 
     const submitHandler = (e) => {
@@ -74,14 +85,17 @@ function BoxOffice(props) {
             downloadLink.download = filename;
 
             downloadLink.click();
-            
+
         }
     }
 
 const renderAttendees = () => {
     if (attendees.length > 0) {
-        return attendees.map((attendee, idx) => {
-            let checkedIn = allUsers.includes(attendee.ticketId)
+        console.log(attendees[0].last_name.toLowerCase() > attendees[1].last_name.toLowerCase())
+        let sorted = attendees.sort((a, b) => a.last_name.localeCompare(b.last_name))
+        console.log(sorted)
+        return sorted.map((attendee, idx) => {
+            let checkedIn = !!userLib[attendee.ticketId]
             return (
                 <tr key={idx} style={{ color: checkedIn ? "green" : "red" }}>
                     <td>
@@ -96,13 +110,18 @@ const renderAttendees = () => {
                     <td>
                         {attendee.ticketId}
                     </td>
-                    <td>
-                        {checkedIn ? null : <button disabled={disabledDB} onClick={() => addToDb(attendee)}>Add To Database</button>}
-                    </td>
+                    
+                    
+                        {checkedIn ? 
+                        <>
+                            <td>
+                               {userLib[attendee.ticketId].username} </td> <td>{userLib[attendee.ticketId].track}</td></>: <><td></td><td></td><button disabled={disabledDB} onClick={() => addToDb(attendee)}>Add To Database</button></>}
+                    
                 </tr>)
         })
     }
 }
+
 return (
     <div>
         <form onSubmit={submitHandler}>
@@ -127,7 +146,8 @@ return (
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Ticket ID</th>
-                    <th>Late Seat?</th>
+                    <th>Username</th>
+                    <th>Track</th>
                 </tr>
             </thead>
             <tbody>
